@@ -10,6 +10,10 @@
 
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
+#define TAG_DRILL 10
+#define TAG_LEFT  20
+#define TAG_RIGHT 20
+
 @interface DIOControlPanelViewController () <GCDAsyncSocketDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *drillButton;
