@@ -11,6 +11,8 @@
 @interface DIOControlPanelViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *drillButton;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
 @end
 
@@ -27,6 +29,16 @@
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
+}
+
+- (IBAction)left:(id)sender
+{
+    NSLog(@"LEFT!");
+}
+
+- (IBAction)right:(id)sender
+{
+    NSLog(@"RIGHT!");
 }
 
 #pragma mark - Navigation
