@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4699AA43-CF4E-44FA-9659-13A8B65C8B7C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Dioresta</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>64A4AE6D-3B55-412F-A83F-C1F4580B3340</key>
+		<string>https://github.com/darcyclarke/Space-Apps.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/Dioresta/Dioresta.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>64A4AE6D-3B55-412F-A83F-C1F4580B3340</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/darcyclarke/Space-Apps.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>64A4AE6D-3B55-412F-A83F-C1F4580B3340</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>64A4AE6D-3B55-412F-A83F-C1F4580B3340</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Space-Apps</string>
+		</dict>
+	</array>
+</dict>
+</plist>
