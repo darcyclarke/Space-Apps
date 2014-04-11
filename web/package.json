@@ -11,17 +11,12 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "pg": "*",
     "express": "*",
+    "socket.io": "*",
     "nib": "*",
     "node-static": "*",
-    "stylus-type-utils": "*",
     "wrench": "*",
     "jade": "*",
-    "jquery": "*",
-    "backbone": "*",
-    "lodash": "*",
-    "jade-browser": "*",
     "gulp": "*",
     "gulp-debug": "*",
     "gulp-if": "*",
@@ -29,22 +24,15 @@
     "gulp-load-plugins": "*",
     "gulp-stylus": "*",
     "gulp-uglify": "*",
-    "gulp-imagemin": "*",
     "gulp-clean": "*",
     "gulp-livereload": "*",
     "gulp-concat": "*",
-    "gulp-webp": "*",
     "gulp-coffee": "*",
-    "gulp-browserify": "*",
     "gulp-jade": "*",
     "gulp-rename": "*",
-    "css-sprite": "*",
-    "coffee-script": "*",
-    "coffeeify": "*"
+    "coffee-script": "*"
   },
-  "peerDependencies": {
-    "grunt": "~0.4.0"
-  },
+  "peerDependencies": {},
   "keywords": [],
   "readmeFilename": "README.md",
   "license": "BSD"

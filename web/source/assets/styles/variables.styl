@@ -1,0 +1,20 @@
+// Base Fonts
+$baseFontSize = 16px
+$baseLineHeight = 200%
+$baseFontFamily = Helvetica, sans-serif
+$secondaryFontFamily = 'Helvetica Neue', sans-serif
+$tertiaryFontFamily = Arial, sans-serif
+$quaternaryFontFamily = Georgia, serif
+$iconFont = 'icon'
+
+// Rem Mixin
+rem($property, $value)
+  {$property}: $value
+  {$property}: unit(($value / $baseFontSize), 'rem')
+
+font-size($v)
+  rem('font-size', $v)
+
+letter-spacing($v)
+  rem('letter-spacing', $v)
+
