@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Control Panel View Controller-->
         <scene sceneID="A8b-PD-SGF">
             <objects>
-                <viewController id="Bfr-z8-pFb" sceneMemberID="viewController">
+                <viewController id="Bfr-z8-pFb" customClass="DIOControlPanelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2tg-aH-Pev"/>
                         <viewControllerLayoutGuide type="bottom" id="qmZ-wm-vUN"/>
@@ -15,10 +15,26 @@
                     <view key="view" contentMode="scaleToFill" id="cac-0b-puG">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F92-e1-ikw">
+                                <rect key="frame" x="312" y="184" width="400" height="400"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.81960784310000001" green="0.1215686275" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="DRILL">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="drill:" destination="Bfr-z8-pFb" eventType="touchUpInside" id="6WD-fx-SkS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="drillButton" destination="F92-e1-ikw" id="hGo-YD-tmi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dlD-7P-cYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
