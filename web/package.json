@@ -1,0 +1,51 @@
+{
+  "name": "spaceapps",
+  "description": "Space Apps",
+  "version": "0.0.1",
+  "homepage": "https://github.com/darcyclarke/Space-Apps",
+  "author": "",
+  "main": "build.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "pg": "*",
+    "express": "*",
+    "nib": "*",
+    "node-static": "*",
+    "stylus-type-utils": "*",
+    "wrench": "*",
+    "jade": "*",
+    "jquery": "*",
+    "backbone": "*",
+    "lodash": "*",
+    "jade-browser": "*",
+    "gulp": "*",
+    "gulp-debug": "*",
+    "gulp-if": "*",
+    "gulp-util": "*",
+    "gulp-load-plugins": "*",
+    "gulp-stylus": "*",
+    "gulp-uglify": "*",
+    "gulp-imagemin": "*",
+    "gulp-clean": "*",
+    "gulp-livereload": "*",
+    "gulp-concat": "*",
+    "gulp-webp": "*",
+    "gulp-coffee": "*",
+    "gulp-browserify": "*",
+    "gulp-jade": "*",
+    "gulp-rename": "*",
+    "css-sprite": "*",
+    "coffee-script": "*",
+    "coffeeify": "*"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [],
+  "readmeFilename": "README.md",
+  "license": "BSD"
+}
