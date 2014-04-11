@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17A2302918F8AAAB00238231 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302818F8AAAB00238231 /* Foundation.framework */; };
+		17A2302B18F8AAAB00238231 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302A18F8AAAB00238231 /* CoreGraphics.framework */; };
+		17A2302D18F8AAAB00238231 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302C18F8AAAB00238231 /* UIKit.framework */; };
+		17A2303318F8AAAB00238231 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17A2303118F8AAAB00238231 /* InfoPlist.strings */; };
+		17A2303518F8AAAB00238231 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A2303418F8AAAB00238231 /* main.m */; };
+		17A2303918F8AAAB00238231 /* DIOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A2303818F8AAAB00238231 /* DIOAppDelegate.m */; };
+		17A2303B18F8AAAB00238231 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17A2303A18F8AAAB00238231 /* Images.xcassets */; };
+		17A2304218F8AAAB00238231 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2304118F8AAAB00238231 /* XCTest.framework */; };
+		17A2304318F8AAAB00238231 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302818F8AAAB00238231 /* Foundation.framework */; };
+		17A2304418F8AAAB00238231 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302C18F8AAAB00238231 /* UIKit.framework */; };
+		17A2304C18F8AAAB00238231 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17A2304A18F8AAAB00238231 /* InfoPlist.strings */; };
+		17A2304E18F8AAAB00238231 /* DiorestaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A2304D18F8AAAB00238231 /* DiorestaTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		17A2304518F8AAAB00238231 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17A2301D18F8AAAB00238231 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17A2302418F8AAAB00238231;
+			remoteInfo = Dioresta;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17A2302518F8AAAB00238231 /* Dioresta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dioresta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17A2302818F8AAAB00238231 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		17A2302A18F8AAAB00238231 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		17A2302C18F8AAAB00238231 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		17A2303018F8AAAB00238231 /* Dioresta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dioresta-Info.plist"; sourceTree = "<group>"; };
+		17A2303218F8AAAB00238231 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		17A2303418F8AAAB00238231 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		17A2303618F8AAAB00238231 /* Dioresta-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dioresta-Prefix.pch"; sourceTree = "<group>"; };
+		17A2303718F8AAAB00238231 /* DIOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DIOAppDelegate.h; sourceTree = "<group>"; };
+		17A2303818F8AAAB00238231 /* DIOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DIOAppDelegate.m; sourceTree = "<group>"; };
+		17A2303A18F8AAAB00238231 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		17A2304018F8AAAB00238231 /* DiorestaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiorestaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17A2304118F8AAAB00238231 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		17A2304918F8AAAB00238231 /* DiorestaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DiorestaTests-Info.plist"; sourceTree = "<group>"; };
+		17A2304B18F8AAAB00238231 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		17A2304D18F8AAAB00238231 /* DiorestaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiorestaTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17A2302218F8AAAB00238231 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A2302B18F8AAAB00238231 /* CoreGraphics.framework in Frameworks */,
+				17A2302D18F8AAAB00238231 /* UIKit.framework in Frameworks */,
+				17A2302918F8AAAB00238231 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A2303D18F8AAAB00238231 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A2304218F8AAAB00238231 /* XCTest.framework in Frameworks */,
+				17A2304418F8AAAB00238231 /* UIKit.framework in Frameworks */,
+				17A2304318F8AAAB00238231 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17A2301C18F8AAAB00238231 = {
+			isa = PBXGroup;
+			children = (
+				17A2302E18F8AAAB00238231 /* Dioresta */,
+				17A2304718F8AAAB00238231 /* DiorestaTests */,
+				17A2302718F8AAAB00238231 /* Frameworks */,
+				17A2302618F8AAAB00238231 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		17A2302618F8AAAB00238231 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17A2302518F8AAAB00238231 /* Dioresta.app */,
+				17A2304018F8AAAB00238231 /* DiorestaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		17A2302718F8AAAB00238231 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17A2302818F8AAAB00238231 /* Foundation.framework */,
+				17A2302A18F8AAAB00238231 /* CoreGraphics.framework */,
+				17A2302C18F8AAAB00238231 /* UIKit.framework */,
+				17A2304118F8AAAB00238231 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		17A2302E18F8AAAB00238231 /* Dioresta */ = {
+			isa = PBXGroup;
+			children = (
+				17A2303718F8AAAB00238231 /* DIOAppDelegate.h */,
+				17A2303818F8AAAB00238231 /* DIOAppDelegate.m */,
+				17A2303A18F8AAAB00238231 /* Images.xcassets */,
+				17A2302F18F8AAAB00238231 /* Supporting Files */,
+			);
+			path = Dioresta;
+			sourceTree = "<group>";
+		};
+		17A2302F18F8AAAB00238231 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17A2303018F8AAAB00238231 /* Dioresta-Info.plist */,
+				17A2303118F8AAAB00238231 /* InfoPlist.strings */,
+				17A2303418F8AAAB00238231 /* main.m */,
+				17A2303618F8AAAB00238231 /* Dioresta-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17A2304718F8AAAB00238231 /* DiorestaTests */ = {
+			isa = PBXGroup;
+			children = (
+				17A2304D18F8AAAB00238231 /* DiorestaTests.m */,
+				17A2304818F8AAAB00238231 /* Supporting Files */,
+			);
+			path = DiorestaTests;
+			sourceTree = "<group>";
+		};
+		17A2304818F8AAAB00238231 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17A2304918F8AAAB00238231 /* DiorestaTests-Info.plist */,
+				17A2304A18F8AAAB00238231 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		17A2302418F8AAAB00238231 /* Dioresta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17A2305118F8AAAB00238231 /* Build configuration list for PBXNativeTarget "Dioresta" */;
+			buildPhases = (
+				17A2302118F8AAAB00238231 /* Sources */,
+				17A2302218F8AAAB00238231 /* Frameworks */,
+				17A2302318F8AAAB00238231 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dioresta;
+			productName = Dioresta;
+			productReference = 17A2302518F8AAAB00238231 /* Dioresta.app */;
+			productType = "com.apple.product-type.application";
+		};
+		17A2303F18F8AAAB00238231 /* DiorestaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17A2305418F8AAAB00238231 /* Build configuration list for PBXNativeTarget "DiorestaTests" */;
+			buildPhases = (
+				17A2303C18F8AAAB00238231 /* Sources */,
+				17A2303D18F8AAAB00238231 /* Frameworks */,
+				17A2303E18F8AAAB00238231 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17A2304618F8AAAB00238231 /* PBXTargetDependency */,
+			);
+			name = DiorestaTests;
+			productName = DiorestaTests;
+			productReference = 17A2304018F8AAAB00238231 /* DiorestaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		17A2301D18F8AAAB00238231 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DIO;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Space Apps";
+				TargetAttributes = {
+					17A2303F18F8AAAB00238231 = {
+						TestTargetID = 17A2302418F8AAAB00238231;
+					};
+				};
+			};
+			buildConfigurationList = 17A2302018F8AAAB00238231 /* Build configuration list for PBXProject "Dioresta" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 17A2301C18F8AAAB00238231;
+			productRefGroup = 17A2302618F8AAAB00238231 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				17A2302418F8AAAB00238231 /* Dioresta */,
+				17A2303F18F8AAAB00238231 /* DiorestaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		17A2302318F8AAAB00238231 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A2303318F8AAAB00238231 /* InfoPlist.strings in Resources */,
+				17A2303B18F8AAAB00238231 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A2303E18F8AAAB00238231 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A2304C18F8AAAB00238231 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17A2302118F8AAAB00238231 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A2303518F8AAAB00238231 /* main.m in Sources */,
+				17A2303918F8AAAB00238231 /* DIOAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A2303C18F8AAAB00238231 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A2304E18F8AAAB00238231 /* DiorestaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17A2304618F8AAAB00238231 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17A2302418F8AAAB00238231 /* Dioresta */;
+			targetProxy = 17A2304518F8AAAB00238231 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		17A2303118F8AAAB00238231 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17A2303218F8AAAB00238231 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		17A2304A18F8AAAB00238231 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17A2304B18F8AAAB00238231 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		17A2304F18F8AAAB00238231 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		17A2305018F8AAAB00238231 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		17A2305218F8AAAB00238231 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
+				INFOPLIST_FILE = "Dioresta/Dioresta-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		17A2305318F8AAAB00238231 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
+				INFOPLIST_FILE = "Dioresta/Dioresta-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		17A2305518F8AAAB00238231 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Dioresta.app/Dioresta";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DiorestaTests/DiorestaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		17A2305618F8AAAB00238231 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Dioresta.app/Dioresta";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
+				INFOPLIST_FILE = "DiorestaTests/DiorestaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17A2302018F8AAAB00238231 /* Build configuration list for PBXProject "Dioresta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17A2304F18F8AAAB00238231 /* Debug */,
+				17A2305018F8AAAB00238231 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17A2305118F8AAAB00238231 /* Build configuration list for PBXNativeTarget "Dioresta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17A2305218F8AAAB00238231 /* Debug */,
+				17A2305318F8AAAB00238231 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		17A2305418F8AAAB00238231 /* Build configuration list for PBXNativeTarget "DiorestaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17A2305518F8AAAB00238231 /* Debug */,
+				17A2305618F8AAAB00238231 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 17A2301D18F8AAAB00238231 /* Project object */;
+}
