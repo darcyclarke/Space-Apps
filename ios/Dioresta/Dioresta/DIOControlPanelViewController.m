@@ -8,19 +8,11 @@
 
 #import "DIOControlPanelViewController.h"
 
-#import <CocoaAsyncSocket/GCDAsyncSocket.h>
-
-#define TAG_DRILL 10
-#define TAG_LEFT  20
-#define TAG_RIGHT 20
-
-@interface DIOControlPanelViewController () <GCDAsyncSocketDelegate>
+@interface DIOControlPanelViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *drillButton;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
-
-@property (strong, nonatomic) GCDAsyncSocket *socket;
 
 @end
 
@@ -30,12 +22,7 @@
 {
     [super viewDidLoad];
     
-    self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     
-    NSError *error;
-    if(![self.socket connectToHost:@"" onPort:80 error:&error]) {
-        NSLog(@"ERROR: Failed to connect to server. %@", [error localizedDescription]);
-    }
 }
 
 #pragma mark - Actions
@@ -55,50 +42,7 @@
 }
 
 #pragma mark - Sockets
-- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
-{
-    NSLog(@"DID ACCEPT NEW SOCKET");
-}
 
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
-{
-    NSLog(@"DID CONNECT TO HOST");
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
-    NSLog(@"DID READ DATA");
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
-{
-    NSLog(@"DID READ PARTIAL DATA OF LENGTH");
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
-{
-    NSLog(@"DID WRITE DATA WITH TAG");
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didWritePartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
-{
-    NSLog(@"DID WRITE PARTIAL DATA OF LENGTH");
-}
-
-- (void)socketDidCloseReadStream:(GCDAsyncSocket *)sock
-{
-    NSLog(@"DID CLOSE READ STREAM");
-}
-
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
-{
-    NSLog(@"DID DISCONNECT");
-}
-
-- (void)socketDidSecure:(GCDAsyncSocket *)sock
-{
-    NSLog(@"DID SECURE");
-}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
