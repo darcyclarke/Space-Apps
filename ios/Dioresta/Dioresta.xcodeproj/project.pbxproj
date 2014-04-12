@@ -58,10 +58,9 @@
 		17A2305A18F8AB5600238231 /* DIOStoryboard-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "DIOStoryboard-iPad.storyboard"; sourceTree = "<group>"; };
 		17A2305D18F8AC6700238231 /* DIOControlPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOControlPanelViewController.h; sourceTree = "<group>"; };
 		17A2305E18F8AC6700238231 /* DIOControlPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOControlPanelViewController.m; sourceTree = "<group>"; };
-		17A2306018F8ACF200238231 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		17A2306018F8ACF200238231 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E4D225618F8B75200A1523C /* DIOAccelerometerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOAccelerometerViewController.h; sourceTree = "<group>"; };
 		9E4D225718F8B75200A1523C /* DIOAccelerometerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOAccelerometerViewController.m; sourceTree = "<group>"; };
-		17A2306018F8ACF200238231 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F4FD2BA83FC437EA29B7099 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA85DD2798DA42E5A1FC2B86 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
