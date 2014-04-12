@@ -1,35 +1,86 @@
 (function() {
-  var app, express, game, initGame, io, server, updateGame;
+  var Asteroid, Game, MINERALS, MINERAL_TOTAL, Player, app, express, game, initGame, io, randomInt, server;
 
-  game = {
-    asteroid: 0,
-    players: {
-      1: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
-        }
-      },
-      2: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
-        }
-      },
-      3: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
-        }
-      },
-      4: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
+  MINERAL_TOTAL = 1000;
+
+  MINERALS = ['water', 'carbon', 'nickel', 'iron', 'silicon', 'olivine'];
+
+  Asteroid = function(size) {
+    this.minerals = {
+      water: size,
+      carbon: size,
+      nickel: size,
+      iron: size,
+      silicon: size,
+      olivine: size
+    };
+    this.totalSize = function() {
+      var mineral, _i, _len;
+      size = 0;
+      for (_i = 0, _len = MINERALS.length; _i < _len; _i++) {
+        mineral = MINERALS[_i];
+        size += this.minerals[mineral];
+      }
+      return size;
+    };
+    this.isEmpty = function() {
+      return this.totalSize() <= 0;
+    };
+    this.presentMinerals = function() {
+      var mineral, minerals, _i, _len;
+      minerals = [];
+      for (_i = 0, _len = MINERALS.length; _i < _len; _i++) {
+        mineral = MINERALS[_i];
+        if (this.minerals[mineral] > 0) {
+          minerals.push(mineral);
         }
       }
-    }
+      return minerals;
+    };
+    this.loseMineral = function(mineral, amount) {
+      return this.minerals[mineral] -= amount;
+    };
   };
+
+  Player = function() {
+    this.drillPower = 0;
+    this.minerals = {
+      water: 0,
+      carbon: 0,
+      nickel: 0,
+      iron: 0,
+      silicon: 0,
+      olivine: 0
+    };
+    this.findMineral = function(mineral, amount) {
+      return this.minerals[mineral] += amount;
+    };
+  };
+
+  Game = function(asteroidSize) {
+    this.isOver = false;
+    this.asteroid = new Asteroid(MINERAL_TOTAL);
+    this.players = {
+      1: new Player(),
+      2: new Player(),
+      3: new Player(),
+      4: new Player()
+    };
+    this.update = function(playerId, drillPower) {
+      var amount, mineral, minerals;
+      if (this.asteroid.isEmpty()) {
+        return this.isOver = true;
+      } else {
+        minerals = game.asteroid.presentMinerals();
+        mineral = minerals[randomInt(minerals.length)];
+        amount = randomInt(drillPower);
+        game.asteroid.loseMineral(mineral, amount);
+        return game.players[playerId].findMineral(mineral, amount);
+      }
+    };
+  };
+
+  game = new Game(MINERAL_TOTAL);
 
   express = require("express");
 
@@ -53,56 +104,27 @@
       return initGame();
     });
     socket.on('drill', function(data) {
+      var drillPower, playerId;
       console.log("DRILL!");
       console.log(data);
-      updateGame(data);
-      socket.emit('update-game', game);
-      return console.log(game);
+      if (data) {
+        playerId = data["playerID"];
+        drillPower = parseInt(data["drillPower"]);
+        if (playerId && drillPower) {
+          game.update(playerId, drillPower);
+          socket.emit('update-game', JSON.stringify(game));
+          return console.log("=====> ", JSON.stringify(game));
+        }
+      }
     });
   });
 
-  updateGame = function(data) {
-    var drillPower, playerId;
-    if (data) {
-      playerId = data["playerID"];
-      drillPower = data["drillPower"];
-      if (playerId && drillPower) {
-        game["asteroid"] += drillPower;
-        return game["players"][playerId]["drillPower"] += drillPower;
-      }
-    }
+  initGame = function() {
+    return game = new Game(MINERAL_TOTAL);
   };
 
-  initGame = function() {
-    return game = {
-      asteroid: 0,
-      players: {
-        1: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        },
-        2: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        },
-        3: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        },
-        4: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        }
-      }
-    };
+  randomInt = function(max) {
+    return Math.floor(Math.random() * (max + 1));
   };
 
 }).call(this);

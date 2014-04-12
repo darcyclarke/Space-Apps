@@ -15,7 +15,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor redColor];
+        self.backgroundColor = [UIColor clearColor];
+        
+        UIImage *drillButtonImage = [UIImage imageNamed:@"NewDrillButtonUp"];
+        
+        [self setImage:drillButtonImage forState:UIControlStateNormal];
+        
+        UIImage *drillButtonImageDown = [UIImage imageNamed:@"NewDrillButtonDown"];
+        
+        [self setImage:drillButtonImageDown forState:UIControlStateHighlighted];
+        [self setImage:drillButtonImageDown forState:UIControlStateSelected];
     }
     return self;
 }
