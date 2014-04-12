@@ -1,10 +1,14 @@
 PODS:
-  - CocoaAsyncSocket (7.3.4)
+  - socket.IO (0.5.2):
+    - SocketRocket (~> 0.2)
+  - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
-  - CocoaAsyncSocket (~> 7.3)
+  - socket.IO (~> 0.5)
+  - SocketRocket (~> 0.3)
 
 SPEC CHECKSUMS:
-  CocoaAsyncSocket: 534d09416f992fd51efb23f534742ce70b3a7999
+  socket.IO: 10f35e5bb4c6d272f652221c63eae9a3a82d0b0e
+  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
 
 COCOAPODS: 0.29.0

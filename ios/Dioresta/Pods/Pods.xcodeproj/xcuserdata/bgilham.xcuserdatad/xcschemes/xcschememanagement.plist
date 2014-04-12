@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-CocoaAsyncSocket.xcscheme</key>
+		<key>Pods-SocketRocket.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-socket.IO.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>B8C97AD29A10466CBB4C370A</key>
+		<key>A4F4130BB0584524A58E1CC4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C25AC2E9BE04406BA96E8380</key>
+		<key>AF2B3E33CA254FFDBED9C77E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F587919CA9654B31A7F7D3EE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
