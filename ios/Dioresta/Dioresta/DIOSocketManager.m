@@ -42,8 +42,7 @@ static NSString *const DIONamespace = @"";
     if((self = [super init])) {
         self.socket = [[SocketIO alloc] initWithDelegate:self];
         [self.socket connectToHost:host
-                            onPort:port
-         ];
+                            onPort:port];
     }
     
     return self;
@@ -56,11 +55,20 @@ static NSString *const DIONamespace = @"";
 }
 
 #pragma mark - Communication
-- (void)sendAction:(NSString *)action
+- (void)sendAction:(NSString *)action andData:(NSDictionary *)data
 {
-    [self.socket sendEvent:action withData:@{
-                                             
-                                               }];
+    if(![self.socket isConnected]) {
+        [self.socket connectToHost:DIOHost
+                            onPort:DIOPort];
+    }
+    
+    NSMutableDictionary *actionData = [NSMutableDictionary dictionaryWithDictionary:data];
+    
+    [actionData addEntriesFromDictionary:@{
+                                           @"playerID":[self deviceID]
+                                           }];
+    
+    [self.socket sendEvent:action withData:actionData];
 }
 
 #pragma mark - Socket.IO Delegate
@@ -97,6 +105,8 @@ static NSString *const DIONamespace = @"";
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
     NSLog(@"DID DISCONNECT %@ %@", socket, error);
+    [self.socket connectToHost:DIOHost
+                        onPort:DIOPort];
 }
 
 @end
