@@ -1,6 +1,4 @@
 @import 'nib'
-@import 'variables'
-@import 'sprites/*'
 
 @font-face
   font-family: 'icon'
@@ -39,11 +37,6 @@ audio, canvas, video
   display: inline-block
 
 html, body
-  background: $bodyBgColor
-  color: $baseColor
-  font-family: $baseFontFamily
-  font-size: $baseFontSize
-  line-height: $baseLineHeight
   padding: 0
   margin: 0
   height: 100%
@@ -52,97 +45,16 @@ html, body
   flex-direction: column
   box-align: center
 
-a
-  color: $baseColor
-  text-decoration: underline
-
-a:hover,
-a:visited,
-a:active
-  color: $baseColor
-
 a:focus
   outline: thin dotted
 
 a:active, a:hover
   outline: 0
 
-blockquote
-  border-left: 1px solid $borderColor
-  padding: $quarterGrid 0 $quarterGrid $halfGrid
-  font-style: italic
-  color: lighten($baseColor, 30%)
-  font-size: 14px
-
-  cite
-    display: block
-
-    &:before
-      content: '~ '
-
-::-moz-selection
-  background: $bgSelectionColor
-  color: $selectionColor
-  text-shadow: none
-
-::selection
-  background: $bgSelectionColor
-  color: $selectionColor
-  text-shadow: none
-
-.fontSize11
-  font-size: 11px
-
-.fontSize13
-  font-size: 13px
-
-.fontSize14
-  font-size: 14px
-
-.fontSize16
-  font-size: 16px
-
-.fontSize18
-  font-size: 18px
-
-.fontSize20
-  font-size: 20px
-
-.fontSize24
-  font-size: 24px
-
-.fontSize32
-  font-size: 32px
-
-.fontSize36
-  font-size: 32px
-
-.fontSize48
-  font-size: 48px
-
 .ir
   font: 0/0 a
   text-shadow: none
   color: transparent
-
-.vh
-  border: 0
-  clip: rect(0 0 0 0)
-  height: 1px
-  margin: -1px
-  overflow: hidden
-  padding: 0
-  position: absolute
-  width: 1px
-
-.vh:active,
-.vh:focus
-  clip: auto
-  height: auto
-  margin: 0
-  overflow: visible
-  position: static
-  width: auto
 
 .cf:before
 .cf:after
@@ -154,9 +66,3 @@ blockquote
 
 .cf
   *zoom: 1
-
-h1, h2, h3, h4, h5, h6, p
-  margin-bottom: $halfGrid
-
-p
-  @extend .fontSize14
