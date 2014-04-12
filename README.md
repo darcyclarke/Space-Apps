@@ -49,24 +49,25 @@ Team TWG's Space Apps Project
 #### User Drilling Screen ####
 - Notifcations appear as resources are mined
   - On main screen or ipad interface or both?
-  - Use an ingot or rock image with the element symobl dynamically added inside as an icon?
+  - Use an ingot or rock image with the element code dynamically added inside as an icon?
 - Units are kg
 - Multiplier of probability applied based on scarcity to determine which resources are mined (Abundent, Common, Scarce resources from table above)
+- Faster tapping or tapping in a pattern (a la morse code?) results in higher probability of different resources.  This could in tern lead to strategically trying to mine certain resources
 
 #### End of Game - Sucess ####
 1. [On Screen]Professor "Faisal Shahbaz" - Astronomer from the Near Earth Object Program
-2. Phew!  You saved us all, that was a close one.  It took you [time taken] seconds to break apart the asteroid at a distance of [ (90s - time taken) x 13888.9m/s]/1000m/km ].  Another [90s - time taken] and we would have been done for!
+2. Phew!  You saved us all, that was a close one.  It took you [time taken] seconds to break apart the asteroid at a distance of [ ( (90s - time taken) x 13888.9m/s)/1000m/km ].  Another [90s - time taken] and we would have been done for!
 3. As a thank you for saving the entire human race, we're going to let you keep all the resources you mined!
 
 #### End of Game - Failure ####
 1. Game Over
-2. You weren't fast enough and life on earth has been completely wiped out.
-3. Oh well, at least you still have all the resources you mined...
+2. Who taught you how to mine?  Life on earth has been completely wiped out.
+3. Oh well, at least you still have the resources you mined.  Better start rebuilding...
 
 #### End of Game - Stats ####
 - Stats showing who mined what resources
 - Scarce resources are worth more points
-- Fun awards for things like fastest button tapper, most kg mined, most scarce resources mined, etc...
+- Fun awards for things like fastest button tapper, most kg mined, most scarce resources mined, etc...?
 - Play again?
 
 
