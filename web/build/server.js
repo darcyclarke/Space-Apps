@@ -1,35 +1,36 @@
 (function() {
-  var Game, app, defaultAsteroidSize, express, game, initGame, io, server, updateGame;
+  var Game, Player, app, defaultAsteroidSize, express, game, initGame, io, minerals, randomInt, server, updatePlayer;
 
-  defaultAsteroidSize = 100;
+  defaultAsteroidSize = 1000;
+
+  minerals = ['water', 'carbon', 'nickel', 'iron', 'silicon', 'olivine'];
+
+  Player = function() {
+    this.drillPower = 0;
+    this.minerals = {
+      water: 0,
+      carbon: 0,
+      nickel: 0,
+      iron: 0,
+      silicon: 0,
+      olivine: 0
+    };
+  };
+
+  Player.prototype.findMineral = function(drillPower) {
+    var mineral, power;
+    power = randomInt(drillPower);
+    mineral = minerals[randomInt(minerals.length)];
+    return this.minerals[mineral] += power;
+  };
 
   Game = function(asteroidSize) {
     this.asteroid = asteroidSize;
     this.players = {
-      1: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
-        }
-      },
-      2: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
-        }
-      },
-      3: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
-        }
-      },
-      4: {
-        drillPower: 0,
-        minerals: {
-          iron: 0
-        }
-      }
+      1: new Player(),
+      2: new Player(),
+      3: new Player(),
+      4: new Player()
     };
   };
 
@@ -56,28 +57,36 @@
       return console.log("START!");
     });
     socket.on('drill', function(data) {
+      var drillPower, playerId;
       console.log("DRILL!");
       console.log(data);
-      updateGame(data);
+      playerId = data["playerID"];
+      drillPower = parseInt(data["drillPower"]);
+      updatePlayer(data);
       socket.emit('update-game', game);
       return console.log(game);
     });
   });
 
-  updateGame = function(data) {
+  updatePlayer = function(data) {
     var drillPower, playerId;
     if (data) {
       playerId = data["playerID"];
-      drillPower = data["drillPower"];
+      drillPower = parseInt(data["drillPower"]);
       if (playerId && drillPower) {
-        game["asteroid"] += drillPower;
-        return game["players"][playerId]["drillPower"] += drillPower;
+        game["asteroid"] -= drillPower;
+        game["players"][playerId]["drillPower"] += drillPower;
+        return game["players"][playerId].findMineral(drillPower);
       }
     }
   };
 
   initGame = function() {
     return game = new Game(defaultAsteroidSize);
+  };
+
+  randomInt = function(max) {
+    return Math.floor(Math.random() * (max + 1));
   };
 
 }).call(this);
