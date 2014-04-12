@@ -8,21 +8,15 @@
 
 #import "DIOControlPanelViewController.h"
 
-#import <socket.IO/SocketIO.h>
+#import "DIOSocketManager.h"
 
-static NSString *const DIOHost = @"";
-static NSString *const DIONamespace = @"";
-
-@interface DIOControlPanelViewController () <SocketIODelegate>
+@interface DIOControlPanelViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *drillButton;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
-
-
-@property (strong, nonatomic) SocketIO *socket;
 
 @end
 
@@ -31,12 +25,6 @@ static NSString *const DIONamespace = @"";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.socket = [[SocketIO alloc] initWithDelegate:self];
-    [self.socket connectToHost:@""
-                        onPort:3000
-                    withParams:@{}
-                 withNamespace:@""];
     
     [self setupTimer];
 }
@@ -52,65 +40,21 @@ static NSString *const DIONamespace = @"";
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
-    [self.socket sendJSON:@{
-                            @"shipId":@"1",
-                            @"direction":@"down"
-                            }];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill forDeviceID:@"1"];
 }
 
 - (IBAction)left:(id)sender
 {
     NSLog(@"LEFT!");
-    [self.socket sendJSON:@{
-                            @"shipId":@"1",
-                            @"direction":@"left"
-                            }];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionLeft forDeviceID:@"1"];
 }
 
 - (IBAction)right:(id)sender
 {
     NSLog(@"RIGHT!");
-    [self.socket sendJSON:@{
-                            @"shipId":@"1",
-                            @"direction":@"right"
-                            }];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionRight forDeviceID:@"1"];
 }
 
-#pragma mark - Sockets
-- (void)socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
-{
-    NSLog(@"DID RECEIVE EVENT");
-}
-
-- (void)socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet
-{
-    NSLog(@"DID RECEIVE JSON");
-}
-
-- (void)socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet
-{
-    NSLog(@"DID RECEIVE MESSAGE");
-}
-
-- (void)socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet
-{
-    NSLog(@"DID SEND MESSAGE");
-}
-
-- (void)socketIO:(SocketIO *)socket onError:(NSError *)error
-{
-    NSLog(@"ON ERROR");
-}
-
-- (void)socketIODidConnect:(SocketIO *)socket
-{
-    NSLog(@"DID CONNECT");
-}
-
-- (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
-{
-    NSLog(@"DID DISCONNECT");
-}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
