@@ -67,23 +67,35 @@
                                     <action selector="right:" destination="Bfr-z8-pFb" eventType="touchUpInside" id="POr-5i-rfH"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Timer Background" translatesAutoresizingMaskIntoConstraints="NO" id="HSx-ME-ufb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer Background" translatesAutoresizingMaskIntoConstraints="NO" id="HSx-ME-ufb">
                                 <rect key="frame" x="788" y="624" width="216" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="216" id="c0b-39-ELx"/>
+                                    <constraint firstAttribute="height" constant="124" id="xxg-vW-FNW"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Fuel Gauge" translatesAutoresizingMaskIntoConstraints="NO" id="18u-Ca-xya">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fuel Gauge" translatesAutoresizingMaskIntoConstraints="NO" id="18u-Ca-xya">
                                 <rect key="frame" x="20" y="553" width="195" height="195"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="Hjf-Zq-hS3"/>
+                                    <constraint firstAttribute="width" constant="195" id="MOi-tD-GYM"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vxo-gx-pV3" firstAttribute="leading" secondItem="F92-e1-ikw" secondAttribute="trailing" constant="101" id="242-3X-Kso"/>
                             <constraint firstAttribute="centerY" secondItem="F92-e1-ikw" secondAttribute="centerY" id="JRY-Fe-rLr"/>
+                            <constraint firstItem="qmZ-wm-vUN" firstAttribute="top" secondItem="18u-Ca-xya" secondAttribute="bottom" constant="20" id="RvX-6Y-pSi"/>
                             <constraint firstAttribute="centerX" secondItem="F92-e1-ikw" secondAttribute="centerX" id="T1f-wh-Eu6"/>
+                            <constraint firstItem="qmZ-wm-vUN" firstAttribute="top" secondItem="HSx-ME-ufb" secondAttribute="bottom" constant="20" id="fgE-y4-tLn"/>
                             <constraint firstAttribute="centerY" secondItem="vxo-gx-pV3" secondAttribute="centerY" constant="0.5" id="foa-yC-xu7"/>
                             <constraint firstAttribute="centerY" secondItem="9ZX-6o-m3y" secondAttribute="centerY" constant="0.5" id="krP-37-9ii"/>
                             <constraint firstItem="F92-e1-ikw" firstAttribute="leading" secondItem="9ZX-6o-m3y" secondAttribute="trailing" constant="101" id="pgS-8j-9HJ"/>
+                            <constraint firstAttribute="trailing" secondItem="HSx-ME-ufb" secondAttribute="trailing" constant="20" id="qgP-QU-XV5"/>
+                            <constraint firstItem="18u-Ca-xya" firstAttribute="leading" secondItem="cac-0b-puG" secondAttribute="leading" constant="20" id="z84-6m-q8K"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
