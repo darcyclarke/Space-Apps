@@ -22,7 +22,7 @@
 
 - (void)setupThumbImage
 {
-    UIImage *thumbImage = [UIImage imageNamed:@"sliderThumbImage"];
+    UIImage *thumbImage = [UIImage imageNamed:@"SliderButton"];
     [self setThumbImage:thumbImage forState:UIControlStateNormal];
 }
 

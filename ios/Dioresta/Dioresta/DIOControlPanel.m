@@ -19,7 +19,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor grayColor];
+        self.backgroundColor = [UIColor colorWithHue:0.500 saturation:0.204 brightness:0.212 alpha:1];
+                                
+        UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background"]];
+    [self addSubview:background];
         
         [self setupViews];
     }
