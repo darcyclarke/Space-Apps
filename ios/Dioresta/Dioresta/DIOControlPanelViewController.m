@@ -7,6 +7,7 @@
 //
 
 #import "DIOControlPanelViewController.h"
+#import "DIOControlPanel.h"
 
 #import "DIOSocketManager.h"
 
@@ -17,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
-
+@property (strong, nonatomic) DIOControlPanel *controlPanel;
 @property (weak, nonatomic) IBOutlet UIView *errorContainer;
 
 @end
@@ -33,6 +34,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnect) name:@"DIODidConnect" object:nil];
     
     [self setupTimer];
+    
+    self.controlPanel = [[DIOControlPanel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds))];
+    [self.view addSubview:self.controlPanel];
 }
 
 - (void)dealloc
