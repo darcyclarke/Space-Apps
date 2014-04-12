@@ -19,14 +19,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F92-e1-ikw">
                                 <rect key="frame" x="312" y="184" width="400" height="400"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.1215686275" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="hcT-Aw-Mrc"/>
                                     <constraint firstAttribute="height" constant="400" id="iKM-pd-cAo"/>
                                 </constraints>
-                                <state key="normal" title="DRILL">
+                                <state key="normal" image="Drill Button Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="Drill Button Down"/>
+                                <state key="highlighted" image="Drill Button Down"/>
                                 <connections>
                                     <action selector="drill:" destination="Bfr-z8-pFb" eventType="touchUpInside" id="6WD-fx-SkS"/>
                                 </connections>
@@ -34,14 +36,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZX-6o-m3y">
                                 <rect key="frame" x="20" y="288" width="191" height="191"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.47058823529999999" green="0.61176470589999998" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="191" id="144-gg-JhS"/>
                                     <constraint firstAttribute="height" constant="191" id="5Ko-1a-6Z8"/>
                                 </constraints>
-                                <state key="normal" title="Left">
+                                <state key="normal" image="Left Button Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="Left Button Down"/>
+                                <state key="highlighted" image="Left Button Down"/>
                                 <connections>
                                     <action selector="left:" destination="Bfr-z8-pFb" eventType="touchUpInside" id="Qgz-1Q-fOy"/>
                                 </connections>
@@ -49,18 +53,41 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxo-gx-pV3">
                                 <rect key="frame" x="813" y="288" width="191" height="191"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.47058823529999999" green="0.61176470589999998" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="191" id="79N-6R-ba2"/>
                                     <constraint firstAttribute="height" constant="191" id="ptu-Er-e3N"/>
                                 </constraints>
-                                <state key="normal" title="Right">
+                                <state key="normal" image="Right Button Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="Right Button Down"/>
+                                <state key="highlighted" image="Right Button Down"/>
                                 <connections>
                                     <action selector="right:" destination="Bfr-z8-pFb" eventType="touchUpInside" id="POr-5i-rfH"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ec-dR-5gV">
+                                <rect key="frame" x="788" y="624" width="216" height="124"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Timer Background" translatesAutoresizingMaskIntoConstraints="NO" id="HSx-ME-ufb">
+                                        <rect key="frame" x="0.0" y="0.0" width="216" height="124"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doY-br-x1i">
+                                        <rect key="frame" x="20" y="36" width="176" height="53"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Fuel Gauge" translatesAutoresizingMaskIntoConstraints="NO" id="18u-Ca-xya">
+                                <rect key="frame" x="20" y="553" width="195" height="195"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -78,6 +105,7 @@
                         <outlet property="drillButton" destination="F92-e1-ikw" id="hGo-YD-tmi"/>
                         <outlet property="leftButton" destination="9ZX-6o-m3y" id="KSl-AO-jT3"/>
                         <outlet property="rightButton" destination="vxo-gx-pV3" id="6C9-fY-AHN"/>
+                        <outlet property="timerLabel" destination="doY-br-x1i" id="YU8-Id-5km"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dlD-7P-cYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -85,6 +113,16 @@
             <point key="canvasLocation" x="-156" y="41"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Drill Button Down" width="400" height="400"/>
+        <image name="Drill Button Up" width="400" height="400"/>
+        <image name="Fuel Gauge" width="195" height="195"/>
+        <image name="Left Button Down" width="191" height="191"/>
+        <image name="Left Button Up" width="191" height="191"/>
+        <image name="Right Button Down" width="191" height="191"/>
+        <image name="Right Button Up" width="191" height="191"/>
+        <image name="Timer Background" width="216" height="124"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

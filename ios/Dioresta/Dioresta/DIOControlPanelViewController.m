@@ -19,6 +19,9 @@ static NSString *const DIONamespace = @"";
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+
+
 @property (strong, nonatomic) SocketIO *socket;
 
 @end
@@ -34,6 +37,15 @@ static NSString *const DIONamespace = @"";
                         onPort:3000
                     withParams:@{}
                  withNamespace:@""];
+    
+    [self setupTimer];
+}
+
+#pragma mark - View Setup
+- (void)setupTimer
+{
+    self.timerLabel.text = @"hello";
+    self.timerLabel.font = [UIFont fontWithName:@"DS-Digital" size:45.0f];
 }
 
 #pragma mark - Actions
