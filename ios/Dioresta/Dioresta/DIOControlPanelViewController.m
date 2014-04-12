@@ -40,26 +40,19 @@
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill forDeviceID:@"1"];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill];
 }
 
 - (IBAction)left:(id)sender
 {
     NSLog(@"LEFT!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionLeft forDeviceID:@"1"];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionLeft];
 }
 
 - (IBAction)right:(id)sender
 {
     NSLog(@"RIGHT!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionRight forDeviceID:@"1"];
-}
-
-
-#pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
+    [[DIOSocketManager sharedManager] sendAction:DIOActionRight];
 }
 
 @end

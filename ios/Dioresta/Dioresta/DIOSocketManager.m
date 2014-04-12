@@ -48,12 +48,18 @@ static NSString *const DIONamespace = @"";
     return self;
 }
 
+#pragma mark - Utilities
+- (NSString *)deviceID
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"DIODeviceID"];
+}
+
 #pragma mark - Communication
-- (void)sendAction:(NSString *)action forDeviceID:(NSString *)deviceID
+- (void)sendAction:(NSString *)action
 {
     [self.socket sendJSON:@{
                             @"action":action,
-                            @"deviceID":deviceID
+                            @"deviceID":[self deviceID]
                             }];
 }
 

@@ -18,6 +18,6 @@ static NSString *const DIOActionRight = @"right";
 + (id)sharedManager;
 
 #pragma mark - Communication
-- (void)sendAction:(NSString *)action forDeviceID:(NSString *)deviceID;
+- (void)sendAction:(NSString *)action;
 
 @end
