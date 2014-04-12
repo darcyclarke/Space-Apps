@@ -1,6 +1,8 @@
-game =
-  asteroid: 0
-  players: 
+defaultAsteroidSize = 100
+
+Game = (asteroidSize) ->
+  this.asteroid = asteroidSize
+  this.players = 
     1:
       drillPower: 0
       minerals: 
@@ -17,6 +19,10 @@ game =
       drillPower: 0
       minerals: 
         iron: 0
+
+  return
+
+game = new Game(defaultAsteroidSize)
 
 express = require("express")
 app = require("express")()
@@ -37,7 +43,7 @@ io.sockets.on "connection", (socket) ->
 
   socket.on 'start', (data) -> 
     console.log("START!")
-    initGame()
+    # initGame()
 
   socket.on 'drill', (data) ->
     console.log("DRILL!")
@@ -60,22 +66,5 @@ updateGame = (data) ->
       game["players"][playerId]["drillPower"] += drillPower
 
 initGame = () -> 
-  game =
-    asteroid: 0
-    players: 
-      1:
-        drillPower: 0
-        minerals: 
-          iron: 0
-      2: 
-        drillPower: 0
-        minerals: 
-          iron: 0
-      3: 
-        drillPower: 0
-        minerals: 
-          iron: 0
-      4: 
-        drillPower: 0
-        minerals: 
-          iron: 0
+  game = new Game(defaultAsteroidSize)
+

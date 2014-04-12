@@ -1,9 +1,11 @@
 (function() {
-  var app, express, game, initGame, io, server, updateGame;
+  var Game, app, defaultAsteroidSize, express, game, initGame, io, server, updateGame;
 
-  game = {
-    asteroid: 0,
-    players: {
+  defaultAsteroidSize = 100;
+
+  Game = function(asteroidSize) {
+    this.asteroid = asteroidSize;
+    this.players = {
       1: {
         drillPower: 0,
         minerals: {
@@ -28,8 +30,10 @@
           iron: 0
         }
       }
-    }
+    };
   };
+
+  game = new Game(defaultAsteroidSize);
 
   express = require("express");
 
@@ -49,8 +53,7 @@
 
   io.sockets.on("connection", function(socket) {
     socket.on('start', function(data) {
-      console.log("START!");
-      return initGame();
+      return console.log("START!");
     });
     socket.on('drill', function(data) {
       console.log("DRILL!");
@@ -74,35 +77,7 @@
   };
 
   initGame = function() {
-    return game = {
-      asteroid: 0,
-      players: {
-        1: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        },
-        2: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        },
-        3: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        },
-        4: {
-          drillPower: 0,
-          minerals: {
-            iron: 0
-          }
-        }
-      }
-    };
+    return game = new Game(defaultAsteroidSize);
   };
 
 }).call(this);
