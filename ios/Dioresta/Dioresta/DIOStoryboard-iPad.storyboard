@@ -61,6 +61,19 @@
                                     <action selector="right:" destination="Bfr-z8-pFb" eventType="touchUpInside" id="POr-5i-rfH"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ec-dR-5gV">
+                                <rect key="frame" x="788" y="624" width="216" height="124"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doY-br-x1i">
+                                        <rect key="frame" x="20" y="36" width="176" height="53"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -78,6 +91,7 @@
                         <outlet property="drillButton" destination="F92-e1-ikw" id="hGo-YD-tmi"/>
                         <outlet property="leftButton" destination="9ZX-6o-m3y" id="KSl-AO-jT3"/>
                         <outlet property="rightButton" destination="vxo-gx-pV3" id="6C9-fY-AHN"/>
+                        <outlet property="timerLabel" destination="doY-br-x1i" id="YU8-Id-5km"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dlD-7P-cYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
