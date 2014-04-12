@@ -71,6 +71,10 @@
                                 <rect key="frame" x="788" y="624" width="216" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Fuel Gauge" translatesAutoresizingMaskIntoConstraints="NO" id="18u-Ca-xya">
+                                <rect key="frame" x="20" y="553" width="195" height="195"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -98,6 +102,7 @@
     <resources>
         <image name="Drill Button Down" width="400" height="400"/>
         <image name="Drill Button Up" width="400" height="400"/>
+        <image name="Fuel Gauge" width="195" height="195"/>
         <image name="Left Button Down" width="191" height="191"/>
         <image name="Left Button Up" width="191" height="191"/>
         <image name="Right Button Down" width="191" height="191"/>
