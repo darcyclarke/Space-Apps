@@ -20,15 +20,28 @@ Asteroid = (size) ->
     silicon: size
     olivine: size
 
-Asteroid::totalSize = () -> 
-  size = 0
-  for mineral in minerals
-    size += this[mineral]
+  this.totalSize = () -> 
+    size = 0
+    for mineral in minerals
+      size += this[mineral]
 
-  return size
+    return size
 
-Asteroid::isEmpty = () ->
-  return totalSize <= 0
+  this.isEmpty = () ->
+    return this.totalSize <= 0
+
+  this.presentMinerals = () -> 
+    minerals = []
+    for mineral in this.minerals
+      if this.minerals[mineral] > 0
+        minerals.push mineral
+
+    return minerals
+
+  this.loseMineral = (mineral, amount) ->
+    this[mineral] -= amount
+
+  return
 
 # -- player -----------------------------------------------------------------
 
@@ -42,13 +55,10 @@ Player = () ->
     silicon: 0
     olivine: 0
 
+  this.findMineral = (mineral, amount) -> 
+    this.minerals[mineral] += amount
+
   return
-
-Player::findMineral = (drillPower) -> 
-  power = randomInt(drillPower)
-  mineral = minerals[randomInt(minerals.length)]
-
-  this.minerals[mineral] += power
 
 # -- game -------------------------------------------------------------------
 
@@ -61,22 +71,24 @@ Game = (asteroidSize) ->
     3: new Player()
     4: new Player()
 
+  this.update = (playerId, drillPower) -> 
+    if !this.asteroid.isEmpty()
+      this.isOver = true
+    else
+      minerals = game.asteroid.presentMinerals()
+      mineral = minerals[randomInt(minerals.length)]
+      amount = randomInt(drillPower)
+
+      game.asteroid.loseMineral(mineral, amount)
+      game.players[playerId].findMineral(mineral, amount)
+
   return
-
-Game::update = (playerId, drillPower) -> 
-  if !this.asteroid.isEmpty()
-    this.isOver = true
-  else
-
-      game["players"][playerId]["drillPower"] += drillPower
-
-      game["players"][playerId].findMineral(drillPower)
 
 # ===========================================================================
 # config
 # ===========================================================================
 
-game = new Game(defaultAsteroidSize)
+game = new Game(MINERAL_TOTAL)
 
 express = require("express")
 app = require("express")()
@@ -99,7 +111,7 @@ io.sockets.on "connection", (socket) ->
 
   socket.on 'start', (data) -> 
     console.log("START!")
-    # initGame()
+    initGame()
 
   socket.on 'drill', (data) ->
     console.log("DRILL!")
@@ -119,7 +131,7 @@ io.sockets.on "connection", (socket) ->
 # ===========================================================================
 
 initGame = () -> 
-  game = new Game(defaultAsteroidSize)
+  game = new Game(MINERAL_TOTAL)
 
 randomInt = (max) ->
   Math.floor(Math.random() * (max + 1))
