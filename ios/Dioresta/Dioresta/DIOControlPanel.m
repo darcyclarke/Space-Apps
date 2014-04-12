@@ -51,16 +51,18 @@
     float sliderX = self.drillAccuracyMeter.sliderIndicator.frame.origin.x;
     //this is the max 'bonus' they can get here, which the width of the white meterContainer in the accuracy meter
     float meterContainerWidth = CGRectGetWidth(self.drillAccuracyMeter.meterContainer.frame);
-    //we then add the length between the powerIndicator and slider, and then subtract it from the meterContainerWidth
-    float accuracyBonus = meterContainerWidth - (powerIndicatorX - sliderX);
+    //get larger number
+    float largerNumber = MAX(powerIndicatorX, sliderX);
+    float smallerNumber = MIN(powerIndicatorX, sliderX);
+    float accuracyBonus = meterContainerWidth - (largerNumber - smallerNumber);
     
     /* add the bonus to the drill power points and send to server */
     
     //use this number to change value of drillPower
-    float drillPowerBonusMultiplier = 10;
+    float drillPowerBonusMultiplier = 15;
     float drillPower = drillPowerLevel * drillPowerBonusMultiplier;
     //use this number to change value accuracy
-    float accuracyBonusMultiplier = 1;
+    float accuracyBonusMultiplier = 1.5;
     float accuracyBonusPoints = accuracyBonus * accuracyBonusMultiplier;
     
     float totalPointsForShot = accuracyBonus + (accuracyBonusPoints * drillPower);
