@@ -11,16 +11,15 @@ Team TWG's Space Apps Project
 - Sustainability
 - Presentation
 
-<<<<<<< HEAD
 ### Earth-Shattering Asteroid Characteristics
 
 - 1,000 km in size
-- Water
-- Carbon
-- Nickel
-- Iron
-- Silicon
-- Olivine
+- Water - H2O
+- Carbon - C
+- Nickel - Ni
+- Iron - Fe
+- Silicon - Si
+- Olivine - (Mg, Fe)2SiO4
 
 
 ### Storyboard
@@ -38,4 +37,3 @@ Team TWG's Space Apps Project
   "deviceID":"1"
 }
 ```
->>>>>>> 7e212208a3b8cc315c7f81d56164ec673cd5bcba
