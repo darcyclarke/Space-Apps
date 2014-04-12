@@ -95,16 +95,22 @@ static NSString *const DIONamespace = @"";
 - (void)socketIO:(SocketIO *)socket onError:(NSError *)error
 {
     NSLog(@"ON ERROR %@", error);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DIODidDisconnectWithError" object:nil];
+    [self.socket connectToHost:DIOHost
+                        onPort:DIOPort];
 }
 
 - (void)socketIODidConnect:(SocketIO *)socket
 {
     NSLog(@"DID CONNECT %@", socket);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DIODidConnect" object:nil];
 }
 
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
     NSLog(@"DID DISCONNECT %@ %@", socket, error);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DIODidDisconnectWithError" object:nil];
     [self.socket connectToHost:DIOHost
                         onPort:DIOPort];
 }

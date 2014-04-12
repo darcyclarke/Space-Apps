@@ -18,6 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *errorContainer;
+
 @end
 
 @implementation DIOControlPanelViewController
@@ -26,7 +28,16 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDisconnectWithError) name:@"DIODidDisconnectWithError" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnect) name:@"DIODidConnect" object:nil];
+    
     [self setupTimer];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - View Setup
@@ -55,6 +66,20 @@
 {
     NSLog(@"RIGHT!");
     [[DIOSocketManager sharedManager] sendAction:DIOActionRight andData:nil];
+}
+
+- (void)didDisconnectWithError
+{
+    self.errorContainer.hidden = NO;
+}
+
+- (void)didConnect
+{
+    self.errorContainer.hidden = YES;
+}
+
+- (IBAction)didTapError:(id)sender {
+    
 }
 
 @end
