@@ -10,8 +10,8 @@
 
 #import <socket.IO/SocketIO.h>
 
-static NSString *const DIOHost = @"";
-static NSInteger const DIOPort = 100;
+static NSString *const DIOHost = @"192.168.1.114";
+static NSInteger const DIOPort = 8000;
 static NSString *const DIONamespace = @"";
 
 @interface DIOSocketManager() <SocketIODelegate>
@@ -28,7 +28,9 @@ static NSString *const DIONamespace = @"";
     static DIOSocketManager *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedManager = [[self alloc] initWithHost:DIOHost port:DIOPort namespace:DIONamespace];
+        sharedManager = [[self alloc] initWithHost:DIOHost
+                                              port:DIOPort
+                                         namespace:DIONamespace];
     });
     return sharedManager;
 }
@@ -41,8 +43,7 @@ static NSString *const DIONamespace = @"";
         self.socket = [[SocketIO alloc] initWithDelegate:self];
         [self.socket connectToHost:host
                             onPort:port
-                        withParams:@{}
-                     withNamespace:namespace];
+         ];
     }
     
     return self;
@@ -57,10 +58,9 @@ static NSString *const DIONamespace = @"";
 #pragma mark - Communication
 - (void)sendAction:(NSString *)action
 {
-    [self.socket sendJSON:@{
-                            @"action":action,
-                            @"deviceID":[self deviceID]
-                            }];
+    [self.socket sendEvent:action withData:@{
+                                             
+                                               }];
 }
 
 #pragma mark - Socket.IO Delegate
