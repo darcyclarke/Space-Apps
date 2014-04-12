@@ -1,20 +1,18 @@
 
-app = require('http').createServer(handler)
-io = require('socket.io').listen(app)
-fs = require('fs')
+express = require('express')
+app = express()
+http = require('http')
+server = http.createServer(app)
+io = require('socket.io').listen(server)
 
-handler = (req, res) ->
-  fs.readFile __dirname + '/index.html', (err, data) ->
-    if(err)
-      res.writeHead(500)
-      return res.end('Error loading index.html')
+app.use('/assets', express.static(__dirname + '/assets'))
 
-    res.writeHead(200)
-    res.end(data)
+app.get '/', (req, res) ->
+  res.sendfile(__dirname + '/index.html')
 
 io.sockets.on 'connection', (socket) ->
-  socket.emit('game start', {})
-  socket.on 'input', (data) ->
-    socket.emit('game update', player: 'blue', action: 'world')
+  socket.emit('news', { hello: 'world'})
+  socket.on 'my something', (data) ->
+    console.log(data)
 
-app.listen(8000)
+http.createServer(app).listen(8000)

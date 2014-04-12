@@ -13,17 +13,32 @@ html.no-js
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     title Space Apps
     meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
-    link(rel="stylesheet", href="assets/styles/main.min.css", type="text/css")
+    link(rel="stylesheet", href="/assets/styles/main.min.css", type="text/css")
   body
     div.wrapper
       div.game
 
         div.earth
-        div.asteroid
+          img(src="/assets/images/earth.png")
 
-        div.ship.red
-        div.ship.blue
-        div.ship.green
-        div.ship.yellow
+        div.asteroids
+          img.asteroid.asteroid-1(src="/assets/images/asteroids/1.png")
 
-    script(type="text/javascript" src="assets/scripts/main.min.js")
+        div.player.red
+          div.ship
+          div.notification.cf
+            p.avatar: img(src="/assets/images/minerals/water.png")
+            p.text <strong>+10</strong> Oxegyn
+
+        div.player.blue
+          div.ship
+
+        div.player.green
+          div.ship
+
+        div.player.yellow
+          div.ship
+
+    script(type="text/javascript" src="/socket.io/socket.io.js")
+    script(type="text/javascript" src="/assets/scripts/libs.min.js")
+    script(type="text/javascript" src="/assets/scripts/main.min.js")

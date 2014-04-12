@@ -7,7 +7,7 @@ gulp        = require('gulp')
 plugins     = require('gulp-load-plugins')()
 paths       =
   styles: './source/**/*.styl'
-  scripts: './source/**/*.js'
+  scripts: './source/**/*.coffee'
   templates: './source/**/*.jade'
 
 #-----------------------------------------------------------------
@@ -75,13 +75,20 @@ gulp.task 'styles', () ->
 
 gulp.task 'scripts', () ->
 
+  # Game
   gulp.src('./source/assets/scripts/**/*.coffee')
     .pipe(plugins.coffee('main.min.js'))
     .pipe(gulp.dest('./build/assets/scripts/'))
 
+  # Libraries
   gulp.src('./source/assets/scripts/libs/**/*.js')
     .pipe(plugins.concat('libs.min.js'))
     .pipe(gulp.dest('./build/assets/scripts/'))
+
+  # Server
+  gulp.src('./source/server.coffee')
+    .pipe(plugins.coffee('server.js'))
+    .pipe(gulp.dest('./build/'))
 
   # LiveReload
   server.changed('./build/assets/scripts/main.min.js') if server
