@@ -10,3 +10,12 @@ Team TWG's Space Apps Project
 - Creativeness
 - Sustainability
 - Presentation
+- 
+
+### JSON Formats
+
+## Action
+{
+  "action":"drill",
+  "deviceID":"1"
+}
