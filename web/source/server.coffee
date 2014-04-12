@@ -1,34 +1,20 @@
 
-#-----------------------------------------------------------------
-# Setup
-#-----------------------------------------------------------------
+app = require('http').createServer(handler)
+io = require('socket.io').listen(app)
+fs = require('fs')
 
-app = require('express')()
-server = require('http').Server(app)
-io = require('socket.io')(server)
+handler = (req, res) ->
+  fs.readFile __dirname + '/index.html', (err, data) ->
+    if(err)
+      res.writeHead(500)
+      return res.end('Error loading index.html')
 
-#-----------------------------------------------------------------
-# Configure
-#-----------------------------------------------------------------
+    res.writeHead(200)
+    res.end(data)
 
-app.configure ()->
-  app.set('view engine', 'jade')
+io.sockets.on 'connection', (socket) ->
+  socket.emit('game start', {})
+  socket.on 'input', (data) ->
+    socket.emit('game update', player: 'blue', action: 'world')
 
-#-----------------------------------------------------------------
-# Connection
-#-----------------------------------------------------------------
-
-io.on 'connection', () ->
-  console.log('.... serving')
-
-app.get '/', (req, res) ->
-  res.send('.... serving')
-
-app.get '/socket/', (req, res) ->
-  res.send('.... serving')
-
-#-----------------------------------------------------------------
-# Listener
-#-----------------------------------------------------------------
-
-server.listen(3000)
+app.listen(8000)

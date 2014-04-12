@@ -2,8 +2,6 @@
 # Setup
 #-----------------------------------------------------------------
 
-fs          = require('fs')
-wrench      = require('wrench')
 server      = false
 gulp        = require('gulp')
 plugins     = require('gulp-load-plugins')()
@@ -20,6 +18,15 @@ gulp.task('default', ['clean', 'images', 'scripts', 'styles', 'templates', 'font
 
 
 #-----------------------------------------------------------------
+# Clean
+#-----------------------------------------------------------------
+
+gulp.task 'clean', () ->
+  gulp.src('./build/', force: true )
+    .pipe(plugins.clean())
+
+
+#-----------------------------------------------------------------
 # Watch
 #-----------------------------------------------------------------
 
@@ -29,6 +36,23 @@ gulp.task 'watch', () ->
   gulp.watch(paths.scripts, ['scripts'])
   gulp.watch(paths.templates, ['templates'])
 
+#-----------------------------------------------------------------
+# Fonts
+#-----------------------------------------------------------------
+
+gulp.task 'fonts', () ->
+  gulp.src('./source/assets/fonts/**/*.{ttf,svg,otf,woff,eot}')
+    .pipe(gulp.dest('./build/assets/fonts/'))
+
+
+#-----------------------------------------------------------------
+# Images
+#-----------------------------------------------------------------
+
+gulp.task 'images', () ->
+  gulp.src('./source/assets/images/**/*.{png,gif,jpg,jpeg}')
+    .pipe(gulp.dest('./build/assets/images/'))
+
 
 #-----------------------------------------------------------------
 # Styles
@@ -37,8 +61,8 @@ gulp.task 'watch', () ->
 gulp.task 'styles', () ->
 
   gulp.src('./source/assets/styles/base.styl')
-    .pipe(plugins.concat('main.min.css'))
     .pipe(plugins.stylus( set: ['compress'], use: ['nib'] ))
+    .pipe(plugins.rename('main.min.css'))
     .pipe(gulp.dest('./build/assets/styles/'))
 
   # LiveReload
@@ -51,7 +75,11 @@ gulp.task 'styles', () ->
 
 gulp.task 'scripts', () ->
 
-  gulp.src('./source/assets/scripts/**/*.js')
+  gulp.src('./source/assets/scripts/**/*.coffee')
+    .pipe(plugins.coffee('main.min.js'))
+    .pipe(gulp.dest('./build/assets/scripts/'))
+
+  gulp.src('./source/assets/scripts/libs/**/*.js')
     .pipe(plugins.concat('libs.min.js'))
     .pipe(gulp.dest('./build/assets/scripts/'))
 
@@ -66,9 +94,8 @@ gulp.task 'scripts', () ->
 gulp.task 'templates', () ->
 
   # Build
-  templates = JSON.parse(require('./server/templates').compile())
   gulp.src('./source/index.jade')
-    .pipe(plugins.jade( locals: templates: templates ))
+    .pipe(plugins.jade())
     .pipe(gulp.dest('./build/'))
 
   # LiveReload
