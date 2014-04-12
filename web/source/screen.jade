@@ -16,13 +16,17 @@ html.no-js
     link(rel="stylesheet", href="/assets/styles/main.min.css", type="text/css")
   body
     div.wrapper
+
+      //- Game
       div.game
 
+        //- Earth
         div.earth
           img(src="/assets/images/earth.png")
 
+        //- Asteroids
         div.asteroids
-          img.asteroid.asteroid-1(src="/assets/images/asteroids/1.png")
+          img.asteroid(src="/assets/images/asteroids/1.png")
 
         div.player.red
           div.ship
@@ -39,6 +43,4 @@ html.no-js
         div.player.yellow
           div.ship
 
-    script(type="text/javascript" src="/socket.io/socket.io.js")
     script(type="text/javascript" src="/assets/scripts/libs.min.js")
-    script(type="text/javascript" src="/assets/scripts/main.min.js")
