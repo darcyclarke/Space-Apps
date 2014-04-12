@@ -4,17 +4,16 @@ Space-Apps
 Team TWG's Space Apps Project
 
 
-### Judging Factors
+## Judging Factors
 
 - Impact
 - Creativeness
 - Sustainability
 - Presentation
-- 
 
-### JSON Formats
+## JSON Formats
 
-## Action
+### Action
 {
   "action":"drill",
   "deviceID":"1"
