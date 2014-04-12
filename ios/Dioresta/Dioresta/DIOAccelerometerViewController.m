@@ -100,4 +100,8 @@ double rotY;
     currentMaxRotY = 0;
 }
 
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
