@@ -5,6 +5,7 @@ PODS:
 
 DEPENDENCIES:
   - socket.IO (~> 0.5)
+  - SocketRocket (~> 0.3)
 
 SPEC CHECKSUMS:
   socket.IO: 10f35e5bb4c6d272f652221c63eae9a3a82d0b0e
