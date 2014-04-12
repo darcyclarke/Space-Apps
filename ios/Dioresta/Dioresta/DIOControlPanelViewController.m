@@ -7,6 +7,7 @@
 //
 
 #import "DIOControlPanelViewController.h"
+#import "DIOControlPanel.h"
 
 #import <socket.IO/SocketIO.h>
 
@@ -20,7 +21,7 @@ static NSString *const DIONamespace = @"";
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
-
+@property (strong, nonatomic) DIOControlPanel *controlPanel;
 
 @property (strong, nonatomic) SocketIO *socket;
 
@@ -39,6 +40,9 @@ static NSString *const DIONamespace = @"";
                  withNamespace:@""];
     
     [self setupTimer];
+    
+    self.controlPanel = [[DIOControlPanel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds))];
+    [self.view addSubview:self.controlPanel];
 }
 
 #pragma mark - View Setup

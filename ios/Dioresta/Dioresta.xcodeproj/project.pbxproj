@@ -25,6 +25,11 @@
 		17A2306118F8ACF200238231 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 17A2306018F8ACF200238231 /* Podfile */; };
 		9E4D225818F8B75200A1523C /* DIOAccelerometerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D225718F8B75200A1523C /* DIOAccelerometerViewController.m */; };
 		9E4D225D18F8D55F00A1523C /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 9E4D225C18F8D55F00A1523C /* DS-DIGI.TTF */; };
+		9E4D226018F99CA700A1523C /* DIOControlPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D225F18F99CA700A1523C /* DIOControlPanel.m */; };
+		9E4D226418F99D9200A1523C /* DIOControlPanelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D226318F99D9200A1523C /* DIOControlPanelButton.m */; };
+		9E4D226718F99FF900A1523C /* DIODJSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D226618F99FF900A1523C /* DIODJSlider.m */; };
+		9E4D226C18F9A5C500A1523C /* DIODrillAccuracyMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D226B18F9A5C500A1523C /* DIODrillAccuracyMeter.m */; };
+		9E4D227018F9AFEE00A1523C /* DIODrillPowerMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D226F18F9AFEE00A1523C /* DIODrillPowerMeter.m */; };
 		F0735EC2D8EE435CA81AAD26 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4FD2BA83FC437EA29B7099 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +68,17 @@
 		9E4D225618F8B75200A1523C /* DIOAccelerometerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOAccelerometerViewController.h; sourceTree = "<group>"; };
 		9E4D225718F8B75200A1523C /* DIOAccelerometerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOAccelerometerViewController.m; sourceTree = "<group>"; };
 		9E4D225C18F8D55F00A1523C /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
+		9E4D225E18F99CA700A1523C /* DIOControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOControlPanel.h; sourceTree = "<group>"; };
+		9E4D225F18F99CA700A1523C /* DIOControlPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOControlPanel.m; sourceTree = "<group>"; };
+		9E4D226218F99D9200A1523C /* DIOControlPanelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOControlPanelButton.h; sourceTree = "<group>"; };
+		9E4D226318F99D9200A1523C /* DIOControlPanelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOControlPanelButton.m; sourceTree = "<group>"; };
+		9E4D226518F99FF900A1523C /* DIODJSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIODJSlider.h; sourceTree = "<group>"; };
+		9E4D226618F99FF900A1523C /* DIODJSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIODJSlider.m; sourceTree = "<group>"; };
+		9E4D226A18F9A5C500A1523C /* DIODrillAccuracyMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIODrillAccuracyMeter.h; sourceTree = "<group>"; };
+		9E4D226B18F9A5C500A1523C /* DIODrillAccuracyMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIODrillAccuracyMeter.m; sourceTree = "<group>"; };
+		9E4D226D18F9A78E00A1523C /* DIOControlPanelDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DIOControlPanelDefines.h; sourceTree = "<group>"; };
+		9E4D226E18F9AFEE00A1523C /* DIODrillPowerMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIODrillPowerMeter.h; sourceTree = "<group>"; };
+		9E4D226F18F9AFEE00A1523C /* DIODrillPowerMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIODrillPowerMeter.m; sourceTree = "<group>"; };
 		9F4FD2BA83FC437EA29B7099 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA85DD2798DA42E5A1FC2B86 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,10 +196,15 @@
 		17A2305C18F8AC4A00238231 /* Control Panel */ = {
 			isa = PBXGroup;
 			children = (
+				9E4D226918F9A5B100A1523C /* meters */,
+				9E4D226118F99D8000A1523C /* controls */,
 				17A2305D18F8AC6700238231 /* DIOControlPanelViewController.h */,
 				17A2305E18F8AC6700238231 /* DIOControlPanelViewController.m */,
 				9E4D225618F8B75200A1523C /* DIOAccelerometerViewController.h */,
 				9E4D225718F8B75200A1523C /* DIOAccelerometerViewController.m */,
+				9E4D225E18F99CA700A1523C /* DIOControlPanel.h */,
+				9E4D225F18F99CA700A1523C /* DIOControlPanel.m */,
+				9E4D226D18F9A78E00A1523C /* DIOControlPanelDefines.h */,
 			);
 			name = "Control Panel";
 			sourceTree = "<group>";
@@ -194,6 +215,28 @@
 				9E4D225C18F8D55F00A1523C /* DS-DIGI.TTF */,
 			);
 			name = fonts;
+			sourceTree = "<group>";
+		};
+		9E4D226118F99D8000A1523C /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				9E4D226218F99D9200A1523C /* DIOControlPanelButton.h */,
+				9E4D226318F99D9200A1523C /* DIOControlPanelButton.m */,
+				9E4D226518F99FF900A1523C /* DIODJSlider.h */,
+				9E4D226618F99FF900A1523C /* DIODJSlider.m */,
+			);
+			name = controls;
+			sourceTree = "<group>";
+		};
+		9E4D226918F9A5B100A1523C /* meters */ = {
+			isa = PBXGroup;
+			children = (
+				9E4D226A18F9A5C500A1523C /* DIODrillAccuracyMeter.h */,
+				9E4D226B18F9A5C500A1523C /* DIODrillAccuracyMeter.m */,
+				9E4D226E18F9AFEE00A1523C /* DIODrillPowerMeter.h */,
+				9E4D226F18F9AFEE00A1523C /* DIODrillPowerMeter.m */,
+			);
+			name = meters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,10 +377,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E4D226718F99FF900A1523C /* DIODJSlider.m in Sources */,
 				17A2303518F8AAAB00238231 /* main.m in Sources */,
+				9E4D226C18F9A5C500A1523C /* DIODrillAccuracyMeter.m in Sources */,
+				9E4D227018F9AFEE00A1523C /* DIODrillPowerMeter.m in Sources */,
+				9E4D226418F99D9200A1523C /* DIOControlPanelButton.m in Sources */,
 				17A2305F18F8AC6700238231 /* DIOControlPanelViewController.m in Sources */,
 				9E4D225818F8B75200A1523C /* DIOAccelerometerViewController.m in Sources */,
 				17A2303918F8AAAB00238231 /* DIOAppDelegate.m in Sources */,
+				9E4D226018F99CA700A1523C /* DIOControlPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,11 +506,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
 				INFOPLIST_FILE = "Dioresta/Dioresta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -474,11 +524,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
 				INFOPLIST_FILE = "Dioresta/Dioresta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
