@@ -101,7 +101,7 @@ gulp.task 'scripts', () ->
 gulp.task 'templates', () ->
 
   # Build
-  gulp.src('./source/index.jade')
+  gulp.src('./source/**/*.jade')
     .pipe(plugins.jade())
     .pipe(gulp.dest('./build/'))
 

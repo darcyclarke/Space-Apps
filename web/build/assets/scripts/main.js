@@ -3,10 +3,11 @@
 
   socket = io.connect('http://localhost:8000');
 
-  socket.on('news', function(data) {
+  socket.on('update-positions', function(data) {
     console.log(data);
-    return socket.emit('my other event', {
-      my: 'data'
+    return $('h1').css({
+      top: data.y,
+      left: data.x
     });
   });
 
