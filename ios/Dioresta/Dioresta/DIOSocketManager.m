@@ -60,37 +60,37 @@ static NSString *const DIONamespace = @"";
 #pragma mark - Socket.IO Delegate
 - (void)socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
 {
-    NSLog(@"DID RECEIVE EVENT");
+    NSLog(@"DID RECEIVE EVENT %@", packet);
 }
 
 - (void)socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet
 {
-    NSLog(@"DID RECEIVE JSON");
+    NSLog(@"DID RECEIVE JSON %@", packet);
 }
 
 - (void)socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet
 {
-    NSLog(@"DID RECEIVE MESSAGE");
+    NSLog(@"DID RECEIVE MESSAGE %@", packet);
 }
 
 - (void)socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet
 {
-    NSLog(@"DID SEND MESSAGE");
+    NSLog(@"DID SEND MESSAGE %@", packet);
 }
 
 - (void)socketIO:(SocketIO *)socket onError:(NSError *)error
 {
-    NSLog(@"ON ERROR");
+    NSLog(@"ON ERROR %@", error);
 }
 
 - (void)socketIODidConnect:(SocketIO *)socket
 {
-    NSLog(@"DID CONNECT");
+    NSLog(@"DID CONNECT %@", socket);
 }
 
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
-    NSLog(@"DID DISCONNECT");
+    NSLog(@"DID DISCONNECT %@ %@", socket, error);
 }
 
 @end
