@@ -77,7 +77,7 @@ gulp.task 'scripts', () ->
 
   # Game
   gulp.src('./source/assets/scripts/**/*.coffee')
-    .pipe(plugins.coffee('main.min.js'))
+    .pipe(plugins.coffee('main.js'))
     .pipe(gulp.dest('./build/assets/scripts/'))
 
   # Libraries
@@ -91,7 +91,7 @@ gulp.task 'scripts', () ->
     .pipe(gulp.dest('./build/'))
 
   # LiveReload
-  server.changed('./build/assets/scripts/main.min.js') if server
+  server.changed('./build/assets/scripts/main.js') if server
 
 
 #-----------------------------------------------------------------
@@ -107,4 +107,3 @@ gulp.task 'templates', () ->
 
   # LiveReload
   server.changed('./build/index.html') if server
-

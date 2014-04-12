@@ -6,9 +6,11 @@
   socket.on('update-positions', function(data) {
     console.log(data);
     return $('h1').css({
-      top: data.y,
-      left: data.x
+      top: data["player1"].y,
+      left: data["player1"].x
     });
   });
+
+  window.socket = socket;
 
 }).call(this);
