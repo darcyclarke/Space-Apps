@@ -17,21 +17,20 @@
     this.totalSize = function() {
       var mineral, _i, _len;
       size = 0;
-      for (_i = 0, _len = minerals.length; _i < _len; _i++) {
-        mineral = minerals[_i];
-        size += this[mineral];
+      for (_i = 0, _len = MINERALS.length; _i < _len; _i++) {
+        mineral = MINERALS[_i];
+        size += this.minerals[mineral];
       }
       return size;
     };
     this.isEmpty = function() {
-      return this.totalSize <= 0;
+      return this.totalSize() <= 0;
     };
     this.presentMinerals = function() {
-      var mineral, minerals, _i, _len, _ref;
+      var mineral, minerals, _i, _len;
       minerals = [];
-      _ref = this.minerals;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        mineral = _ref[_i];
+      for (_i = 0, _len = MINERALS.length; _i < _len; _i++) {
+        mineral = MINERALS[_i];
         if (this.minerals[mineral] > 0) {
           minerals.push(mineral);
         }
@@ -39,7 +38,7 @@
       return minerals;
     };
     this.loseMineral = function(mineral, amount) {
-      return this[mineral] -= amount;
+      return this.minerals[mineral] -= amount;
     };
   };
 
@@ -69,7 +68,7 @@
     };
     this.update = function(playerId, drillPower) {
       var amount, mineral, minerals;
-      if (!this.asteroid.isEmpty()) {
+      if (this.asteroid.isEmpty()) {
         return this.isOver = true;
       } else {
         minerals = game.asteroid.presentMinerals();
@@ -113,8 +112,8 @@
         drillPower = parseInt(data["drillPower"]);
         if (playerId && drillPower) {
           game.update(playerId, drillPower);
-          socket.emit('update-game', game);
-          return console.log(game);
+          socket.emit('update-game', JSON.stringify(game));
+          return console.log("=====> ", JSON.stringify(game));
         }
       }
     });
