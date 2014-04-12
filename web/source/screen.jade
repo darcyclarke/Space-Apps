@@ -1,0 +1,46 @@
+doctype
+//if lt IE 7
+  <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+//if IE 7
+  <html class="no-js lt-ie9 lt-ie8">
+//if IE 8
+  <html class="no-js lt-ie9">
+//[if gt IE 8]><!
+html.no-js
+  //<![endif]
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    title Space Apps
+    meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
+    link(rel="stylesheet", href="/assets/styles/main.min.css", type="text/css")
+  body
+    div.wrapper
+
+      //- Game
+      div.game
+
+        //- Earth
+        div.earth
+          img(src="/assets/images/earth.png")
+
+        //- Asteroids
+        div.asteroids
+          img.asteroid(src="/assets/images/asteroids/1.png")
+
+        div.player.red
+          div.ship
+          div.notification.cf
+            p.avatar: img(src="/assets/images/minerals/water.png")
+            p.text <strong>+10</strong> Oxegyn
+
+        div.player.blue
+          div.ship
+
+        div.player.green
+          div.ship
+
+        div.player.yellow
+          div.ship
+
+    script(type="text/javascript" src="/assets/scripts/libs.min.js")

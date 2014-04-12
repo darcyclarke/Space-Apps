@@ -1,31 +1,108 @@
 (function() {
-  var app, express, http, io, server;
+  var app, express, game, initGame, io, server, updateGame;
 
-  express = require('express');
+  game = {
+    asteroid: 0,
+    players: {
+      1: {
+        drillPower: 0,
+        minerals: {
+          iron: 0
+        }
+      },
+      2: {
+        drillPower: 0,
+        minerals: {
+          iron: 0
+        }
+      },
+      3: {
+        drillPower: 0,
+        minerals: {
+          iron: 0
+        }
+      },
+      4: {
+        drillPower: 0,
+        minerals: {
+          iron: 0
+        }
+      }
+    }
+  };
 
-  app = express();
+  express = require("express");
 
-  http = require('http');
+  app = require("express")();
 
-  server = http.createServer(app);
+  server = require("http").createServer(app);
 
-  io = require('socket.io').listen(server);
+  io = require("socket.io").listen(server);
 
   app.use('/assets', express["static"](__dirname + '/assets'));
 
-  app.get('/', function(req, res) {
-    return res.sendfile(__dirname + '/index.html');
+  server.listen(8000);
+
+  app.get("/", function(req, res) {
+    res.sendfile(__dirname + "/index.html");
   });
 
-  io.sockets.on('connection', function(socket) {
-    socket.emit('news', {
-      hello: 'world'
+  io.sockets.on("connection", function(socket) {
+    socket.on('start', function(data) {
+      console.log("START!");
+      return initGame();
     });
-    return socket.on('my something', function(data) {
-      return console.log(data);
+    socket.on('drill', function(data) {
+      console.log("DRILL!");
+      console.log(data);
+      updateGame(data);
+      socket.emit('update-game', game);
+      return console.log(game);
     });
   });
 
-  http.createServer(app).listen(8000);
+  updateGame = function(data) {
+    var drillPower, playerId;
+    if (data) {
+      playerId = data["playerID"];
+      drillPower = data["drillPower"];
+      if (playerId && drillPower) {
+        game["asteroid"] += drillPower;
+        return game["players"][playerId]["drillPower"] += drillPower;
+      }
+    }
+  };
+
+  initGame = function() {
+    return game = {
+      asteroid: 0,
+      players: {
+        1: {
+          drillPower: 0,
+          minerals: {
+            iron: 0
+          }
+        },
+        2: {
+          drillPower: 0,
+          minerals: {
+            iron: 0
+          }
+        },
+        3: {
+          drillPower: 0,
+          minerals: {
+            iron: 0
+          }
+        },
+        4: {
+          drillPower: 0,
+          minerals: {
+            iron: 0
+          }
+        }
+      }
+    };
+  };
 
 }).call(this);

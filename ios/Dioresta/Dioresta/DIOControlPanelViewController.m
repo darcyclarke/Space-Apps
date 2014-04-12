@@ -9,12 +9,9 @@
 #import "DIOControlPanelViewController.h"
 #import "DIOControlPanel.h"
 
-#import <socket.IO/SocketIO.h>
+#import "DIOSocketManager.h"
 
-static NSString *const DIOHost = @"";
-static NSString *const DIONamespace = @"";
-
-@interface DIOControlPanelViewController () <SocketIODelegate>
+@interface DIOControlPanelViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *drillButton;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
@@ -22,8 +19,7 @@ static NSString *const DIONamespace = @"";
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) DIOControlPanel *controlPanel;
-
-@property (strong, nonatomic) SocketIO *socket;
+@property (weak, nonatomic) IBOutlet UIView *errorContainer;
 
 @end
 
@@ -33,16 +29,19 @@ static NSString *const DIONamespace = @"";
 {
     [super viewDidLoad];
     
-    self.socket = [[SocketIO alloc] initWithDelegate:self];
-    [self.socket connectToHost:@""
-                        onPort:3000
-                    withParams:@{}
-                 withNamespace:@""];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDisconnectWithError) name:@"DIODidDisconnectWithError" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnect) name:@"DIODidConnect" object:nil];
     
     [self setupTimer];
     
     self.controlPanel = [[DIOControlPanel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds))];
     [self.view addSubview:self.controlPanel];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - View Setup
@@ -56,69 +55,34 @@ static NSString *const DIONamespace = @"";
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
-    [self.socket sendJSON:@{
-                            @"shipId":@"1",
-                            @"direction":@"down"
-                            }];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill andData:@{
+                                                                          @"drillPower":@"10"
+                                                                          }];
 }
 
 - (IBAction)left:(id)sender
 {
     NSLog(@"LEFT!");
-    [self.socket sendJSON:@{
-                            @"shipId":@"1",
-                            @"direction":@"left"
-                            }];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionLeft andData:nil];
 }
 
 - (IBAction)right:(id)sender
 {
     NSLog(@"RIGHT!");
-    [self.socket sendJSON:@{
-                            @"shipId":@"1",
-                            @"direction":@"right"
-                            }];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionRight andData:nil];
 }
 
-#pragma mark - Sockets
-- (void)socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
+- (void)didDisconnectWithError
 {
-    NSLog(@"DID RECEIVE EVENT");
+    self.errorContainer.hidden = NO;
 }
 
-- (void)socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet
+- (void)didConnect
 {
-    NSLog(@"DID RECEIVE JSON");
+    self.errorContainer.hidden = YES;
 }
 
-- (void)socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet
-{
-    NSLog(@"DID RECEIVE MESSAGE");
-}
-
-- (void)socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet
-{
-    NSLog(@"DID SEND MESSAGE");
-}
-
-- (void)socketIO:(SocketIO *)socket onError:(NSError *)error
-{
-    NSLog(@"ON ERROR");
-}
-
-- (void)socketIODidConnect:(SocketIO *)socket
-{
-    NSLog(@"DID CONNECT");
-}
-
-- (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
-{
-    NSLog(@"DID DISCONNECT");
-}
-
-#pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (IBAction)didTapError:(id)sender {
     
 }
 
