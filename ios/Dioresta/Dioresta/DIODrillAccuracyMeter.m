@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) BOOL powerIndicatorShouldGoForward;
+@property (assign, nonatomic) float accuracyMeterSpeed;
 
 @end
 
@@ -28,6 +29,7 @@
         // Initialization code
         self.backgroundColor = [UIColor orangeColor];
         [self addSubview:self.meterContainer];
+        self.accuracyMeterSpeed = 5;
         
         [self.meterContainer addSubview:self.sliderIndicator];
         [self.meterContainer addSubview:self.powerIndicator];
@@ -57,13 +59,14 @@
 -(void)movePowerIndicator:(NSTimer *)sender
 {
     if (self.powerIndicator.center.x < CGRectGetWidth(self.meterContainer.frame) && self.powerIndicatorShouldGoForward) {
-        self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x + 5, self.powerIndicator.center.y);
+        self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x + self.accuracyMeterSpeed, self.powerIndicator.center.y);
     } else if (self.powerIndicator.center.x > 0) {
         self.powerIndicatorShouldGoForward = NO;
-        self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x - 5, self.powerIndicator.center.y);
+        self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x - self.accuracyMeterSpeed, self.powerIndicator.center.y);
     } else {
         self.powerIndicatorShouldGoForward = YES;
-        self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x + 5, self.powerIndicator.center.y);
+        self.accuracyMeterSpeed += 1;
+        self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x + self.accuracyMeterSpeed, self.powerIndicator.center.y);
     }
 }
 
