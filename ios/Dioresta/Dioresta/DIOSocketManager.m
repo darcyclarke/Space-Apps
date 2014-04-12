@@ -10,8 +10,8 @@
 
 #import <socket.IO/SocketIO.h>
 
-static NSString *const DIOHost = @"";
-static NSInteger const DIOPort = 100;
+static NSString *const DIOHost = @"192.168.1.114";
+static NSInteger const DIOPort = 8000;
 static NSString *const DIONamespace = @"";
 
 @interface DIOSocketManager() <SocketIODelegate>
@@ -28,7 +28,9 @@ static NSString *const DIONamespace = @"";
     static DIOSocketManager *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedManager = [[self alloc] initWithHost:DIOHost port:DIOPort namespace:DIONamespace];
+        sharedManager = [[self alloc] initWithHost:DIOHost
+                                              port:DIOPort
+                                         namespace:DIONamespace];
     });
     return sharedManager;
 }
@@ -40,9 +42,7 @@ static NSString *const DIONamespace = @"";
     if((self = [super init])) {
         self.socket = [[SocketIO alloc] initWithDelegate:self];
         [self.socket connectToHost:host
-                            onPort:port
-                        withParams:@{}
-                     withNamespace:namespace];
+                            onPort:port];
     }
     
     return self;
@@ -55,12 +55,20 @@ static NSString *const DIONamespace = @"";
 }
 
 #pragma mark - Communication
-- (void)sendAction:(NSString *)action
+- (void)sendAction:(NSString *)action andData:(NSDictionary *)data
 {
-    [self.socket sendJSON:@{
-                            @"action":action,
-                            @"deviceID":[self deviceID]
-                            }];
+    if(![self.socket isConnected]) {
+        [self.socket connectToHost:DIOHost
+                            onPort:DIOPort];
+    }
+    
+    NSMutableDictionary *actionData = [NSMutableDictionary dictionaryWithDictionary:data];
+    
+    [actionData addEntriesFromDictionary:@{
+                                           @"playerID":[self deviceID]
+                                           }];
+    
+    [self.socket sendEvent:action withData:actionData];
 }
 
 #pragma mark - Socket.IO Delegate
@@ -97,6 +105,8 @@ static NSString *const DIONamespace = @"";
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error
 {
     NSLog(@"DID DISCONNECT %@ %@", socket, error);
+    [self.socket connectToHost:DIOHost
+                        onPort:DIOPort];
 }
 
 @end

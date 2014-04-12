@@ -40,19 +40,21 @@
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill andData:@{
+                                                                          @"drillPower":@"10"
+                                                                          }];
 }
 
 - (IBAction)left:(id)sender
 {
     NSLog(@"LEFT!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionLeft];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionLeft andData:nil];
 }
 
 - (IBAction)right:(id)sender
 {
     NSLog(@"RIGHT!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionRight];
+    [[DIOSocketManager sharedManager] sendAction:DIOActionRight andData:nil];
 }
 
 @end
