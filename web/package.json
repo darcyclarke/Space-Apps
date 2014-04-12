@@ -12,7 +12,7 @@
   "dependencies": {},
   "devDependencies": {
     "socket.io": "*",
-    "express": "*",
+    "express": "3.*",
     "nib": "*",
     "jade": "*",
     "gulp": "*",

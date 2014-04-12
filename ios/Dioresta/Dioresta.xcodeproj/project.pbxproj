@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171710A318F99646008A29E7 /* DIOSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 171710A218F99646008A29E7 /* DIOSocketManager.m */; };
+		171710A718F9A6EE008A29E7 /* DIOSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 171710A618F9A6EE008A29E7 /* DIOSetupViewController.m */; };
 		17A2302918F8AAAB00238231 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302818F8AAAB00238231 /* Foundation.framework */; };
 		17A2302B18F8AAAB00238231 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302A18F8AAAB00238231 /* CoreGraphics.framework */; };
 		17A2302D18F8AAAB00238231 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2302C18F8AAAB00238231 /* UIKit.framework */; };
@@ -39,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		171710A118F99646008A29E7 /* DIOSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSocketManager.h; sourceTree = "<group>"; };
+		171710A218F99646008A29E7 /* DIOSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSocketManager.m; sourceTree = "<group>"; };
+		171710A518F9A6EE008A29E7 /* DIOSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSetupViewController.h; sourceTree = "<group>"; };
+		171710A618F9A6EE008A29E7 /* DIOSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSetupViewController.m; sourceTree = "<group>"; };
 		17A2302518F8AAAB00238231 /* Dioresta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dioresta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A2302818F8AAAB00238231 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		17A2302A18F8AAAB00238231 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,6 +98,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		171710A018F99621008A29E7 /* Socket Manager */ = {
+			isa = PBXGroup;
+			children = (
+				171710A118F99646008A29E7 /* DIOSocketManager.h */,
+				171710A218F99646008A29E7 /* DIOSocketManager.m */,
+			);
+			name = "Socket Manager";
+			sourceTree = "<group>";
+		};
+		171710A418F9A6DE008A29E7 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				171710A518F9A6EE008A29E7 /* DIOSetupViewController.h */,
+				171710A618F9A6EE008A29E7 /* DIOSetupViewController.m */,
+			);
+			name = Setup;
+			sourceTree = "<group>";
+		};
 		17A2301C18F8AAAB00238231 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				17A2305718F8AAEB00238231 /* App */,
+				171710A418F9A6DE008A29E7 /* Setup */,
 				17A2305C18F8AC4A00238231 /* Control Panel */,
 			);
 			path = Dioresta;
@@ -172,6 +197,7 @@
 				17A2303A18F8AAAB00238231 /* Images.xcassets */,
 				17A2305818F8AB4700238231 /* DIOStoryboard-iPhone.storyboard */,
 				17A2305A18F8AB5600238231 /* DIOStoryboard-iPad.storyboard */,
+				171710A018F99621008A29E7 /* Socket Manager */,
 				17A2302F18F8AAAB00238231 /* Supporting Files */,
 			);
 			name = App;
@@ -334,8 +360,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				171710A318F99646008A29E7 /* DIOSocketManager.m in Sources */,
 				17A2303518F8AAAB00238231 /* main.m in Sources */,
 				17A2305F18F8AC6700238231 /* DIOControlPanelViewController.m in Sources */,
+				171710A718F9A6EE008A29E7 /* DIOSetupViewController.m in Sources */,
 				9E4D225818F8B75200A1523C /* DIOAccelerometerViewController.m in Sources */,
 				17A2303918F8AAAB00238231 /* DIOAppDelegate.m in Sources */,
 			);
@@ -457,11 +485,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Gilham (HABBUBG8PH)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
 				INFOPLIST_FILE = "Dioresta/Dioresta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -477,7 +505,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dioresta/Dioresta-Prefix.pch";
 				INFOPLIST_FILE = "Dioresta/Dioresta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
