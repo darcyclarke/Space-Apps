@@ -40,16 +40,28 @@ static NSString *const DIONamespace = @"";
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
+    [self.socket sendJSON:@{
+                            @"shipId":@"1",
+                            @"direction":@"down"
+                            }];
 }
 
 - (IBAction)left:(id)sender
 {
     NSLog(@"LEFT!");
+    [self.socket sendJSON:@{
+                            @"shipId":@"1",
+                            @"direction":@"left"
+                            }];
 }
 
 - (IBAction)right:(id)sender
 {
     NSLog(@"RIGHT!");
+    [self.socket sendJSON:@{
+                            @"shipId":@"1",
+                            @"direction":@"right"
+                            }];
 }
 
 #pragma mark - Sockets
