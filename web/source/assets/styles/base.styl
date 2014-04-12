@@ -1,0 +1,162 @@
+@import 'nib'
+@import 'variables'
+@import 'sprites/*'
+
+@font-face
+  font-family: 'icon'
+  src: url('../fonts/fontawesome-webfont.eot?v=4.0.3'), url('../fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg')
+  font-weight: normal
+  font-style: normal
+
+*, *:before, *:after
+  box-sizing: border-box;
+  font-smoothing: antialiased
+  text-size-adjust: 100%
+  backface-visibility: hidden
+  transform: translate3d(0, 0, 0)
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
+acronym, address, big, cite, code, del, dfn, em, img,
+ins, kbd, q, s, samp, small, strike, strong,
+sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output, ruby,
+section, summary, time, mark, audio, video
+  margin: 0
+  padding: 0
+  border: 0
+  vertical-align: baseline
+  position: relative
+
+article, aside, details, figcaption,
+figure, footer, header, hgroup,
+main, nav, section, summary
+  display: block
+
+audio, canvas, video
+  display: inline-block
+
+html, body
+  background: $bodyBgColor
+  color: $baseColor
+  font-family: $baseFontFamily
+  font-size: $baseFontSize
+  line-height: $baseLineHeight
+  padding: 0
+  margin: 0
+  height: 100%
+  width: 100%
+  display: flex
+  flex-direction: column
+  box-align: center
+
+a
+  color: $baseColor
+  text-decoration: underline
+
+a:hover,
+a:visited,
+a:active
+  color: $baseColor
+
+a:focus
+  outline: thin dotted
+
+a:active, a:hover
+  outline: 0
+
+blockquote
+  border-left: 1px solid $borderColor
+  padding: $quarterGrid 0 $quarterGrid $halfGrid
+  font-style: italic
+  color: lighten($baseColor, 30%)
+  font-size: 14px
+
+  cite
+    display: block
+
+    &:before
+      content: '~ '
+
+::-moz-selection
+  background: $bgSelectionColor
+  color: $selectionColor
+  text-shadow: none
+
+::selection
+  background: $bgSelectionColor
+  color: $selectionColor
+  text-shadow: none
+
+.fontSize11
+  font-size: 11px
+
+.fontSize13
+  font-size: 13px
+
+.fontSize14
+  font-size: 14px
+
+.fontSize16
+  font-size: 16px
+
+.fontSize18
+  font-size: 18px
+
+.fontSize20
+  font-size: 20px
+
+.fontSize24
+  font-size: 24px
+
+.fontSize32
+  font-size: 32px
+
+.fontSize36
+  font-size: 32px
+
+.fontSize48
+  font-size: 48px
+
+.ir
+  font: 0/0 a
+  text-shadow: none
+  color: transparent
+
+.vh
+  border: 0
+  clip: rect(0 0 0 0)
+  height: 1px
+  margin: -1px
+  overflow: hidden
+  padding: 0
+  position: absolute
+  width: 1px
+
+.vh:active,
+.vh:focus
+  clip: auto
+  height: auto
+  margin: 0
+  overflow: visible
+  position: static
+  width: auto
+
+.cf:before
+.cf:after
+  content: ' '
+  display: table
+
+.cf:after
+  clear: both
+
+.cf
+  *zoom: 1
+
+h1, h2, h3, h4, h5, h6, p
+  margin-bottom: $halfGrid
+
+p
+  @extend .fontSize14
