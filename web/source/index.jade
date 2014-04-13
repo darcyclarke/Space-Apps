@@ -11,7 +11,7 @@ html.no-js
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    title Space Apps
+    title NASA Space Apps | Dioresta
     meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
     link(rel="stylesheet", href="/assets/styles/main.min.css", type="text/css")
   body
@@ -19,34 +19,9 @@ html.no-js
     //- Wrapper
     div.wrapper
 
-      //- Screen-0
-      //- div.screen.screen-0(data-delay="5000",style="z-index:99999999")
-      //-   button(class="click-me") space!
-      //-   button(class="start") start over
-
-      //-   div(class="game")
-      //-     h2 Game
-      //-     span(class="game")
-
-      //-   div(class="asteroid")
-      //-     h2 Asteroid
-      //-     span(class="asteroid")
-      //-   div(class="player1")
-      //-     h2 Player 1
-      //-     span(class="player1")
-      //-   div(class="player2")
-      //-     h2 Player 2
-      //-     span(class="player2")
-      //-   div(class="player3")
-      //-     h2 Player 3
-      //-     span(class="player3")
-      //-   div(class="player4")
-      //-     h2 Player 4
-      //-     span(class="player4")
-
       //- Title Screen
       div.screen.home(data-delay="5000")
-        h1.title Diores<span>/</span>ta
+        h1.title Dioresta
         h2.creators Created by<br>
           span.logos
             span.twg.ir TWG
@@ -155,10 +130,10 @@ html.no-js
         h1 GO!
 
       //- Game
-      div.screen.screen-2.game(data-delay="5000")
+      div.screen.game(data-delay="5000")
 
         //- Countdown Timer
-        h1.timer <strong>90</strong> seconds
+        h1.timer <strong class="countdown">90</strong> seconds
 
         //- Earth
         div.earth
@@ -179,9 +154,6 @@ html.no-js
 
           - each color in ['red','blue','green','yellow']
             div.player(class=color)
-
-              div.notification.cf.rare
-                p.text <strong>+10</strong> Water Gained - H²O
 
         //- GUI
         div.gui

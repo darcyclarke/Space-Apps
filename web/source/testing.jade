@@ -1,0 +1,43 @@
+doctype
+//if lt IE 7
+  <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+//if IE 7
+  <html class="no-js lt-ie9 lt-ie8">
+//if IE 8
+  <html class="no-js lt-ie9">
+//[if gt IE 8]><!
+html.no-js
+  //<![endif]
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    title Testing
+    meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
+  body
+
+    button(class="click-me") space!
+    button(class="start") start over
+
+    div(class="game")
+      h2 Game
+      span(class="game")
+
+    div(class="asteroid")
+      h2 Asteroid
+      span(class="asteroid")
+    div(class="player1")
+      h2 Player 1
+      span(class="player1")
+    div(class="player2")
+      h2 Player 2
+      span(class="player2")
+    div(class="player3")
+      h2 Player 3
+      span(class="player3")
+    div(class="player4")
+      h2 Player 4
+      span(class="player4")
+
+    script(type="text/javascript" src="/socket.io/socket.io.js")
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js")
+    script(type="text/javascript" src="/assets/scripts/main.js")
