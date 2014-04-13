@@ -156,11 +156,11 @@ io.sockets.on "connection", (socket) ->
   socket.on 'start', (data) -> 
     console.log("START")
     initGame()
-    socket.emit('updateGame', game)
+    io.sockets.emit('updateGame', game)
 
   socket.on 'clientRegistered', (data) -> 
     console.log("CLIENT REGISTERED ==> ", data)
-    socket.emit('updateGame', game)
+    io.sockets.emit('updateGame', game)
 
   socket.on 'drill', (data) ->
     console.log("DRILL!")
@@ -170,15 +170,15 @@ io.sockets.on "connection", (socket) ->
       drillPower = parseInt(data["drillPower"])
       if playerId && drillPower
         game.update(playerId, drillPower)
-        socket.emit('updateGame', game)
+        io.sockets.emit('updateGame', game)
 
         if isScarce(lastMineral)
-          socket.emit('scarceMineralCollected', {
+          io.sockets.emit('scarceMineralCollected', {
             mineral: lastMineral, 
             playerID: playerId, 
           })
         else if isCommon(lastMineral)
-          socket.emit('commonMineralCollected', {
+          io.sockets.emit('commonMineralCollected', {
             mineral: lastMineral, 
             playerID: playerId, 
           })
@@ -188,7 +188,7 @@ io.sockets.on "connection", (socket) ->
   socket.on 'timeUp', (data) -> 
     console.log("TIME UP")
     game.isOver = true
-    socket.emit('updateGame', game)
+    io.sockets.emit('updateGame', game)
 
   return
 
