@@ -179,12 +179,20 @@ html.no-js
                   p Rare
 
       //- Safety!
-      div.screen.skyline.header(data-delay="10000")
+      div.screen.skyline.header
         div.shootingstar
         div.city
         div.text
           h1 Congratulations!
           h2 You've saved planet Earth!
+
+      //- The end...
+      div.screen.end.header
+        div.text
+          h1.red Game Over!
+          div.bubble
+            | Unfortunately, <strong class="green">life on earth</strong> has been completely <strong class="red">wiped out</strong>.
+            | At least you have all those sweet minerals. <strong class="blue">Better start rebuilding...</strong>
 
     script(type="text/javascript" src="/socket.io/socket.io.js")
     script(type="text/javascript" src="/assets/scripts/libs.js")

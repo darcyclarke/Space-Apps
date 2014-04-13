@@ -42,8 +42,8 @@ lastAmount = null
 
 # -- asteroid ---------------------------------------------------------------
 
-Asteroid = () -> 
-  this.minerals = 
+Asteroid = () ->
+  this.minerals =
     iron: ABUNDANT_TOTAL
     carbon: ABUNDANT_TOTAL
     silicon: ABUNDANT_TOTAL
@@ -56,7 +56,7 @@ Asteroid = () ->
     gold: SCARCE_TOTAL
     silver: SCARCE_TOTAL
 
-  this.totalSize = () -> 
+  this.totalSize = () ->
     size = 0
     for mineral in MINERALS
       size += this.minerals[mineral]
@@ -66,7 +66,7 @@ Asteroid = () ->
   this.isEmpty = () ->
     return this.totalSize() <= 0
 
-  this.presentMinerals = () -> 
+  this.presentMinerals = () ->
     minerals = []
     for mineral in MINERALS
       if this.minerals[mineral] > 0
@@ -81,8 +81,8 @@ Asteroid = () ->
 
 # -- player -----------------------------------------------------------------
 
-Player = () -> 
-  this.minerals = 
+Player = () ->
+  this.minerals =
     iron: 0
     carbon: 0
     silicon: 0
@@ -95,7 +95,7 @@ Player = () ->
     gold: 0
     silver: 0
 
-  this.findMineral = (mineral, amount) -> 
+  this.findMineral = (mineral, amount) ->
     this.minerals[mineral] += amount
 
   return
@@ -107,13 +107,13 @@ Game = () ->
   this.didWin = false
   this.numPlayers = 0
   this.asteroid = new Asteroid()
-  this.players = 
+  this.players =
     player1: new Player()
     player2: new Player()
     player3: new Player()
     player4: new Player()
 
-  this.update = (playerId, drillPower) -> 
+  this.update = (playerId, drillPower) ->
     if this.asteroid.isEmpty()
       this.didWin = true
       this.isOver = true
@@ -132,7 +132,7 @@ Game = () ->
       while isScarce(mineral) && i < SCARCE_DIFFICULTY_LEVEL
         mineral = minerals[randomInt(minerals.length-1)]
         i++
-        
+
       if game.asteroid.minerals[mineral] < amount
         amount = game.asteroid.minerals[mineral]
 
@@ -169,12 +169,12 @@ io.sockets.on "connection", (socket) ->
   # events
   # ==========================================================================
 
-  socket.on 'start', (data) -> 
+  socket.on 'start', (data) ->
     console.log("START")
     initGame()
     io.sockets.emit('updateGame', game)
 
-  socket.on 'clientRegistered', (data) -> 
+  socket.on 'clientRegistered', (data) ->
     console.log("CLIENT REGISTERED ==> ", data)
     io.sockets.emit('updateGame', game)
 
@@ -197,7 +197,7 @@ io.sockets.on "connection", (socket) ->
           })
         else if isCommon(lastMineral)
           io.sockets.emit('commonMineralCollected', {
-            mineral: lastMineral, 
+            name: lastMineral, 
             element: ELEMENTS[lastMineral],
             playerID: playerId, 
             amount: lastAmount
@@ -205,7 +205,7 @@ io.sockets.on "connection", (socket) ->
 
         console.log("=====> ", JSON.stringify(game))
 
-  socket.on 'timeUp', (data) -> 
+  socket.on 'timeUp', (data) ->
     console.log("TIME UP")
     game.isOver = true
     io.sockets.emit('updateGame', game)
@@ -216,7 +216,7 @@ io.sockets.on "connection", (socket) ->
 # global methods
 # ===========================================================================
 
-mineralType = (mineral) -> 
+mineralType = (mineral) ->
   if isScarce(mineral)
     return "scarce"
   else if isCommon(mineral)
@@ -224,16 +224,16 @@ mineralType = (mineral) ->
   else
     return "abundant"
 
-initGame = () -> 
+initGame = () ->
   game = new Game()
 
-isScarce = (mineral) -> 
+isScarce = (mineral) ->
   SCARCE_MINERALS.indexOf(mineral) > -1
 
-isCommon = (mineral) -> 
+isCommon = (mineral) ->
   COMMON_MINERALS.indexOf(mineral) > -1
 
-isAbundant = (mineral) -> 
+isAbundant = (mineral) ->
   ABUNDANT_MINERALS.indexOf(mineral) > -1
 
 randomInt = (max) ->

@@ -186,7 +186,7 @@
             });
           } else if (isCommon(lastMineral)) {
             io.sockets.emit('commonMineralCollected', {
-              mineral: lastMineral,
+              name: lastMineral,
               element: ELEMENTS[lastMineral],
               playerID: playerId,
               amount: lastAmount
