@@ -7,6 +7,7 @@
 //
 
 #import "DIOControlPanelViewController.h"
+#import "DIOControlPanel.h"
 
 #import "DIOSocketManager.h"
 
@@ -17,8 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
-
-@property (weak, nonatomic) IBOutlet UIView *errorContainer;
+@property (strong, nonatomic) DIOControlPanel *controlPanel;
+@property (strong, nonatomic) IBOutlet UIView *errorContainer;
 
 @end
 
@@ -33,6 +34,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnect) name:@"DIODidConnect" object:nil];
     
     [self setupTimer];
+    
+    self.controlPanel = [[DIOControlPanel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds))];
+    [self.view addSubview:self.controlPanel];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (void)dealloc
@@ -51,9 +60,7 @@
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill andData:@{
-                                                                          @"drillPower":@"10"
-                                                                          }];
+    
 }
 
 - (IBAction)left:(id)sender
@@ -71,11 +78,13 @@
 - (void)didDisconnectWithError
 {
     self.errorContainer.hidden = NO;
+    self.controlPanel.errorMessage.hidden = NO;
 }
 
 - (void)didConnect
 {
     self.errorContainer.hidden = YES;
+    self.controlPanel.errorMessage.hidden = YES;
 }
 
 - (IBAction)didTapError:(id)sender {

@@ -8,6 +8,8 @@
 
 #import "DIOSetupViewController.h"
 
+#import "DIOSocketManager.h"
+
 @interface DIOSetupViewController ()
 
 @end
@@ -26,6 +28,8 @@
 - (IBAction)selectedButton:(id)sender {
     UIButton *selectedButton = (UIButton *)sender;
     NSString *deviceID = selectedButton.titleLabel.text;
+    
+    [[DIOSocketManager sharedManager] sendAction:DIOActionClientRegistered andData:@{}];
     
     [self performSegueWithIdentifier:@"DIOControlPanel" sender:deviceID];
 }

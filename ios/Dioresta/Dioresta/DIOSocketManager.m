@@ -65,7 +65,7 @@ static NSString *const DIONamespace = @"";
     NSMutableDictionary *actionData = [NSMutableDictionary dictionaryWithDictionary:data];
     
     [actionData addEntriesFromDictionary:@{
-                                           @"playerID":[self deviceID]
+                                           @"playerID":[NSString stringWithFormat:@"player%@", [self deviceID]]
                                            }];
     
     [self.socket sendEvent:action withData:actionData];
