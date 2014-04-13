@@ -8,9 +8,8 @@
 
 #import "DIODrillPowerMeter.h"
 
-#define POWER_SQUARE_WIDTH 48.0f
-#define POWER_SQUARE_HEIGHT 48.0f
-#define POWER_SQUARE_SPACING 9.0f
+#define POWER_SQUARE_WIDTH 68.0f
+#define POWER_SQUARE_HEIGHT 68.0f
 #define MAX_DRILL_LEVEL 4
 
 @interface DIODrillPowerMeter ()
@@ -70,12 +69,41 @@
     }
 }
 
+- (NSInteger)powerSquareSpacingForDrillLevel:(NSInteger)drillLevel
+{
+    switch(drillLevel) {
+        case 0: {
+            return 0;
+        }
+            
+        case 1: {
+            return -5;
+        }
+            
+        case 2: {
+            return -7;
+        }
+            
+        case 3: {
+            return -7;
+        }
+            
+        case 4: {
+            return -8;
+        }
+            
+        default: {
+            return -5;
+        }
+    }
+}
+
 #pragma mark drill power meter
 - (void)showDrillPowerLevelWithLevel:(float)drillLevel
 {
-    UIView *newSquare = [[UIView alloc] initWithFrame:CGRectMake(POWER_SQUARE_SPACING, 26, POWER_SQUARE_WIDTH, POWER_SQUARE_HEIGHT)];
-    newSquare.backgroundColor = [UIColor blueColor];
-    newSquare.frame = CGRectOffset(newSquare.frame, self.drillLevel * (POWER_SQUARE_SPACING + POWER_SQUARE_WIDTH), 0);
+    UIView *newSquare = [[UIView alloc] initWithFrame:CGRectMake([self powerSquareSpacingForDrillLevel:drillLevel], 15, POWER_SQUARE_WIDTH, POWER_SQUARE_HEIGHT)];
+    newSquare.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"PowerLight"]];
+    newSquare.frame = CGRectOffset(newSquare.frame, self.drillLevel * ([self powerSquareSpacingForDrillLevel:drillLevel] + POWER_SQUARE_WIDTH), 0);
     [self addSubview:newSquare];
 }
 

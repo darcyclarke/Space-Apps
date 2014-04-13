@@ -77,8 +77,8 @@
 
 - (void)didDisconnectWithError
 {
-    self.errorContainer.hidden = NO;
-    self.controlPanel.errorMessage.hidden = NO;
+//    self.errorContainer.hidden = NO;
+//    self.controlPanel.errorMessage.hidden = NO;
 }
 
 - (void)didConnect
