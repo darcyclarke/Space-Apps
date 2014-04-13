@@ -12,6 +12,47 @@ $paddingSize = 20px
 // Keyframe Animations
 ////////////////////////////////////////////////////////
 
+@keyframes alert
+  0%
+    font-size: 80px
+  50%
+    color: red
+    font-size: 100px
+  100%
+    font-size: 80px
+
+@keyframes logo
+  0%
+    opacity: 0
+    transform: translate3d(0, -25px, 0)
+  100%
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+
+@keyframes creators
+  0%
+    opacity: 0
+    transform: translate3d(0, -15px, 0)
+  50%
+    0%
+    opacity: 0
+    transform: translate3d(0, -15px, 0)
+  100%
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+
+@keyframes shootingstar
+  0%
+    opacity: 0
+    transform: rotate(-80deg) translate3d(0, 0, 0)
+  80%
+    opacity: 1
+    transform: rotate(15deg) translate3d(1200px, 200px, 0)
+  100%
+    opacity: 0
+    width: 25px
+    transform: rotate(15deg) translate3d(1200px, 100px, 0)
+
 @keyframes star_pulse
   0%
     opacity: 0.15
@@ -22,11 +63,11 @@ $paddingSize = 20px
 
 @keyframes star_pulse_two
   0%
-    opacity: 0.35
+    opacity: 0.25
   50%
     opacity: 0
   100%
-    opacity: 0.35
+    opacity: 0.25
 
 @keyframes shake_red
   0%
@@ -163,6 +204,11 @@ html, body
   flex-direction: column
   box-align: center
 
+u
+  text-decoration: none
+  border-bottom: 0.15em solid black
+  padding-bottom: 0.05em
+
 a:focus
   outline: thin dotted
 
@@ -189,22 +235,112 @@ a:active, a:hover
 // General Classes
 ////////////////////////////////////////////////////////
 
+.show
+  z-index: 9999999 !important
+  display: block !important
+  position: absolute !important
+  opacity: 1 !important
+  background: black !important
+
 .title
   font-family: 'minecraftia'
 
+.red
+  color: red
+
+  u
+    border-color: red
+
+.blue
+  color: blue
+
+  u
+    border-color: blue
+
+.green
+  color: green
+
+  u
+    border-color: green
+
+.yellow
+  color: #ffae00
+
+  u
+    border-color: #ffae00
+
+.gray
+  @extends u
+  border-color: #efefef
 
 ////////////////////////////////////////////////////////
-// Kid
+// Alert Stripes
 ////////////////////////////////////////////////////////
 
-.kid
+.bg.stripes
+  box-shadow: inset 0 0 50px rgba(red, 0.5)
   position: absolute
-  bottom: 300px
-  right: 300px
-  width: 100px
-  height: 100px
-  background: url(../images.kid.png)
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
 
+  &:before
+    content: ''
+    top: 0
+    left: 0
+    position: absolute
+    width: 100%
+    height: 100%
+    opacity: 0.3
+    background: repeating-linear-gradient(45deg, rgba(red, 0.8), rgba(red, 0.8) 20px, rgba(lighten(red, 50%),0.4) 20px, rgba(lighten(red, 50%),0.4) 40px)
+
+
+////////////////////////////////////////////////////////
+// Speech Bubble
+////////////////////////////////////////////////////////
+
+.bubble
+  display: block
+  color: black
+  background: white
+  max-width: 90%
+  padding: 20px 40px
+  margin: 0 auto
+  line-height: 180%
+  font-size: 30px
+  font-weight: bold
+  letter-spacing: -1px
+  border-top: 10px solid white
+  border-bottom: 10px solid white
+  position: relative
+  box-shadow: 0 0 50px black
+
+  &:before, &:after
+    content: ''
+    top: 0
+    width: 10px
+    height: 100%
+    position: absolute
+    background: white
+
+  &:before
+    left: -9px
+
+  &:after
+    right: -9px
+
+  .arrow
+    position: absolute
+    bottom: -60px
+    right: 280px
+    display: block
+    width: 0
+    height: 0
+    transform: rotate(180deg)
+    border-left: 40px solid transparent
+    border-right: 40px solid transparent
+    border-bottom: 80px solid white
 
 ////////////////////////////////////////////////////////
 // Ships
@@ -257,21 +393,21 @@ a:active, a:hover
   .ship
     top: 20px
     animation: shake_red 2s infinite
-    background-image: url(../images/ships/red2.png)
+    background-image: url(../images/ships/red.png)
 
 .blue
   border-color: blue
 
   .ship
     animation: shake_blue 1.45s infinite
-    background-image: url(../images/ships/blue2.png)
+    background-image: url(../images/ships/blue.png)
 
 .green
   border-color: green
 
   .ship
     animation: shake_green 1.45s infinite
-    background-image: url(../images/ships/green2.png)
+    background-image: url(../images/ships/green.png)
 
 .yellow
   border-color: yellow
@@ -279,7 +415,7 @@ a:active, a:hover
   .ship
     top: 20px
     animation: shake_yellow 1.45s infinite
-    background-image: url(../images/ships/yellow2.png)
+    background-image: url(../images/ships/yellow.png)
 
 
 ////////////////////////////////////////////////////////
@@ -523,24 +659,216 @@ a:active, a:hover
     animation: start_pulse_two 4s infinite
 
 ////////////////////////////////////////////////////////
-// Screen 1
+// Home Screen
 ////////////////////////////////////////////////////////
 
-.screen-1
+.home
   .title
     text-align: center
-    margin: 25% 0
-    font-size: 80px
+    margin: 22% 0 60px
+    font-size: 100px
     letter-spacing: 5px
     color: white
+    line-height: 100%
     text-transform: uppercase
     -webkit-text-stroke: 1px rgba(#0086ff, 0.2)
     text-shadow: 0 0 50px #49e4ff
     font-weight: bold
+    animation: logo 1s 1
+    position: relative
+
+    span
+      display: none
+      position: absolute
+      top: -36px
+      text-transform: normal
+      font-size: 42px
+      text-align: center
+      transform: rotate(30deg) translate3d(-60px, 0, 0)
+
+  .creators
+    opacity: 1
+    margin: 0 auto
+    text-align: center
+    font-size: 20px
+    animation: creators 2s 1
+
+    .logos
+      font-size: 40px
+      display: inline-block
+
+      span
+        margin: 40px 0 0 0
+        float: left
+        display: block
+
+        &.plus
+          margin: 40px 15px 0 30px
+
+        &.twg
+          width: 150px
+          height: 60px
+          box-shadow: 0 0 25px #99b63c
+          background-image: url(../images/logo-white.png)
+          background-color: #99b63c
+          background-size: 60% auto
+          background-repeat: no-repeat
+          background-position: center center
+
+        &.darcy
+          font-size: 26px
+          text-shadow: 0 0 25px gold
+          padding: 10px 0 0 0
+          color: gold
 
 ////////////////////////////////////////////////////////
-// Screen 2
+// Skyline
 ////////////////////////////////////////////////////////
+
+.skyline
+
+  .text
+    h1
+      margin-bottom: 10px
+      font-size: 60px
+      text-shadow: 0 0 50px #dd6516
+
+    h2
+      font-size: 40px
+      margin: 0 auto
+      text-align: center
+      color: lighten(#dd6516, 20%)
+      text-shadow: 0 0 25px darken(#dd6516, 50%)
+
+  .shootingstar
+    position: absolute
+    top: 200px
+    left: 0
+    width: 100px
+    height: 100px
+    opacity: 0
+    background: url(../images/shootingstar.png)
+    background-repeat: no-repeat
+    background-size: contain
+    animation: shootingstar 5s 1
+
+  .city
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+
+    &:before, &:after
+      content: ''
+      background-image: url(../images/skyline.png)
+      background-repeat: repeat-x
+      background-position: left bottom
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      left: 0
+
+    &:before
+      background-image: linear-gradient(bottom, orange, rgba(darken(orange, 90%), 0.25))
+
+
+////////////////////////////////////////////////////////
+// Alert Screen
+////////////////////////////////////////////////////////
+
+.alert
+
+  .text
+    margin: 20% 0 0 0
+
+    .title
+      text-transform: uppercase
+      color: red
+      width: 100%
+      text-align: center
+      font-size: 80px
+      margin: 0 auto
+      text-shadow: 0 0 20px red
+      animation: alert 1s infinite
+
+////////////////////////////////////////////////////////
+// LowDown Screens
+////////////////////////////////////////////////////////
+
+.thelowdown
+  padding-top: 10%
+
+  .scientist
+    position: absolute
+    bottom: -330px
+    right: 0
+    width: 60%
+    height: 350px
+    display: block
+
+
+    .bubble
+      width: 450px
+      font-size: 16px
+      z-index: 999
+      bottom: 30px
+      right: 300px
+      position: absolute
+
+    img
+      height: 100%
+      width: auto
+      position: absolute
+      bottom: 0
+      right: 0
+
+  &.two
+    .asteroid
+      float: right
+      margin: 30px
+      width: 150px
+
+      img
+        max-width: 100%
+
+  &.three
+    .scientist
+      bottom: -260px
+
+    .ship
+      float: right
+      position: relative
+      margin: 60px 0 80px 30px
+      top: auto
+      left: auto
+      right: auto
+      width: 150px
+
+      &:before
+        z-index: 999
+        left: 55px
+        top: -28px
+        animation: none
+
+      span
+        left: -20px
+        top: 60px
+
+  &.six
+    .bubble
+      font-size: 60px
+      text-align: center
+
+////////////////////////////////////////////////////////
+// Starting in... Screen
+////////////////////////////////////////////////////////
+
+.screen.starting.header
+
+  h1
+    font-size: 60px
 
 
 ////////////////////////////////////////////////////////

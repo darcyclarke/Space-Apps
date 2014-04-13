@@ -82,7 +82,7 @@ gulp.task 'scripts', () ->
 
   # Libraries
   gulp.src('./source/assets/scripts/libs/**/*.js')
-    .pipe(plugins.concat('libs.min.js'))
+    .pipe(plugins.concat('libs.js'))
     .pipe(gulp.dest('./build/assets/scripts/'))
 
   # Server
