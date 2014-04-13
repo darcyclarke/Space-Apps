@@ -17,6 +17,9 @@
         // Initialization code
         [self setupThumbImage];
         
+        UIImage *sliderTrack = [UIImage imageNamed:@"SliderRail"];
+        [self setMinimumTrackImage:sliderTrack forState:UIControlStateNormal];
+        [self setMaximumTrackImage:sliderTrack forState:UIControlStateNormal];
     }
     return self;
 }
