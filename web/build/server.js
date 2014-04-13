@@ -1,5 +1,5 @@
 (function() {
-  var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_MINERALS, COMMON_TOTAL, Game, MINERALS, Player, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, randomInt, server;
+  var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_DIFFICULTY_LEVEL, COMMON_MINERALS, COMMON_TOTAL, Game, MINERALS, Player, SCARCE_DIFFICULTY_LEVEL, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, randomInt, server;
 
   ABUNDANT_TOTAL = 10000;
 
@@ -12,6 +12,10 @@
   COMMON_MINERALS = ['water', 'nickel', 'cobalt', 'titanium', 'magnesium'];
 
   SCARCE_MINERALS = ['platinum', 'gold', 'silver'];
+
+  COMMON_DIFFICULTY_LEVEL = 2;
+
+  SCARCE_DIFFICULTY_LEVEL = 3;
 
   MINERALS = ABUNDANT_MINERALS.concat(COMMON_MINERALS, SCARCE_MINERALS);
 
@@ -95,12 +99,12 @@
         mineral = minerals[randomInt(minerals.length - 1)];
         amount = drillPower * 10;
         i = 0;
-        while (isCommon(mineral) && i < 2) {
+        while (isCommon(mineral) && i < COMMON_DIFFICULTY_LEVEL) {
           mineral = minerals[randomInt(minerals.length - 1)];
           i++;
         }
         i = 0;
-        while (isScarce(mineral) && i < 3) {
+        while (isScarce(mineral) && i < SCARCE_DIFFICULTY_LEVEL) {
           mineral = minerals[randomInt(minerals.length - 1)];
           i++;
         }

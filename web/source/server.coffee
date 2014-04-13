@@ -10,6 +10,9 @@ ABUNDANT_MINERALS = ['iron', 'carbon', 'silicon']
 COMMON_MINERALS = ['water', 'nickel', 'cobalt', 'titanium', 'magnesium']
 SCARCE_MINERALS = ['platinum', 'gold', 'silver']
 
+COMMON_DIFFICULTY_LEVEL = 2
+SCARCE_DIFFICULTY_LEVEL = 3
+
 MINERALS = ABUNDANT_MINERALS.concat(COMMON_MINERALS, SCARCE_MINERALS)
 
 # ===========================================================================
@@ -98,12 +101,12 @@ Game = () ->
 
       # it's a little harder to get scarce or common resources
       i = 0
-      while isCommon(mineral) && i < 2
+      while isCommon(mineral) && i < COMMON_DIFFICULTY_LEVEL
         mineral = minerals[randomInt(minerals.length-1)]
         i++
 
       i = 0
-      while isScarce(mineral) && i < 3
+      while isScarce(mineral) && i < SCARCE_DIFFICULTY_LEVEL
         mineral = minerals[randomInt(minerals.length-1)]
         i++
         
