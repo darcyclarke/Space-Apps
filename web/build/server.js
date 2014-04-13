@@ -1,21 +1,36 @@
 (function() {
-  var Asteroid, Game, MINERALS, MINERAL_TOTAL, Player, app, express, game, initGame, io, randomInt, server;
+  var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_MINERALS, COMMON_TOTAL, Game, MINERALS, Player, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, randomInt, server;
 
-  MINERAL_TOTAL = 1000;
+  ABUNDANT_TOTAL = 10000;
 
-  MINERALS = ['water', 'carbon', 'nickel', 'iron', 'silicon', 'olivine'];
+  COMMON_TOTAL = 5000;
 
-  Asteroid = function(size) {
+  SCARCE_TOTAL = 1000;
+
+  ABUNDANT_MINERALS = ['iron', 'carbon', 'silicon'];
+
+  COMMON_MINERALS = ['water', 'nickel', 'cobalt', 'titanium', 'magnesium'];
+
+  SCARCE_MINERALS = ['platinum', 'gold', 'silver'];
+
+  MINERALS = ABUNDANT_MINERALS.concat(COMMON_MINERALS, SCARCE_MINERALS);
+
+  Asteroid = function() {
     this.minerals = {
-      water: size,
-      carbon: size,
-      nickel: size,
-      iron: size,
-      silicon: size,
-      olivine: size
+      iron: ABUNDANT_TOTAL,
+      carbon: ABUNDANT_TOTAL,
+      silicon: ABUNDANT_TOTAL,
+      water: COMMON_TOTAL,
+      nickel: COMMON_TOTAL,
+      cobalt: COMMON_TOTAL,
+      titanium: COMMON_TOTAL,
+      magnesium: COMMON_TOTAL,
+      platinum: SCARCE_TOTAL,
+      gold: SCARCE_TOTAL,
+      silver: SCARCE_TOTAL
     };
     this.totalSize = function() {
-      var mineral, _i, _len;
+      var mineral, size, _i, _len;
       size = 0;
       for (_i = 0, _len = MINERALS.length; _i < _len; _i++) {
         mineral = MINERALS[_i];
@@ -43,44 +58,60 @@
   };
 
   Player = function() {
-    this.drillPower = 0;
     this.minerals = {
-      water: 0,
-      carbon: 0,
-      nickel: 0,
       iron: 0,
+      carbon: 0,
       silicon: 0,
-      olivine: 0
+      water: 0,
+      nickel: 0,
+      cobalt: 0,
+      titanium: 0,
+      magnesium: 0,
+      platinum: 0,
+      gold: 0,
+      silver: 0
     };
     this.findMineral = function(mineral, amount) {
       return this.minerals[mineral] += amount;
     };
   };
 
-  Game = function(asteroidSize) {
+  Game = function() {
     this.isOver = false;
-    this.asteroid = new Asteroid(MINERAL_TOTAL);
+    this.asteroid = new Asteroid();
     this.players = {
-      1: new Player(),
-      2: new Player(),
-      3: new Player(),
-      4: new Player()
+      player1: new Player(),
+      player2: new Player(),
+      player3: new Player(),
+      player4: new Player()
     };
     this.update = function(playerId, drillPower) {
-      var amount, mineral, minerals;
+      var amount, i, mineral, minerals;
       if (this.asteroid.isEmpty()) {
         return this.isOver = true;
       } else {
         minerals = game.asteroid.presentMinerals();
-        mineral = minerals[randomInt(minerals.length)];
-        amount = randomInt(drillPower);
+        mineral = minerals[randomInt(minerals.length - 1)];
+        amount = drillPower * 100;
+        i = 0;
+        while (isCommon(mineral) && i < 2) {
+          mineral = minerals[randomInt(minerals.length - 1)];
+          i++;
+        }
+        while (isScarce(mineral) && i < 8) {
+          mineral = minerals[randomInt(minerals.length - 1)];
+          i++;
+        }
+        if (game.asteroid.minerals[mineral] < amount) {
+          amount = game.asteroid.minerals[mineral];
+        }
         game.asteroid.loseMineral(mineral, amount);
         return game.players[playerId].findMineral(mineral, amount);
       }
     };
   };
 
-  game = new Game(MINERAL_TOTAL);
+  game = new Game();
 
   express = require("express");
 
@@ -101,7 +132,8 @@
   io.sockets.on("connection", function(socket) {
     socket.on('start', function(data) {
       console.log("START!");
-      return initGame();
+      initGame();
+      return socket.emit('update-game', JSON.stringify(game));
     });
     socket.on('drill', function(data) {
       var drillPower, playerId;
@@ -117,10 +149,27 @@
         }
       }
     });
+    socket.on('time-up', function(data) {
+      game.isOver = true;
+      socket.emit('update-game', JSON.stringify(game));
+      return socket.emit('update-game', JSON.stringify(game));
+    });
   });
 
   initGame = function() {
-    return game = new Game(MINERAL_TOTAL);
+    return game = new Game();
+  };
+
+  isScarce = function(mineral) {
+    return SCARCE_MINERALS.indexOf(mineral) > -1;
+  };
+
+  isCommon = function(mineral) {
+    return COMMON_MINERALS.indexOf(mineral) > -1;
+  };
+
+  isAbundant = function(mineral) {
+    return ABUNDANT_MINERALS.indexOf(mineral) > -1;
   };
 
   randomInt = function(max) {
