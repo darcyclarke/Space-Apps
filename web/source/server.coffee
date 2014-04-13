@@ -82,6 +82,7 @@ Asteroid = () ->
 # -- player -----------------------------------------------------------------
 
 Player = () ->
+  this.points = 0
   this.minerals =
     iron: 0
     carbon: 0
@@ -97,6 +98,13 @@ Player = () ->
 
   this.findMineral = (mineral, amount) ->
     this.minerals[mineral] += amount
+
+    if isScarce(mineral)
+      this.points += 3
+    else if isCommon(mineral)
+      this.points += 2
+    else
+      this.points += 1
 
   return
 

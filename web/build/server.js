@@ -80,6 +80,7 @@
   };
 
   Player = function() {
+    this.points = 0;
     this.minerals = {
       iron: 0,
       carbon: 0,
@@ -94,7 +95,14 @@
       silver: 0
     };
     this.findMineral = function(mineral, amount) {
-      return this.minerals[mineral] += amount;
+      this.minerals[mineral] += amount;
+      if (isScarce(mineral)) {
+        return this.points += 3;
+      } else if (isCommon(mineral)) {
+        return this.points += 2;
+      } else {
+        return this.points += 1;
+      }
     };
   };
 
