@@ -12,8 +12,6 @@
 
 @interface DIOControlPanel ()
 
-@property (strong, nonatomic) UILabel *displayLabel;
-
 @end
 
 @implementation DIOControlPanel
@@ -39,9 +37,9 @@
     [self addSubview:self.slider];
     [self addSubview:self.drillAccuracyMeter];
     [self addSubview:self.drillPowerMeter];
+    [self addSubview:self.display];
     [self addSubview:self.errorMessage];
     self.errorMessage.hidden = YES;
-    [self addSubview:self.display];
 }
 
 #pragma mark slider
@@ -168,7 +166,7 @@
         displayLabel.font = [UIFont fontWithName:@"DS-Digital" size:45.0f];
         displayLabel.textColor = [UIColor colorWithHue:0.277 saturation:0.761 brightness:0.953 alpha:1];
         [self.display addSubview:displayLabel];
-        displayLabel.text = @"WELCOME TO DIORESTA";
+        displayLabel.text = [NSString stringWithFormat:@"PLAYER #%@", [[DIOSocketManager sharedManager] deviceID]];
         displayLabel.textAlignment = NSTextAlignmentCenter;
     }
     

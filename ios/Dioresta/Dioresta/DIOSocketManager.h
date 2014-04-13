@@ -21,4 +21,7 @@ static NSString *const DIOActionClientRegistered = @"clientRegistered";
 #pragma mark - Communication
 - (void)sendAction:(NSString *)action andData:(NSDictionary *)data;
 
+#pragma mark - Device ID
+- (NSString *)deviceID;
+
 @end

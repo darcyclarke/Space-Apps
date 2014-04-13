@@ -9,8 +9,9 @@
 #import "DIOSocketManager.h"
 
 #import <socket.IO/SocketIO.h>
+#import <socket.io/SocketIOPacket.h>
 
-static NSString *const DIOHost = @"192.168.1.114";
+static NSString *const DIOHost = @"192.168.106.50";
 static NSInteger const DIOPort = 8000;
 static NSString *const DIONamespace = @"";
 
@@ -75,6 +76,16 @@ static NSString *const DIONamespace = @"";
 - (void)socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
 {
     NSLog(@"DID RECEIVE EVENT %@", packet);
+    NSDictionary *data = [NSJSONSerialization JSONObjectWithData: [packet.data dataUsingEncoding:NSUTF8StringEncoding]
+                                                         options: NSJSONReadingMutableContainers
+                                                           error: nil];
+    if([data[@"name"] isEqualToString:@"commonMineralCollected"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DIOCommonCollected" object:nil userInfo:@{@"name":data[@"args"][0][@"name"], @"amount":data[@"args"][0][@"amount"], @"element":data[@"args"][0][@"element"]}];
+    } else if([data[@"name"] isEqualToString:@"scarceMineralCollected"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DIOScarceCollected" object:nil userInfo:@{@"name":data[@"args"][0][@"name"], @"amount":data[@"args"][0][@"amount"], @"element":data[@"args"][0][@"element"]}];
+    }
+    
+    NSLog(@"data: %@", data);
 }
 
 - (void)socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet

@@ -33,6 +33,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnect) name:@"DIODidConnect" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commonCollected:) name:@"DIOCommonCollected" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scarceCollected:) name:@"DIOScarceCollected" object:nil];
+    
     [self setupTimer];
     
     self.controlPanel = [[DIOControlPanel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds))];
@@ -77,8 +81,8 @@
 
 - (void)didDisconnectWithError
 {
-//    self.errorContainer.hidden = NO;
-//    self.controlPanel.errorMessage.hidden = NO;
+    self.errorContainer.hidden = NO;
+    self.controlPanel.errorMessage.hidden = NO;
 }
 
 - (void)didConnect
@@ -89,6 +93,16 @@
 
 - (IBAction)didTapError:(id)sender {
     
+}
+
+- (void)commonCollected:(NSNotification *)note
+{
+    self.controlPanel.displayLabel.text = [NSString stringWithFormat:@"PLAYER #%@: +%@ %@ COLLECTED!", [[DIOSocketManager sharedManager] deviceID], note.userInfo[@"amount"], note.userInfo[@"name"]];
+}
+
+- (void)scarceCollected:(NSNotification *)note
+{
+    self.controlPanel.displayLabel.text = [NSString stringWithFormat:@"PLAYER #%@: +%@ %@ COLLECTED!", [[DIOSocketManager sharedManager] deviceID], note.userInfo[@"amount"], note.userInfo[@"name"]];
 }
 
 @end
