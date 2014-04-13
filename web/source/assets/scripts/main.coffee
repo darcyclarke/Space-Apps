@@ -151,10 +151,6 @@ class Asteroid
 # ---------------------------------------------------
 # Setup Socket Connection & Game
 
-window.socket = socket = io.connect('http://192.168.106.50:8000')
-window.game = game = new Game(socket)
-
-
-
-
-
+jQuery ($) ->
+  window.socket = socket = io.connect('http://107.170.78.222:8000/')
+  window.game = game = new Game(socket)

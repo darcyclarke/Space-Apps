@@ -144,11 +144,11 @@
     socket.on('start', function(data) {
       console.log("START");
       initGame();
-      return socket.emit('updateGame', game);
+      return io.sockets.emit('updateGame', game);
     });
     socket.on('clientRegistered', function(data) {
       console.log("CLIENT REGISTERED ==> ", data);
-      return socket.emit('updateGame', game);
+      return io.sockets.emit('updateGame', game);
     });
     socket.on('drill', function(data) {
       var drillPower, playerId;
@@ -159,14 +159,14 @@
         drillPower = parseInt(data["drillPower"]);
         if (playerId && drillPower) {
           game.update(playerId, drillPower);
-          socket.emit('updateGame', game);
+          io.sockets.emit('updateGame', game);
           if (isScarce(lastMineral)) {
-            socket.emit('scarceMineralCollected', {
+            io.sockets.emit('scarceMineralCollected', {
               mineral: lastMineral,
               playerID: playerId
             });
           } else if (isCommon(lastMineral)) {
-            socket.emit('commonMineralCollected', {
+            io.sockets.emit('commonMineralCollected', {
               mineral: lastMineral,
               playerID: playerId
             });
@@ -178,7 +178,7 @@
     socket.on('timeUp', function(data) {
       console.log("TIME UP");
       game.isOver = true;
-      return socket.emit('updateGame', game);
+      return io.sockets.emit('updateGame', game);
     });
   });
 

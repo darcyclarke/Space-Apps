@@ -1,5 +1,5 @@
 (function() {
-  var Asteroid, Game, Player, game, socket;
+  var Asteroid, Game, Player;
 
   Game = (function() {
     function Game(socket) {
@@ -226,8 +226,10 @@
 
   })();
 
-  window.socket = socket = io.connect('http://192.168.106.50:8000');
-
-  window.game = game = new Game(socket);
+  jQuery(function($) {
+    var game, socket;
+    window.socket = socket = io.connect('http://107.170.78.222:8000/');
+    return window.game = game = new Game(socket);
+  });
 
 }).call(this);
