@@ -78,6 +78,7 @@
 
   Game = function() {
     this.isOver = false;
+    this.numPlayers = 0;
     this.asteroid = new Asteroid();
     this.players = {
       player1: new Player(),
@@ -92,13 +93,14 @@
       } else {
         minerals = game.asteroid.presentMinerals();
         mineral = minerals[randomInt(minerals.length - 1)];
-        amount = drillPower * 100;
+        amount = drillPower * 10;
         i = 0;
         while (isCommon(mineral) && i < 2) {
           mineral = minerals[randomInt(minerals.length - 1)];
           i++;
         }
-        while (isScarce(mineral) && i < 8) {
+        i = 0;
+        while (isScarce(mineral) && i < 3) {
           mineral = minerals[randomInt(minerals.length - 1)];
           i++;
         }
@@ -131,9 +133,13 @@
 
   io.sockets.on("connection", function(socket) {
     socket.on('start', function(data) {
-      console.log("START!");
+      console.log("START");
       initGame();
-      return socket.emit('update-game', game);
+      return socket.emit('updateGame', game);
+    });
+    socket.on('clientRegistered', function(data) {
+      console.log("CLIENT REGISTERED ==> ", data);
+      return socket.emit('updateGame', game);
     });
     socket.on('drill', function(data) {
       var drillPower, playerId;
@@ -144,7 +150,7 @@
         drillPower = parseInt(data["drillPower"]);
         if (playerId && drillPower) {
           game.update(playerId, drillPower);
-          socket.emit('update-game', game);
+          socket.emit('updateGame', game);
           return console.log("=====> ", JSON.stringify(game));
         }
       }

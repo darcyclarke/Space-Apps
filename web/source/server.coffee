@@ -80,6 +80,7 @@ Player = () ->
 
 Game = () ->
   this.isOver = false
+  this.numPlayers = 0
   this.asteroid = new Asteroid()
   this.players = 
     player1: new Player()
@@ -93,7 +94,7 @@ Game = () ->
     else
       minerals = game.asteroid.presentMinerals()
       mineral = minerals[randomInt(minerals.length-1)]
-      amount = (drillPower)*100
+      amount = (drillPower)*10
 
       # it's a little harder to get scarce or common resources
       i = 0
@@ -101,7 +102,8 @@ Game = () ->
         mineral = minerals[randomInt(minerals.length-1)]
         i++
 
-      while isScarce(mineral) && i < 8
+      i = 0
+      while isScarce(mineral) && i < 3
         mineral = minerals[randomInt(minerals.length-1)]
         i++
         
@@ -139,9 +141,13 @@ io.sockets.on "connection", (socket) ->
   # ==========================================================================
 
   socket.on 'start', (data) -> 
-    console.log("START!")
+    console.log("START")
     initGame()
-    socket.emit('update-game', game)
+    socket.emit('updateGame', game)
+
+  socket.on 'clientRegistered', (data) -> 
+    console.log("CLIENT REGISTERED ==> ", data)
+    socket.emit('updateGame', game)
 
   socket.on 'drill', (data) ->
     console.log("DRILL!")
@@ -151,7 +157,7 @@ io.sockets.on "connection", (socket) ->
       drillPower = parseInt(data["drillPower"])
       if playerId && drillPower
         game.update(playerId, drillPower)
-        socket.emit('update-game', game)
+        socket.emit('updateGame', game)
         console.log("=====> ", JSON.stringify(game))
 
   socket.on 'time-up', (data) -> 

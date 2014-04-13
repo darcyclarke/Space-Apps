@@ -2,7 +2,7 @@ randomInt = (min, max) ->
   Math.floor(Math.random() * (max - min + 1)) + min
 
 socket = io.connect('http://localhost:8000');
-socket.on 'update-game', (data) ->
+socket.on 'updateGame', (data) ->
   json = data
   console.log("===> ", json)
   # $('h1').css({ top: data["player1"].y, left: data["player1"].x })

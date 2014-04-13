@@ -7,7 +7,7 @@
 
   socket = io.connect('http://localhost:8000');
 
-  socket.on('update-game', function(data) {
+  socket.on('updateGame', function(data) {
     var json;
     json = data;
     console.log("===> ", json);
