@@ -15,10 +15,50 @@ html.no-js
     meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
     link(rel="stylesheet", href="/assets/styles/main.min.css", type="text/css")
   body
+
+    //- Wrapper
     div.wrapper
 
+      //- Screen-1
+      div.screen.screen-1(data-delay="2000")
+        h1.title Dioresta
+
+      //- Screen-2
+      div.screen.screen-2(data-delay="5000")
+        div.kid
+          img(src="/assets/images/scientist.gif")
+
+      //- Screen-3
+      div.screen.screen-3.header(data-delay="1000")
+        h1 3
+
+      //- Screen-4
+      div.screen.screen-4.header(data-delay="1000")
+        h1 2
+
+      //- Screen-5
+      div.screen.screen-5.header(data-delay="1000")
+        h1 1
+
+      //- Screen-6
+      div.screen.screen-6.header(data-delay="1000")
+        h1 GO!
+
+      //- //- Screen-3
+      //- div.screen.screen-3(data-delay="5000")
+      //-   div.asteroid
+      //-     img(src="/assets/images/asteroids/1.png")
+
+      //- //- Screen-4
+      //- div.screen.screen-3(data-delay="5000")
+      //-   div.kid
+      //-     img(src="/assets/images/asteroids/1.png")
+
       //- Game
-      div.game
+      div.screen.screen-2.game
+
+        //- Countdown Timer
+        h1.timer <strong>90</strong> seconds
 
         //- Earth
         div.earth
@@ -26,21 +66,59 @@ html.no-js
 
         //- Asteroids
         div.asteroids
+
+          //- Asteroid
           img.asteroid(src="/assets/images/asteroids/1.png")
 
-        div.player.red
-          div.ship
-          div.notification.cf
-            p.avatar: img(src="/assets/images/minerals/water.png")
-            p.text <strong>+10</strong> Oxegyn
+          - each color in ['red','blue','green','yellow']
+            div.player(class=color)
+              div.ship: span
 
-        div.player.blue
-          div.ship
+        //- Notifications
+        div.notifications
 
-        div.player.green
-          div.ship
+          - each color in ['red','blue','green','yellow']
+            div.player(class=color)
 
-        div.player.yellow
-          div.ship
+              div.notification.cf.rare
+                p.text <strong>+10</strong> Water Gained - H²O
+
+        //- GUI
+        div.gui
+
+          - each color, index in {1:'red',2:'blue',3:'green',4:'yellow'}
+            div.player(class=color)
+              div.avatar
+                img(src="/assets/images/ships/"+color+"2.png")
+                p.number= index + ''
+
+
+              div.bars
+                div.bar.overall
+                  div.score
+                  p Minerals
+                div.bar.abundant
+                  div.score
+                  p Abundant
+                div.bar.common
+                  div.score
+                  p Common
+                div.bar.scarce
+                  div.score
+                  p Rare
 
     script(type="text/javascript" src="/assets/scripts/libs.min.js")
+    script(type="text/javascript").
+      jQuery(function($){
+        var $screens = $('.screen');
+        var len = $screens.length;
+        var delay = 2000;
+        var roll = function(x){
+          delay = $screens.eq(x).data('delay') || delay;
+          $screens.css({ opacity: 0 }).delay(1000).eq(x).css({ opacity: 1 });
+          if((x + 1)  >= len)
+            return;
+          setTimeout(function(){ roll((x + 1)); }, delay);
+        };
+        roll(0);
+      });
