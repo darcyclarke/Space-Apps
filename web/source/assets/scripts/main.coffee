@@ -1,58 +1,121 @@
-randomInt = (min, max) ->
-  Math.floor(Math.random() * (max - min + 1)) + min
 
-socket = io.connect('http://localhost:8000');
+# ---------------------------------------------------
+# Game Class
 
-socket.on 'scarceMineralCollected', (data) -> 
-  console.log("SCARCE");
-  $('span.scarce-mineral').html(JSON.stringify(data))
+class Game
 
-socket.on 'commonMineralCollected', (data) -> 
-  console.log("COMMON");
-  $('span.common-mineral').html(JSON.stringify(data))
+    constructor: (socket) ->
 
-socket.on 'updateGame', (data) ->
-  json = data
-  console.log("===> ", json)
-  # $('h1').css({ top: data["player1"].y, left: data["player1"].x })
-  $('span.game').html(
-    "isOver: " + JSON.stringify(json["isOver"]) +
-    ", didWin: " + JSON.stringify(json["didWin"])
-  )
+      @log('Game Started')
 
-  $('span.asteroid').html(JSON.stringify(json["asteroid"]))
+      @socket         = socket
+      @won            = false
+      @time           = 90
+      @currentScreen  = 0
+      @screenDelay    = 2000
+      @colors         = ['red', 'blue', 'green', 'yellow']
+      @$game          = $('.game')
+      @$countdown     = $('.countdown')
+      @$screens       = $('.screen')
+      @asteroid       = new Asteroid()
+      @players        = @colors.forEach (k, v) -> new Player(k)
 
-  $('span.player1').html(JSON.stringify(json["players"]["player1"]))
-  $('span.player2').html(JSON.stringify(json["players"]["player2"]))
-  $('span.player3').html(JSON.stringify(json["players"]["player3"]))
-  $('span.player4').html(JSON.stringify(json["players"]["player4"]))
+      @socket.on 'scarceMineralCollected', (data) ->
+        @addMineral(data)
 
-$('button.click-me').on 'click', ->
-  socket.emit('drill', {
-    'playerID': ("player" + randomInt(1, 4)),
-    'drillPower': randomInt(0, 1000)
-  })
+      @socket.on 'commonMineralCollected', (data) ->
+        @addMineral(data)
 
-$('button.start').on 'click', ->
-  socket.emit('start')
+      @socket.on 'updateGame', (data) ->
+        @updateGame(data)
 
-$('button.time-up').on 'click', -> 
-  socket.emit('timeUp')
+      @nextScreen()
 
-window.socket = socket
+    log: (message, data=@) ->
+      console.log('LOG: ' + message, data)
+
+    nextScreen: () ->
+      x = @currentScreen
+      @screenDelay = @$screens.eq(x).data('delay') or @screenDelay
+
+      increment = () =>
+        @currentScreen = @currentScreen + 1
+        @nextScreen()
+
+      @$screens.css( opacity: 0 ).eq(x).css( opacity: 1 )
+
+      return if((x + 1)  >= @$screens.length)
+
+      if(@$screens.eq(x) is @$game)
+        @startCoundown()
+      else
+        setTimeout(increment, @screenDelay)
+
+    startCountdown: () ->
+      @log('Countdown Started')
+      @socket.emit('start')
+
+      increment: () =>
+        @time = @time - 1
+        @$countdown.text(@time)
+        if(@time <= 0)
+          clearInterval(@timer)
+          @socket.emit('timeUp')
+          return
+
+      @counter = setInterval(increment, 1000)
+
+    updateGame: (data) ->
+      @log('Game Update', data)
+      if(data.isOver)
+        @won = data.didWin
+        @log('Game Over')
+
+
+# ---------------------------------------------------
+# Player Class
+
+class Player
+
+    x: 0
+    y: 0
+
+    constructor: (color) ->
+      @color                 = color
+      @$player               = $('.asteroids .' + color)
+      @$player_gui           = $('.gui .' + color)
+      @$player_notifications = $('.notifications .' + color)
+      @$ship                 = @$player.find('.ship')
+      @$minerals_overall     = @$player_gui.find('.overall .score')
+      @$minerals_abundant    = @$player_gui.find('.abundant .score')
+      @$minerals_common      = @$player_gui.find('.common .score')
+      @$minerals_rare        = @$player_gui.find('.rare .score')
+
+    notification: (data) ->
+      name          = data.name or '...'
+      element       = data.element or '...'
+      amount        = data.amount or 0
+      $template     = $('<div class="notification cf rare"><p class="text"><strong>+' + amount+ '</strong> ' + name + ' Gained - ' + element + '</p></div>')
+      $template.appendTo(@player_notifications).show().delay(500).remove()
+
+    update: (data) ->
+      console.log('player update', @color, data)
+
+# ---------------------------------------------------
+# Asteroid Class
+
+class Asteroid
+
+  x: 0
+  y: 0
+
+  constructor: () ->
+    @$asteroid = $('.asteroids .asteroid')
+
+
+# ---------------------------------------------------
+# Setup Socket Connection & Game
 
 jQuery ($) ->
-  $screens = $('.screen')
-  len = $screens.length
-  delay = 2000
-  x = 0
-  callback = () ->
-    x = x + 1
-    roll()
-  roll = () ->
-    delay = $screens.eq(x).data('delay') or delay
-    $screens.css( opacity: 0 ).delay(1000).eq(x).css( opacity: 1 )
-    if((x + 1)  >= len)
-      return
-    setTimeout(callback, delay)
-  roll()
+  window.socket = socket = io.connect('http://localhost:8000')
+  window.game = game = new Game(socket)
