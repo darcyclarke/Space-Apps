@@ -13,33 +13,125 @@ html.no-js
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     title Space Apps
     meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
-    //- link(rel="stylesheet", href="/assets/styles/main.min.css", type="text/css")
+    link(rel="stylesheet", href="/assets/styles/main.min.css", type="text/css")
   body
-    button(class="click-me") space!
-    button(class="start") start over
 
-    div(class="game")
-      h2 Game
-      span(class="game")
+    //- Wrapper
+    div.wrapper
 
-    div(class="asteroid")
-      h2 Asteroid
-      span(class="asteroid")
-    div(class="player1") 
-      h2 Player 1
-      span(class="player1")
-    div(class="player2")
-      h2 Player 2
-      span(class="player2")
-    div(class="player3")
-      h2 Player 3
-      span(class="player3")
-    div(class="player4")
-      h2 Player 4
-      span(class="player4")
+      //- Screen-0
+      div.screen.screen-0(data-delay="5000",style="z-index:99999999")
+        button(class="click-me") space!
+        button(class="start") start over
 
+        div(class="game")
+          h2 Game
+          span(class="game")
+
+        div(class="asteroid")
+          h2 Asteroid
+          span(class="asteroid")
+        div(class="player1")
+          h2 Player 1
+          span(class="player1")
+        div(class="player2")
+          h2 Player 2
+          span(class="player2")
+        div(class="player3")
+          h2 Player 3
+          span(class="player3")
+        div(class="player4")
+          h2 Player 4
+          span(class="player4")
+
+      //- Screen-1
+      div.screen.screen-1(data-delay="2000")
+        h1.title Dioresta
+
+      //- Screen-2
+      div.screen.screen-2(data-delay="5000")
+        div.kid
+          img(src="/assets/images/scientist.gif")
+
+      //- Screen-3
+      div.screen.screen-3.header(data-delay="1000")
+        h1 3
+
+      //- Screen-4
+      div.screen.screen-4.header(data-delay="1000")
+        h1 2
+
+      //- Screen-5
+      div.screen.screen-5.header(data-delay="1000")
+        h1 1
+
+      //- Screen-6
+      div.screen.screen-6.header(data-delay="1000")
+        h1 GO!
+
+      //- //- Screen-3
+      //- div.screen.screen-3(data-delay="5000")
+      //-   div.asteroid
+      //-     img(src="/assets/images/asteroids/1.png")
+
+      //- //- Screen-4
+      //- div.screen.screen-3(data-delay="5000")
+      //-   div.kid
+      //-     img(src="/assets/images/asteroids/1.png")
+
+      //- Game
+      div.screen.screen-2.game
+
+        //- Countdown Timer
+        h1.timer <strong>90</strong> seconds
+
+        //- Earth
+        div.earth
+          img(src="/assets/images/earth.png")
+
+        //- Asteroids
+        div.asteroids
+
+          //- Asteroid
+          img.asteroid(src="/assets/images/asteroids/1.png")
+
+          - each color in ['red','blue','green','yellow']
+            div.player(class=color)
+              div.ship: span
+
+        //- Notifications
+        div.notifications
+
+          - each color in ['red','blue','green','yellow']
+            div.player(class=color)
+
+              div.notification.cf.rare
+                p.text <strong>+10</strong> Water Gained - H²O
+
+        //- GUI
+        div.gui
+
+          - each color, index in {1:'red',2:'blue',3:'green',4:'yellow'}
+            div.player(class=color)
+              div.avatar
+                img(src="/assets/images/ships/"+color+"2.png")
+                p.number= index + ''
+
+
+              div.bars
+                div.bar.overall
+                  div.score
+                  p Minerals
+                div.bar.abundant
+                  div.score
+                  p Abundant
+                div.bar.common
+                  div.score
+                  p Common
+                div.bar.scarce
+                  div.score
+                  p Rare
 
     script(type="text/javascript" src="/socket.io/socket.io.js")
     script(src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js")
-    //- script(type="text/javascript" src="/assets/scripts/libs.min.js")
     script(type="text/javascript" src="/assets/scripts/main.js")
