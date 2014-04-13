@@ -1,8 +1,104 @@
 @import 'nib'
 
+////////////////////////////////////////////////////////
+// Variables
+////////////////////////////////////////////////////////
+
 $shipSize = 150px
 $asteroidSize = 600px
 $paddingSize = 20px
+
+////////////////////////////////////////////////////////
+// Keyframe Animations
+////////////////////////////////////////////////////////
+
+@keyframes star_pulse
+  0%
+    opacity: 0.15
+  50%
+    opacity: 0.5
+  100%
+    opacity: 0.15
+
+@keyframes star_pulse_two
+  0%
+    opacity: 0.35
+  50%
+    opacity: 0
+  100%
+    opacity: 0.35
+
+@keyframes shake_red
+  0%
+    transform: rotate(145deg) translate3d(0, 0, 0)
+  25%
+    transform: rotate(150deg) translate3d(-3px, -2px, 0)
+  50%
+    transform: rotate(140deg) translate3d(2px, -5px, 0)
+  75%
+    transform: rotate(150deg) translate3d(-3px, 3px, 0)
+  100%
+    transform: rotate(145deg) translate3d(0, 0, 0)
+
+@keyframes shake_blue
+  0%
+    transform: rotate(180deg) translate3d(0, 0, 0)
+  25%
+    transform: rotate(175deg) translate3d(10px, 0, 0)
+  50%
+    transform: rotate(170deg) translate3d(5px, 0, 0)
+  75%
+    transform: rotate(175deg) translate3d(20px, 0, 0)
+  100%
+    transform: rotate(180deg) translate3d(0, 0, 0)
+
+@keyframes shake_green
+  0%
+    transform: rotate(190deg) translate3d(0, 0, 0)
+  25%
+    transform: rotate(197deg) translate3d(5px, 0, 0)
+  50%
+    transform: rotate(180deg) translate3d(20px, 0, 0)
+  75%
+    transform: rotate(175deg) translate3d(10px, 0, 0)
+  100%
+    transform: rotate(190deg) translate3d(0, 0, 0)
+
+@keyframes shake_yellow
+  0%
+    transform: rotate(175deg) translate3d(5px, 0, 0)
+  25%
+    transform: rotate(195deg) translate3d(20px, 0, 0)
+  50%
+    transform: rotate(180deg) translate3d(10px, 0, 0)
+  75%
+    transform: rotate(195deg) translate3d(5px, 0, 0)
+  100%
+    transform: rotate(175deg) translate3d(0, 0, 0)
+
+@keyframes drill_pulse
+  0%
+    transform: rotate(-90deg) translate3d(0, 0, 0)
+  50%
+    transform: rotate(-90deg) translate3d(10px, 0, 0)
+  100%
+    transform: rotate(-90deg) translate3d(0, 0, 0)
+
+@keyframes asteroid_shake
+  0%
+    transform: translate3d(0, 0, 0)
+  25%
+    transform: translate3d(10px, 0, 0)
+  50%
+    transform: translate3d(5px, 0, 0)
+  75%
+    transform: translate3d(20px, 0, 0)
+  100%
+    transform: translate3d(0, 0, 0)
+
+////////////////////////////////////////////////////////
+// Fonts
+////////////////////////////////////////////////////////
 
 @font-face
   font-family: 'minecraftia'
@@ -15,6 +111,16 @@ $paddingSize = 20px
   src: url('../fonts/visitor.ttf') format('truetype')
   font-weight: normal
   font-style: normal
+
+@font-face
+  font-family: 'fipps'
+  src: url('../fonts/fipps.otf') format('opentype')
+  font-weight: normal
+  font-style: normal
+
+////////////////////////////////////////////////////////
+// Reset
+////////////////////////////////////////////////////////
 
 *, *:before, *:after
   box-sizing: border-box;
@@ -79,51 +185,39 @@ a:active, a:hover
 .cf
   *zoom: 1
 
-.wrapper, .game
-  position: relative
-  width: 100%
-  height: 100%
-  overflow: hidden
+////////////////////////////////////////////////////////
+// General Classes
+////////////////////////////////////////////////////////
 
-.game
-  background: url(../images/stars/1.png)
+.title
+  font-family: 'minecraftia'
 
-.asteroids
+
+////////////////////////////////////////////////////////
+// Kid
+////////////////////////////////////////////////////////
+
+.kid
   position: absolute
-  width: $asteroidSize
-  height: $asteroidSize
-  margin: -($asteroidSize / 2) 0 0 (-1 * ($asteroidSize / 2))
-  top: 50%
-  left: 50%
+  bottom: 300px
+  right: 300px
+  width: 100px
+  height: 100px
+  background: url(../images.kid.png)
 
-  .asteroid
-    width: 100%
-    position: absolute
 
-.earth
-  position: absolute
-  width: ($asteroidSize / 2)
-  height: ($asteroidSize / 2)
-  margin: 0 0 0 (-1 * ($asteroidSize / 4))
-  bottom: -($asteroidSize / 4)
-  left: 50%
-
-  img
-    max-width: 100%
-
-.player
-  display: inline-block
-  position: relative
-  transform: translate3d(0,0,0)
+////////////////////////////////////////////////////////
+// Ships
+////////////////////////////////////////////////////////
 
 .ship
   position: absolute
   width: $shipSize
   height: $shipSize
   border-radius: 50%
-  transform: translate3d(0,0,0)
   background-position: center center
   background-repeat: no-repeat
+  animation: ship_shake 1.45s infinite
 
   &:before
     content: ''
@@ -131,70 +225,369 @@ a:active, a:hover
     background-size: contain
     background-position: center center
     background-repeat: no-repeat
-    width: 35px
-    height: 35px
+    width: 50px
+    height: 50px
+    position: absolute
+    top: 5px
+    left: 50%
+    margin: 0 0 0 -25px
+    animation: drill_pulse 1.45s infinite
+    transform: rotate(-90deg)
+
+  span
+    width: 100%
+    height: 50px
     display: block
-    margin: 0 auto 0
-    transform: rotate(-90deg) translate3d(-22px, 0, 0)
+    position: absolute
+    text-align: center
+    top: 104px
+
+    &:before, &:after
+      content: ''
+      width: 20px
+      height: 100%
+      margin: 0 12px
+      display: inline-block
+      background: url(../images/ships/flames.gif)
+      background-repeat: no-repeat
 
 .red
+  border-color: red
 
   .ship
-    transform: rotate(145deg)
+    top: 20px
+    animation: shake_red 2s infinite
     background-image: url(../images/ships/red2.png)
 
 .blue
+  border-color: blue
 
   .ship
-    transform: rotate(170deg)
+    animation: shake_blue 1.45s infinite
     background-image: url(../images/ships/blue2.png)
 
 .green
+  border-color: green
 
   .ship
-    transform: rotate(190deg)
+    animation: shake_green 1.45s infinite
     background-image: url(../images/ships/green2.png)
 
 .yellow
+  border-color: yellow
 
   .ship
-    transform: rotate(215deg)
+    top: 20px
+    animation: shake_yellow 1.45s infinite
     background-image: url(../images/ships/yellow2.png)
 
-.notification
-  position: absolute
-  opacity: 0
-  text-transform: uppercase
-  font-size: 22px
-  font-weight: bold
-  letter-spacing: -1px
-  text-shadow: 0 -3px 0 black
-  color: white
-  border: 1px solid #46e6fc
-  min-width: 250px
-  padding: 20px 40px
-  background: rgba(white, 0.05)
-  box-shadow: 0 0 15px #46e6fc
-  background-image: linear-gradient(bottom, #010825, #0169b0)
 
-  .avatar, .text
-    float: left
-    display: block
+////////////////////////////////////////////////////////
+// Notifications
+////////////////////////////////////////////////////////
 
-  .avatar
-    width: 75px
-    height: 75px
-    padding: 10px
+.notifications
+  z-index: 9999
 
-    img
-      max-width: 100%
+  .notification
+    opacity: 0
+    position: absolute
+    display: inline-block
+    text-transform: uppercase
+    font-size: 18px
+    font-weight: bold
+    text-shadow: 0 2px 0 black
+    color: white
+    padding: 15px 30px 18px
 
-  .text
-    padding: 20px 0 0 20px
+    $color = #84ff00
+    &.abundant
+      background: darken($color, 20%)
+      border: 3px solid rgba(lighten($color, 50%), 0.8)
+      box-shadow: 0 0 25px $color
+
+    $color = #1789fb
+    &.common
+      background: $color
+      border: 3px solid rgba(lighten($color, 50%), 0.8)
+      box-shadow: 0 0 25px $color
+
+    $color = #ffba00
+    &.rare
+      background: $color
+      border: 3px solid rgba(lighten($color, 50%), 0.8)
+      box-shadow: 0 0 25px $color
+
+    .element, .avatar, .text
+      float: left
+      display: inline-block
 
     strong
       color: yellow
 
+  .red
+    .notification
+      top: 40px
+      left: 80px
+
+  .blue
+    .notification
+      top: 40px
+      right: 80px
+
+  .green
+    .notification
+      bottom: 40px
+      left: 80px
+
+  .yellow
+    .notification
+      bottom: 40px
+      right: 80px
 
 
+////////////////////////////////////////////////////////
+// GUI
+////////////////////////////////////////////////////////
+
+.gui, .notifications
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+
+  .player
+    position: absolute
+    display: block
+    width: 50%
+    height: 50%
+
+  .red
+    top: 0
+    left: 0
+
+    .bars
+      top: 10px
+      left: 60px
+
+    .bar .score
+      top: 0
+      left: 0
+
+    .avatar
+      top: 30px
+      left: 0
+
+  .blue
+    top: 0
+    right: 0
+
+    .bars
+      top: 10px
+      right: 60px
+      text-align: right
+
+    .bar .score
+      top: 0
+      right: 0
+
+    .avatar
+      top: 30px
+      right: 0
+
+  .green
+    bottom: 0
+    left: 0
+
+    .bars
+      bottom: 10px
+      left: 60px
+
+    .bar .score
+      bottom: 0
+      left: 0
+
+    .avatar
+      bottom: 40px
+      left: 0
+
+  .yellow
+    bottom: 0
+    right: 0
+
+    .bars
+      bottom: 10px
+      right: 60px
+      text-align: right
+
+    .bar .score
+      bottom: 0
+      right: 0
+
+    .avatar
+      bottom: 40px
+      right: 0
+
+  .avatar
+    position: absolute
+    width: 80px
+
+    img
+      max-width: 100%
+
+    .number
+      color: white
+      font-size: 30px
+      font-weight: bold
+      width: 100%
+      text-align: center
+
+  .bars
+    position: absolute
+    width: 40%
+    margin: 0 auto
+    padding: 1px
+
+  .bar
+    font-size: 11px
+    letter-spacing: 2px
+    text-transform: uppercase
+    color: white
+    font-weight: bold
+    text-shadow: 0 1px 0 black
+    padding: 10px 20px
+    width: 100%
+    background: rgba(gray, 0.35)
+    display: block
+    margin: 0 auto 1px
+
+    .score
+      position: absolute
+      display: block
+      top: 0
+      width: 0%
+      height: 100%
+
+    &.overall .score
+      background-color: rgba(white, 0.25)
+
+    &.abundant .score
+      background-color: rgba(#84ff00, 0.25)
+
+    &.common .score
+      background-color: rgba(#1789fb, 0.25)
+
+    &.scarce .score
+      background-color: rgba(#ffba00, 0.25)
+
+////////////////////////////////////////////////////////
+// General Screens
+////////////////////////////////////////////////////////
+
+.wrapper, .screen
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  transition: all 0.25s
+
+  &.wrapper
+    overflow: hidden
+
+  &.screen
+    opacity: 0
+    color: white
+
+  &.header
+    h1
+      margin: 20% auto
+      font-size: 175px
+      text-align: center
+
+  &.screen:before, &.wrapper:before
+    content: ''
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    background: url(../images/stars.png)
+    opacity: 0.4
+    animation: star_pulse 4s infinite
+
+  &.wrapper:before
+    background: url(../images/stars.png)
+    background-position: -50px -50px
+    animation: start_pulse_two 4s infinite
+
+////////////////////////////////////////////////////////
+// Screen 1
+////////////////////////////////////////////////////////
+
+.screen-1
+  .title
+    text-align: center
+    margin: 25% 0
+    font-size: 80px
+    letter-spacing: 5px
+    color: white
+    text-transform: uppercase
+    -webkit-text-stroke: 1px rgba(#0086ff, 0.2)
+    text-shadow: 0 0 50px #49e4ff
+    font-weight: bold
+
+////////////////////////////////////////////////////////
+// Screen 2
+////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////
+// Game Screen
+////////////////////////////////////////////////////////
+
+.game
+
+  .timer
+    font-size: 50px
+    font-weight: bold
+    color: white
+    position: absolute
+    width: 100%
+    text-align: center
+
+    strong
+      color: red
+
+  .asteroids
+    position: absolute
+    width: $asteroidSize
+    height: $asteroidSize
+    margin: -($asteroidSize / 2) 0 0 (-1 * ($asteroidSize / 2))
+    top: 50%
+    left: 50%
+
+    .asteroid
+      width: 100%
+      position: absolute
+
+  .earth
+    position: absolute
+    width: ($asteroidSize / 2)
+    height: ($asteroidSize / 2)
+    margin: 0 0 0 (-1 * ($asteroidSize / 4))
+    bottom: -($asteroidSize / 4)
+    left: 50%
+
+    img
+      max-width: 100%
+
+  .asteroids
+    .player
+      display: inline-block
+      position: relative
+      width: 25%
+      height: 100%
+      transform: translate3d(0,0,0)
 
