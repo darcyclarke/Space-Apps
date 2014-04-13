@@ -46,4 +46,29 @@
 
   window.socket = socket;
 
+  jQuery(function($) {
+    var $screens, callback, delay, len, roll, x;
+    $screens = $('.screen');
+    len = $screens.length;
+    delay = 2000;
+    x = 0;
+    callback = function() {
+      x = x + 1;
+      return roll();
+    };
+    roll = function() {
+      delay = $screens.eq(x).data('delay') || delay;
+      $screens.css({
+        opacity: 0
+      }).delay(1000).eq(x).css({
+        opacity: 1
+      });
+      if ((x + 1) >= len) {
+        return;
+      }
+      return setTimeout(callback, delay);
+    };
+    return roll();
+  });
+
 }).call(this);
