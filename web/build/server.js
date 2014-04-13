@@ -1,5 +1,5 @@
 (function() {
-  var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_DIFFICULTY_LEVEL, COMMON_MINERALS, COMMON_TOTAL, Game, MINERALS, Player, SCARCE_DIFFICULTY_LEVEL, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, randomInt, server;
+  var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_DIFFICULTY_LEVEL, COMMON_MINERALS, COMMON_TOTAL, Game, MINERALS, Player, SCARCE_DIFFICULTY_LEVEL, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, lastMineral, mineralType, randomInt, server;
 
   ABUNDANT_TOTAL = 10000;
 
@@ -18,6 +18,8 @@
   SCARCE_DIFFICULTY_LEVEL = 3;
 
   MINERALS = ABUNDANT_MINERALS.concat(COMMON_MINERALS, SCARCE_MINERALS);
+
+  lastMineral = null;
 
   Asteroid = function() {
     this.minerals = {
@@ -82,6 +84,7 @@
 
   Game = function() {
     this.isOver = false;
+    this.didWin = false;
     this.numPlayers = 0;
     this.asteroid = new Asteroid();
     this.players = {
@@ -93,6 +96,7 @@
     this.update = function(playerId, drillPower) {
       var amount, i, mineral, minerals;
       if (this.asteroid.isEmpty()) {
+        this.didWin = true;
         return this.isOver = true;
       } else {
         minerals = game.asteroid.presentMinerals();
@@ -112,7 +116,8 @@
           amount = game.asteroid.minerals[mineral];
         }
         game.asteroid.loseMineral(mineral, amount);
-        return game.players[playerId].findMineral(mineral, amount);
+        game.players[playerId].findMineral(mineral, amount);
+        return lastMineral = mineral;
       }
     };
   };
@@ -155,6 +160,17 @@
         if (playerId && drillPower) {
           game.update(playerId, drillPower);
           socket.emit('updateGame', game);
+          if (isScarce(lastMineral)) {
+            socket.emit('scarceMineralCollected', {
+              mineral: lastMineral,
+              playerID: playerId
+            });
+          } else if (isCommon(lastMineral)) {
+            socket.emit('commonMineralCollected', {
+              mineral: lastMineral,
+              playerID: playerId
+            });
+          }
           return console.log("=====> ", JSON.stringify(game));
         }
       }
@@ -165,6 +181,16 @@
       return socket.emit('updateGame', game);
     });
   });
+
+  mineralType = function(mineral) {
+    if (isScarce(mineral)) {
+      return "scarce";
+    } else if (isCommon(mineral)) {
+      return "common";
+    } else {
+      return "abundant";
+    }
+  };
 
   initGame = function() {
     return game = new Game();
