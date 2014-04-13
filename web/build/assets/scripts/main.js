@@ -23,7 +23,7 @@
           var player;
           player = _this.getPlayer(data.playerID);
           console.log('Found Rare Mineral!', player);
-          return _this.players[player].notification('scarce', data);
+          return _this.players[player].notification('rare', data);
         };
       })(this));
       this.socket.on('commonMineralCollected', (function(_this) {
@@ -32,6 +32,14 @@
           player = _this.getPlayer(data.playerID);
           console.log('Found Common Mineral!', player);
           return _this.players[player].notification('common', data);
+        };
+      })(this));
+      this.socket.on('abundantMineralCollected', (function(_this) {
+        return function(data) {
+          var player;
+          player = _this.getPlayer(data.playerID);
+          console.log('Found Abundant Mineral!', player);
+          return _this.players[player].notification('abundant', data);
         };
       })(this));
       this.socket.on('updateGame', (function(_this) {
@@ -194,29 +202,44 @@
       this.$minerals_overall = this.$player_gui.find('.overall .score');
       this.$minerals_abundant = this.$player_gui.find('.abundant .score');
       this.$minerals_common = this.$player_gui.find('.common .score');
-      this.$minerals_rare = this.$player_gui.find('.rare .score');
+      this.$minerals_rare = this.$player_gui.find('.scarce .score');
     }
 
     Player.prototype.notification = function(type, data) {
-      var $template, amount, element, name;
-      this.$minerals_overall.css({
-        width: '+=1%'
-      });
+      var $template, amount, element, hide, name;
       if (type === 'common') {
         this.$minerals_common.css({
-          width: '+=1%'
+          width: '+=5%'
         });
       }
-      if (type === 'scarce') {
-        this.$minerals_scarce.css({
-          width: '+=1%'
+      if (type === 'rare') {
+        this.$minerals_rare.css({
+          width: '+=10%'
         });
       }
-      name = data.name || '...';
-      element = data.element || '...';
-      amount = data.amount || 0;
-      $template = $('<div class="notification cf rare"><p class="text"><strong>+' + amount + '</strong> ' + name + ' Gained - ' + element + '</p></div>');
-      return $template.appendTo(this.player_notifications).show().delay(500).remove();
+      if (type === 'abundant') {
+        this.$minerals_abundant.css({
+          width: '+=2.5%'
+        });
+      }
+      if (type === 'rare' || type === 'abundant') {
+        name = data.name || '...';
+        element = data.element || '...';
+        amount = data.amount || 0;
+        $template = $('<div class="notification cf ' + type + '"><p class="text"><strong>+' + amount + '</strong> ' + name + ' Gained - ' + element + '</p></div>');
+        $template.appendTo(this.$player_notifications).css({
+          opacity: '1'
+        });
+        hide = function() {
+          return $template.animate({
+            top: '+=10px',
+            opacity: '0'
+          }, 200, function() {
+            return $(this).remove();
+          });
+        };
+        return setTimeout(hide, 100);
+      }
     };
 
     Player.prototype.addMineral = function(data) {
@@ -246,7 +269,7 @@
 
   jQuery(function($) {
     var game, socket;
-    window.socket = socket = io.connect('http://192.168.106.50:8000/');
+    window.socket = socket = io.connect('http://192.168.106.50:8000');
     return window.game = game = new Game(socket);
   });
 

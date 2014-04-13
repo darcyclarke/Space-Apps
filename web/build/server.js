@@ -1,11 +1,11 @@
 (function() {
   var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_DIFFICULTY_LEVEL, COMMON_MINERALS, COMMON_TOTAL, ELEMENTS, Game, MINERALS, Player, SCARCE_DIFFICULTY_LEVEL, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, lastAmount, lastMineral, mineralType, randomInt, server;
 
-  ABUNDANT_TOTAL = 10000;
+  ABUNDANT_TOTAL = 100000;
 
-  COMMON_TOTAL = 5000;
+  COMMON_TOTAL = 100000;
 
-  SCARCE_TOTAL = 1000;
+  SCARCE_TOTAL = 50000;
 
   ABUNDANT_MINERALS = ['iron', 'carbon', 'silicon'];
 
@@ -186,6 +186,13 @@
             });
           } else if (isCommon(lastMineral)) {
             io.sockets.emit('commonMineralCollected', {
+              name: lastMineral,
+              element: ELEMENTS[lastMineral],
+              playerID: playerId,
+              amount: lastAmount
+            });
+          } else if (isAbundant(lastMineral)) {
+            io.sockets.emit('abundantMineralCollected', {
               name: lastMineral,
               element: ELEMENTS[lastMineral],
               playerID: playerId,

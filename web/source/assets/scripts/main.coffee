@@ -27,12 +27,17 @@ class Game
       @socket.on 'scarceMineralCollected', (data) =>
         player = @getPlayer(data.playerID)
         console.log('Found Rare Mineral!', player)
-        @players[player].notification('scarce', data)
+        @players[player].notification('rare', data)
 
       @socket.on 'commonMineralCollected', (data) =>
         player = @getPlayer(data.playerID)
         console.log('Found Common Mineral!', player)
         @players[player].notification('common', data)
+
+      @socket.on 'abundantMineralCollected', (data) =>
+        player = @getPlayer(data.playerID)
+        console.log('Found Abundant Mineral!', player)
+        @players[player].notification('abundant', data)
 
       @socket.on 'updateGame', (data) =>
         @updateGame(data)
@@ -128,22 +133,27 @@ class Player
       @$minerals_overall     = @$player_gui.find('.overall .score')
       @$minerals_abundant    = @$player_gui.find('.abundant .score')
       @$minerals_common      = @$player_gui.find('.common .score')
-      @$minerals_rare        = @$player_gui.find('.rare .score')
+      @$minerals_rare        = @$player_gui.find('.scarce .score')
 
     notification: (type, data) ->
 
-      # Add minerals to bars!
-      @$minerals_overall.css( width: '+=1%' )
       if(type == 'common')
-        @$minerals_common.css( width: '+=1%' )
-      if(type == 'scarce')
-        @$minerals_scarce.css( width: '+=1%' )
+        @$minerals_common.css( width: '+=5%' )
+      if(type == 'rare')
+        @$minerals_rare.css( width: '+=10%' )
+      if(type == 'abundant')
+        @$minerals_abundant.css( width: '+=2.5%' )
 
-      name          = data.name or '...'
-      element       = data.element or '...'
-      amount        = data.amount or 0
-      $template     = $('<div class="notification cf rare"><p class="text"><strong>+' + amount+ '</strong> ' + name + ' Gained - ' + element + '</p></div>')
-      $template.appendTo(@player_notifications).show().delay(500).remove()
+      if(type == 'rare' or type == 'abundant')
+        name = data.name or '...'
+        element = data.element or '...'
+        amount = data.amount or 0
+        $template = $('<div class="notification cf ' + type + '"><p class="text"><strong>+' + amount+ '</strong> ' + name + ' Gained - ' + element + '</p></div>')
+        $template.appendTo(@$player_notifications).css( opacity: '1' )
+        hide = () ->
+          $template.animate { top: '+=10px', opacity: '0' }, 200, () ->
+            $(this).remove()
+        setTimeout(hide, 100)
 
     addMineral: (data) ->
       console.log(data)
@@ -167,6 +177,6 @@ class Asteroid
 # Setup Socket Connection & Game
 
 jQuery ($) ->
-  window.socket = socket = io.connect('http://192.168.106.50:8000/')
+  window.socket = socket = io.connect('http://192.168.106.50:8000')
 #   window.socket = socket = io.connect('http://localhost:8000')
   window.game = game = new Game(socket)

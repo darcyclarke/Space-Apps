@@ -606,16 +606,16 @@ a:active, a:hover
       height: 100%
 
     &.overall .score
-      background-color: rgba(white, 0.25)
+      background-color: rgba(white, 0.5)
 
     &.abundant .score
-      background-color: rgba(#84ff00, 0.25)
+      background-color: rgba(#84ff00, 0.5)
 
     &.common .score
-      background-color: rgba(#1789fb, 0.25)
+      background-color: rgba(#1789fb, 0.5)
 
     &.scarce .score
-      background-color: rgba(#ffba00, 0.25)
+      background-color: rgba(#ffba00, 0.5)
 
 ////////////////////////////////////////////////////////
 // General Screens
@@ -746,7 +746,8 @@ a:active, a:hover
     left: 0
     width: 100px
     height: 100px
-    opacity: 0
+    opacity: 1
+    z-index: 999
     background: url(../images/shootingstar.png)
     background-repeat: no-repeat
     background-size: contain
