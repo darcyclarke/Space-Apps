@@ -2,18 +2,18 @@
 # constants
 # ===========================================================================
 
-ABUNDANT_TOTAL = 10000
-COMMON_TOTAL = 5000
-SCARCE_TOTAL = 1000
+ABUNDANT_TOTAL = 100000
+COMMON_TOTAL = 100000
+SCARCE_TOTAL = 50000
 
 ABUNDANT_MINERALS = ['iron', 'carbon', 'silicon']
 COMMON_MINERALS = ['water', 'nickel', 'cobalt', 'titanium', 'magnesium']
 SCARCE_MINERALS = ['platinum', 'gold', 'silver']
 
 ELEMENTS = {
-  'iron': 'Fe', 
-  'carbon': 'C', 
-  'silicon': 'Si', 
+  'iron': 'Fe',
+  'carbon': 'C',
+  'silicon': 'Si',
   'water': 'H20',
   'nickel': 'Ni',
   'cobalt': 'Co',
@@ -198,16 +198,23 @@ io.sockets.on "connection", (socket) ->
 
         if isScarce(lastMineral)
           io.sockets.emit('scarceMineralCollected', {
-            name: lastMineral, 
+            name: lastMineral,
             element: ELEMENTS[lastMineral],
-            playerID: playerId, 
+            playerID: playerId,
             amount: lastAmount
           })
         else if isCommon(lastMineral)
           io.sockets.emit('commonMineralCollected', {
-            name: lastMineral, 
+            name: lastMineral,
             element: ELEMENTS[lastMineral],
-            playerID: playerId, 
+            playerID: playerId,
+            amount: lastAmount
+          })
+        else if isAbundant(lastMineral)
+          io.sockets.emit('abundantMineralCollected', {
+            name: lastMineral,
+            element: ELEMENTS[lastMineral],
+            playerID: playerId,
             amount: lastAmount
           })
 

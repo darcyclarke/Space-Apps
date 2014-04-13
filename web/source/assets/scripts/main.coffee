@@ -13,20 +13,31 @@ class Game
       @time           = 90
       @currentScreen  = 0
       @screenDelay    = 2000
-      @colors         = ['red', 'blue', 'green', 'yellow']
       @$game          = $('.game')
       @$countdown     = $('.countdown')
       @$screens       = $('.screen')
       @asteroid       = new Asteroid()
-      @players        = @colors.forEach (k, v) -> new Player(k)
+      @players        = []
+
+      @players.push(new Player('red'))
+      @players.push(new Player('blue'))
+      @players.push(new Player('green'))
+      @players.push(new Player('yellow'))
 
       @socket.on 'scarceMineralCollected', (data) =>
-        console.log('Found Rare Mineral!', data.playerID)
-        @players[getPlayer(data.playerID)].notification(data)
+        player = @getPlayer(data.playerID)
+        console.log('Found Rare Mineral!', player)
+        @players[player].notification('rare', data)
 
       @socket.on 'commonMineralCollected', (data) =>
-        console.log('Found Common Mineral!', data.playerID)
-        @players[getPlayer(data.playerID)].notification(data)
+        player = @getPlayer(data.playerID)
+        console.log('Found Common Mineral!', player)
+        @players[player].notification('common', data)
+
+      @socket.on 'abundantMineralCollected', (data) =>
+        player = @getPlayer(data.playerID)
+        console.log('Found Abundant Mineral!', player)
+        @players[player].notification('abundant', data)
 
       @socket.on 'updateGame', (data) =>
         @updateGame(data)
@@ -45,13 +56,13 @@ class Game
 
     getPlayer: (id) ->
       if(id == 'player1')
-        return 'red'
+        return 0
       if(id == 'player2')
-        return 'blue'
+        return 1
       if(id == 'player3')
-        return 'green'
+        return 2
       if(id == 'player4')
-        return 'yellow'
+        return 3
 
     startCountdown: () ->
       console.log('Countdown Started')
@@ -60,6 +71,7 @@ class Game
         @time = @time - 1
         @$countdown.text(@time)
 
+        # Make universe work...
         if(@time <= 10)
           $('.asteroids .asteroid').css( transform: 'scale(0.1)' )
           $('.asteroids').css( top: '+=375px' )
@@ -121,14 +133,27 @@ class Player
       @$minerals_overall     = @$player_gui.find('.overall .score')
       @$minerals_abundant    = @$player_gui.find('.abundant .score')
       @$minerals_common      = @$player_gui.find('.common .score')
-      @$minerals_rare        = @$player_gui.find('.rare .score')
+      @$minerals_rare        = @$player_gui.find('.scarce .score')
 
-    notification: (data) ->
-      name          = data.name or '...'
-      element       = data.element or '...'
-      amount        = data.amount or 0
-      $template     = $('<div class="notification cf rare"><p class="text"><strong>+' + amount+ '</strong> ' + name + ' Gained - ' + element + '</p></div>')
-      $template.appendTo(@player_notifications).show().delay(500).remove()
+    notification: (type, data) ->
+
+      if(type == 'common')
+        @$minerals_common.css( width: '+=5%' )
+      if(type == 'rare')
+        @$minerals_rare.css( width: '+=10%' )
+      if(type == 'abundant')
+        @$minerals_abundant.css( width: '+=2.5%' )
+
+      if(type == 'rare' or type == 'abundant')
+        name = data.name or '...'
+        element = data.element or '...'
+        amount = data.amount or 0
+        $template = $('<div class="notification cf ' + type + '"><p class="text"><strong>+' + amount+ '</strong> ' + name + ' Gained - ' + element + '</p></div>')
+        $template.appendTo(@$player_notifications).css( opacity: '1' )
+        hide = () ->
+          $template.animate { top: '+=10px', opacity: '0' }, 200, () ->
+            $(this).remove()
+        setTimeout(hide, 100)
 
     addMineral: (data) ->
       console.log(data)
@@ -152,5 +177,6 @@ class Asteroid
 # Setup Socket Connection & Game
 
 jQuery ($) ->
-  window.socket = socket = io.connect('http://localhost:8000')
+  window.socket = socket = io.connect('http://192.168.106.50:8000')
+#   window.socket = socket = io.connect('http://localhost:8000')
   window.game = game = new Game(socket)
