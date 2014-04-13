@@ -19,7 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) DIOControlPanel *controlPanel;
-@property (weak, nonatomic) IBOutlet UIView *errorContainer;
+@property (strong, nonatomic) IBOutlet UIView *errorContainer;
 
 @end
 
@@ -39,6 +39,11 @@
     [self.view addSubview:self.controlPanel];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -55,9 +60,7 @@
 - (IBAction)drill:(id)sender
 {
     NSLog(@"DRILL!");
-    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill andData:@{
-                                                                          @"drillPower":@"10"
-                                                                          }];
+    
 }
 
 - (IBAction)left:(id)sender
@@ -75,11 +78,13 @@
 - (void)didDisconnectWithError
 {
     self.errorContainer.hidden = NO;
+    self.controlPanel.errorMessage.hidden = NO;
 }
 
 - (void)didConnect
 {
     self.errorContainer.hidden = YES;
+    self.controlPanel.errorMessage.hidden = YES;
 }
 
 - (IBAction)didTapError:(id)sender {

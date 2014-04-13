@@ -8,6 +8,8 @@
 
 #import "DIOControlPanel.h"
 
+#import "DIOSocketManager.h"
+
 @interface DIOControlPanel ()
 
 @end
@@ -35,6 +37,8 @@
     [self addSubview:self.slider];
     [self addSubview:self.drillAccuracyMeter];
     [self addSubview:self.drillPowerMeter];
+    [self addSubview:self.errorMessage];
+    self.errorMessage.hidden = YES;
 }
 
 #pragma mark slider
@@ -69,12 +73,47 @@
     float accuracyBonusPoints = accuracyBonus * accuracyBonusMultiplier;
     
     float totalPointsForShot = accuracyBonus + (accuracyBonusPoints * drillPower);
-#warning TODO send to server
+    
+    [[DIOSocketManager sharedManager] sendAction:DIOActionDrill andData:@{
+                                                                          @"drillPower":[NSString stringWithFormat:@"%f", totalPointsForShot]
+                                                                          }];
+    
     NSLog(@"%f",totalPointsForShot);
 }
 
 
 #pragma mark lazy load
+
+- (UIView *)errorMessage
+{
+    if(!_errorMessage) {
+        UIView *errorMessageContainer = [[UIView alloc] initWithFrame:self.bounds];
+        errorMessageContainer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        
+        UIView *errorBox = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 - 300, self.frame.size.height / 2 - 150 , 600, 300)];
+        errorBox.backgroundColor = [UIColor redColor];
+        [errorMessageContainer addSubview:errorBox];
+        
+        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, errorBox.frame.size.width, 80.0)];
+        headerLabel.font = [UIFont boldSystemFontOfSize:60.0];
+        headerLabel.text = @"SYSTEM FAILURE!";
+        headerLabel.textAlignment = NSTextAlignmentCenter;
+        headerLabel.textColor = [UIColor whiteColor];
+        [errorBox addSubview:headerLabel];
+        
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, headerLabel.frame.size.height, errorBox.frame.size.width, 150.0)];
+        detailLabel.font = [UIFont boldSystemFontOfSize:30.0];
+        detailLabel.text = @"YOUR SHIP HAS LOST COMMUNICATION WITH MISSION CONTROL. PLEASE ADVISE A SCIENCE CENTRE TECHNICIAN.";
+        detailLabel.textAlignment = NSTextAlignmentCenter;
+        detailLabel.textColor = [UIColor whiteColor];
+        detailLabel.numberOfLines = 0;
+        [errorBox addSubview:detailLabel];
+        
+        _errorMessage = errorMessageContainer;
+    }
+    
+    return _errorMessage;
+}
                         
 - (DIOControlPanelButton*)drillButton
 {

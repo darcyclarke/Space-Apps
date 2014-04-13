@@ -16,6 +16,7 @@
     if (self) {
         // Initialization code
         [self setupThumbImage];
+        
     }
     return self;
 }
@@ -25,6 +26,5 @@
     UIImage *thumbImage = [UIImage imageNamed:@"SliderButton"];
     [self setThumbImage:thumbImage forState:UIControlStateNormal];
 }
-
 
 @end
