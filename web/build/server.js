@@ -159,9 +159,10 @@
         }
       }
     });
-    socket.on('time-up', function(data) {
+    socket.on('timeUp', function(data) {
+      console.log("TIME UP");
       game.isOver = true;
-      return socket.emit('update-game', game);
+      return socket.emit('updateGame', game);
     });
   });
 
