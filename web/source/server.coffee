@@ -141,7 +141,7 @@ io.sockets.on "connection", (socket) ->
   socket.on 'start', (data) -> 
     console.log("START!")
     initGame()
-    socket.emit('update-game', JSON.stringify(game))
+    socket.emit('update-game', game)
 
   socket.on 'drill', (data) ->
     console.log("DRILL!")
@@ -151,13 +151,12 @@ io.sockets.on "connection", (socket) ->
       drillPower = parseInt(data["drillPower"])
       if playerId && drillPower
         game.update(playerId, drillPower)
-        socket.emit('update-game', JSON.stringify(game))
+        socket.emit('update-game', game)
         console.log("=====> ", JSON.stringify(game))
 
   socket.on 'time-up', (data) -> 
     game.isOver = true
-    socket.emit('update-game', JSON.stringify(game))
-    socket.emit('update-game', JSON.stringify(game))
+    socket.emit('update-game', game)
 
   return
 

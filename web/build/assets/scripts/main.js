@@ -9,7 +9,7 @@
 
   socket.on('update-game', function(data) {
     var json;
-    json = $.parseJSON(data);
+    json = data;
     console.log("===> ", json);
     $('span.game').html("isOver: " + JSON.stringify(json["isOver"]));
     $('span.asteroid').html(JSON.stringify(json["asteroid"]));

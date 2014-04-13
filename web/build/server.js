@@ -133,7 +133,7 @@
     socket.on('start', function(data) {
       console.log("START!");
       initGame();
-      return socket.emit('update-game', JSON.stringify(game));
+      return socket.emit('update-game', game);
     });
     socket.on('drill', function(data) {
       var drillPower, playerId;
@@ -144,15 +144,14 @@
         drillPower = parseInt(data["drillPower"]);
         if (playerId && drillPower) {
           game.update(playerId, drillPower);
-          socket.emit('update-game', JSON.stringify(game));
+          socket.emit('update-game', game);
           return console.log("=====> ", JSON.stringify(game));
         }
       }
     });
     socket.on('time-up', function(data) {
       game.isOver = true;
-      socket.emit('update-game', JSON.stringify(game));
-      return socket.emit('update-game', JSON.stringify(game));
+      return socket.emit('update-game', game);
     });
   });
 

@@ -3,7 +3,7 @@ randomInt = (min, max) ->
 
 socket = io.connect('http://localhost:8000');
 socket.on 'update-game', (data) ->
-  json = $.parseJSON(data)
+  json = data
   console.log("===> ", json)
   # $('h1').css({ top: data["player1"].y, left: data["player1"].x })
   $('span.game').html("isOver: " + JSON.stringify(json["isOver"]))
