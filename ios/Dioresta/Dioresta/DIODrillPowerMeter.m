@@ -10,7 +10,7 @@
 
 #define POWER_SQUARE_WIDTH 48.0f
 #define POWER_SQUARE_HEIGHT 48.0f
-#define POWER_SQUARE_SPACING 10.0f
+#define POWER_SQUARE_SPACING 9.0f
 #define MAX_DRILL_LEVEL 4
 
 @interface DIODrillPowerMeter ()
@@ -28,7 +28,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor greenColor];
+        
+        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"PowerLightsBackground"]]];
+        
         [self reset];
     }
     return self;

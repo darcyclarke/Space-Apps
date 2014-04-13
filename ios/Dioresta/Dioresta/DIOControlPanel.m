@@ -88,21 +88,21 @@
 {
     if(!_errorMessage) {
         UIView *errorMessageContainer = [[UIView alloc] initWithFrame:self.bounds];
-        errorMessageContainer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        errorMessageContainer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1.0];
         
         UIView *errorBox = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 - 300, self.frame.size.height / 2 - 150 , 600, 300)];
         errorBox.backgroundColor = [UIColor redColor];
         [errorMessageContainer addSubview:errorBox];
         
-        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, errorBox.frame.size.width, 80.0)];
-        headerLabel.font = [UIFont boldSystemFontOfSize:60.0];
+        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, errorBox.frame.size.width - 40, 80.0)];
+        headerLabel.font = [UIFont fontWithName:@"AmericanTypewriter-Bold" size:50.0];
         headerLabel.text = @"SYSTEM FAILURE!";
         headerLabel.textAlignment = NSTextAlignmentCenter;
         headerLabel.textColor = [UIColor whiteColor];
         [errorBox addSubview:headerLabel];
         
-        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, headerLabel.frame.size.height, errorBox.frame.size.width, 150.0)];
-        detailLabel.font = [UIFont boldSystemFontOfSize:30.0];
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, headerLabel.frame.size.height + 20, errorBox.frame.size.width - 40, 150.0)];
+        detailLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:30.0];
         detailLabel.text = @"YOUR SHIP HAS LOST COMMUNICATION WITH MISSION CONTROL. PLEASE ADVISE A SCIENCE CENTRE TECHNICIAN.";
         detailLabel.textAlignment = NSTextAlignmentCenter;
         detailLabel.textColor = [UIColor whiteColor];
