@@ -168,4 +168,5 @@ class Asteroid
 
 jQuery ($) ->
   window.socket = socket = io.connect('http://192.168.106.50:8000/')
+#   window.socket = socket = io.connect('http://localhost:8000')
   window.game = game = new Game(socket)

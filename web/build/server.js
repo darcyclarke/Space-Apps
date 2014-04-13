@@ -1,5 +1,5 @@
 (function() {
-  var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_DIFFICULTY_LEVEL, COMMON_MINERALS, COMMON_TOTAL, Game, MINERALS, Player, SCARCE_DIFFICULTY_LEVEL, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, lastMineral, mineralType, randomInt, server;
+  var ABUNDANT_MINERALS, ABUNDANT_TOTAL, Asteroid, COMMON_DIFFICULTY_LEVEL, COMMON_MINERALS, COMMON_TOTAL, ELEMENTS, Game, MINERALS, Player, SCARCE_DIFFICULTY_LEVEL, SCARCE_MINERALS, SCARCE_TOTAL, app, express, game, initGame, io, isAbundant, isCommon, isScarce, lastAmount, lastMineral, mineralType, randomInt, server;
 
   ABUNDANT_TOTAL = 10000;
 
@@ -13,6 +13,20 @@
 
   SCARCE_MINERALS = ['platinum', 'gold', 'silver'];
 
+  ELEMENTS = {
+    'iron': 'Fe',
+    'carbon': 'C',
+    'silicon': 'Si',
+    'water': 'H20',
+    'nickel': 'Ni',
+    'cobalt': 'Co',
+    'titanium': 'Ti',
+    'magnesium': 'Mg',
+    'platinum': 'Pt',
+    'gold': 'Au',
+    'silver': 'Ag'
+  };
+
   COMMON_DIFFICULTY_LEVEL = 2;
 
   SCARCE_DIFFICULTY_LEVEL = 3;
@@ -20,6 +34,8 @@
   MINERALS = ABUNDANT_MINERALS.concat(COMMON_MINERALS, SCARCE_MINERALS);
 
   lastMineral = null;
+
+  lastAmount = null;
 
   Asteroid = function() {
     this.minerals = {
@@ -117,7 +133,8 @@
         }
         game.asteroid.loseMineral(mineral, amount);
         game.players[playerId].findMineral(mineral, amount);
-        return lastMineral = mineral;
+        lastMineral = mineral;
+        return lastAmount = amount;
       }
     };
   };
@@ -162,13 +179,17 @@
           io.sockets.emit('updateGame', game);
           if (isScarce(lastMineral)) {
             io.sockets.emit('scarceMineralCollected', {
-              mineral: lastMineral,
-              playerID: playerId
+              name: lastMineral,
+              element: ELEMENTS[lastMineral],
+              playerID: playerId,
+              amount: lastAmount
             });
           } else if (isCommon(lastMineral)) {
             io.sockets.emit('commonMineralCollected', {
-              mineral: lastMineral,
-              playerID: playerId
+              name: lastMineral,
+              element: ELEMENTS[lastMineral],
+              playerID: playerId,
+              amount: lastAmount
             });
           }
           return console.log("=====> ", JSON.stringify(game));

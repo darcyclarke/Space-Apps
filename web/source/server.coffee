@@ -10,6 +10,20 @@ ABUNDANT_MINERALS = ['iron', 'carbon', 'silicon']
 COMMON_MINERALS = ['water', 'nickel', 'cobalt', 'titanium', 'magnesium']
 SCARCE_MINERALS = ['platinum', 'gold', 'silver']
 
+ELEMENTS = {
+  'iron': 'Fe', 
+  'carbon': 'C', 
+  'silicon': 'Si', 
+  'water': 'H20',
+  'nickel': 'Ni',
+  'cobalt': 'Co',
+  'titanium': 'Ti',
+  'magnesium': 'Mg',
+  'platinum': 'Pt',
+  'gold': 'Au',
+  'silver': 'Ag'
+}
+
 COMMON_DIFFICULTY_LEVEL = 2
 SCARCE_DIFFICULTY_LEVEL = 3
 
@@ -19,7 +33,8 @@ MINERALS = ABUNDANT_MINERALS.concat(COMMON_MINERALS, SCARCE_MINERALS)
 # global variables
 # ===========================================================================
 
-lastMineral= null
+lastMineral = null
+lastAmount = null
 
 # ===========================================================================
 # class definitions
@@ -124,7 +139,8 @@ Game = () ->
       game.asteroid.loseMineral(mineral, amount)
       game.players[playerId].findMineral(mineral, amount)
 
-      lastMineral= mineral
+      lastMineral = mineral
+      lastAmount = amount
 
   return
 
@@ -174,13 +190,17 @@ io.sockets.on "connection", (socket) ->
 
         if isScarce(lastMineral)
           io.sockets.emit('scarceMineralCollected', {
-            mineral: lastMineral,
-            playerID: playerId,
+            name: lastMineral, 
+            element: ELEMENTS[lastMineral],
+            playerID: playerId, 
+            amount: lastAmount
           })
         else if isCommon(lastMineral)
           io.sockets.emit('commonMineralCollected', {
-            mineral: lastMineral,
-            playerID: playerId,
+            name: lastMineral, 
+            element: ELEMENTS[lastMineral],
+            playerID: playerId, 
+            amount: lastAmount
           })
 
         console.log("=====> ", JSON.stringify(game))
