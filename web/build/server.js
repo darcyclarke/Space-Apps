@@ -160,6 +160,7 @@
       }
     });
     socket.on('timeUp', function(data) {
+      console.log("TIME UP");
       game.isOver = true;
       return socket.emit('updateGame', game);
     });

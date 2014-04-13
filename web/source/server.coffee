@@ -164,6 +164,7 @@ io.sockets.on "connection", (socket) ->
         console.log("=====> ", JSON.stringify(game))
 
   socket.on 'timeUp', (data) -> 
+    console.log("TIME UP")
     game.isOver = true
     socket.emit('updateGame', game)
 

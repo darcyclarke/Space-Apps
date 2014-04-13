@@ -24,4 +24,7 @@ $('button.click-me').on 'click', ->
 $('button.start').on 'click', -> 
   socket.emit('start')
 
+$('button.time-up').on 'click', -> 
+  socket.emit('timeUp')
+
 window.socket = socket

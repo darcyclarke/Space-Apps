@@ -30,6 +30,10 @@
     return socket.emit('start');
   });
 
+  $('button.time-up').on('click', function() {
+    return socket.emit('timeUp');
+  });
+
   window.socket = socket;
 
 }).call(this);
