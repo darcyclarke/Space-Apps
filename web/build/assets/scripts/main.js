@@ -9,24 +9,29 @@
       this.time = 90;
       this.currentScreen = 0;
       this.screenDelay = 2000;
-      this.colors = ['red', 'blue', 'green', 'yellow'];
       this.$game = $('.game');
       this.$countdown = $('.countdown');
       this.$screens = $('.screen');
       this.asteroid = new Asteroid();
-      this.players = this.colors.forEach(function(k, v) {
-        return new Player(k);
-      });
+      this.players = [];
+      this.players.push(new Player('red'));
+      this.players.push(new Player('blue'));
+      this.players.push(new Player('green'));
+      this.players.push(new Player('yellow'));
       this.socket.on('scarceMineralCollected', (function(_this) {
         return function(data) {
-          console.log('Found Rare Mineral!', data.playerID);
-          return _this.players[getPlayer(data.playerID)].notification(data);
+          var player;
+          player = _this.getPlayer(data.playerID);
+          console.log('Found Rare Mineral!', player);
+          return _this.players[player].notification('scarce', data);
         };
       })(this));
       this.socket.on('commonMineralCollected', (function(_this) {
         return function(data) {
-          console.log('Found Common Mineral!', data.playerID);
-          return _this.players[getPlayer(data.playerID)].notification(data);
+          var player;
+          player = _this.getPlayer(data.playerID);
+          console.log('Found Common Mineral!', player);
+          return _this.players[player].notification('common', data);
         };
       })(this));
       this.socket.on('updateGame', (function(_this) {
@@ -60,16 +65,16 @@
 
     Game.prototype.getPlayer = function(id) {
       if (id === 'player1') {
-        return 'red';
+        return 0;
       }
       if (id === 'player2') {
-        return 'blue';
+        return 1;
       }
       if (id === 'player3') {
-        return 'green';
+        return 2;
       }
       if (id === 'player4') {
-        return 'yellow';
+        return 3;
       }
     };
 
@@ -192,8 +197,21 @@
       this.$minerals_rare = this.$player_gui.find('.rare .score');
     }
 
-    Player.prototype.notification = function(data) {
+    Player.prototype.notification = function(type, data) {
       var $template, amount, element, name;
+      this.$minerals_overall.css({
+        width: '+=1%'
+      });
+      if (type === 'common') {
+        this.$minerals_common.css({
+          width: '+=1%'
+        });
+      }
+      if (type === 'scarce') {
+        this.$minerals_scarce.css({
+          width: '+=1%'
+        });
+      }
       name = data.name || '...';
       element = data.element || '...';
       amount = data.amount || 0;
@@ -228,7 +246,7 @@
 
   jQuery(function($) {
     var game, socket;
-    window.socket = socket = io.connect('http://107.170.78.222:8000/');
+    window.socket = socket = io.connect('http://192.168.106.50:8000/');
     return window.game = game = new Game(socket);
   });
 

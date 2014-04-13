@@ -13,20 +13,26 @@ class Game
       @time           = 90
       @currentScreen  = 0
       @screenDelay    = 2000
-      @colors         = ['red', 'blue', 'green', 'yellow']
       @$game          = $('.game')
       @$countdown     = $('.countdown')
       @$screens       = $('.screen')
       @asteroid       = new Asteroid()
-      @players        = @colors.forEach (k, v) -> new Player(k)
+      @players        = []
+
+      @players.push(new Player('red'))
+      @players.push(new Player('blue'))
+      @players.push(new Player('green'))
+      @players.push(new Player('yellow'))
 
       @socket.on 'scarceMineralCollected', (data) =>
-        console.log('Found Rare Mineral!', data.playerID)
-        @players[getPlayer(data.playerID)].notification(data)
+        player = @getPlayer(data.playerID)
+        console.log('Found Rare Mineral!', player)
+        @players[player].notification('scarce', data)
 
       @socket.on 'commonMineralCollected', (data) =>
-        console.log('Found Common Mineral!', data.playerID)
-        @players[getPlayer(data.playerID)].notification(data)
+        player = @getPlayer(data.playerID)
+        console.log('Found Common Mineral!', player)
+        @players[player].notification('common', data)
 
       @socket.on 'updateGame', (data) =>
         @updateGame(data)
@@ -45,13 +51,13 @@ class Game
 
     getPlayer: (id) ->
       if(id == 'player1')
-        return 'red'
+        return 0
       if(id == 'player2')
-        return 'blue'
+        return 1
       if(id == 'player3')
-        return 'green'
+        return 2
       if(id == 'player4')
-        return 'yellow'
+        return 3
 
     startCountdown: () ->
       console.log('Countdown Started')
@@ -60,6 +66,7 @@ class Game
         @time = @time - 1
         @$countdown.text(@time)
 
+        # Make universe work...
         if(@time <= 10)
           $('.asteroids .asteroid').css( transform: 'scale(0.1)' )
           $('.asteroids').css( top: '+=375px' )
@@ -123,7 +130,15 @@ class Player
       @$minerals_common      = @$player_gui.find('.common .score')
       @$minerals_rare        = @$player_gui.find('.rare .score')
 
-    notification: (data) ->
+    notification: (type, data) ->
+
+      # Add minerals to bars!
+      @$minerals_overall.css( width: '+=1%' )
+      if(type == 'common')
+        @$minerals_common.css( width: '+=1%' )
+      if(type == 'scarce')
+        @$minerals_scarce.css( width: '+=1%' )
+
       name          = data.name or '...'
       element       = data.element or '...'
       amount        = data.amount or 0
@@ -152,5 +167,5 @@ class Asteroid
 # Setup Socket Connection & Game
 
 jQuery ($) ->
-  window.socket = socket = io.connect('http://107.170.78.222:8000/')
+  window.socket = socket = io.connect('http://192.168.106.50:8000/')
   window.game = game = new Game(socket)
