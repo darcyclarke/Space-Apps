@@ -31,8 +31,16 @@
         [self addSubview:self.meterContainer];
         self.accuracyMeterSpeed = 5;
         
+        UIImageView *dialBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DialBackground"]];
+        dialBackground.frame = self.meterContainer.bounds;
+        [self.meterContainer addSubview:dialBackground];
+        
         [self.meterContainer addSubview:self.sliderIndicator];
         [self.meterContainer addSubview:self.powerIndicator];
+        
+        UIImageView *accuracyFrame = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AccuracyFrame"]];
+        accuracyFrame.frame = self.bounds;
+        [self addSubview:accuracyFrame];
         
         [self startAnimatingPowerIndicator];
     }
@@ -65,7 +73,6 @@
         self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x - self.accuracyMeterSpeed, self.powerIndicator.center.y);
     } else {
         self.powerIndicatorShouldGoForward = YES;
-        self.accuracyMeterSpeed += 1;
         self.powerIndicator.center = CGPointMake(self.powerIndicator.center.x + self.accuracyMeterSpeed, self.powerIndicator.center.y);
     }
 }
@@ -90,7 +97,7 @@
     if (!_sliderIndicator) {
         CGRect sliderIndicatorFrame = CGRectMake(0, 0, SLIDER_INDICATOR_WIDTH, CGRectGetHeight(self.meterContainer.frame));
         self.sliderIndicator = [[UIView alloc] initWithFrame:sliderIndicatorFrame];
-        self.sliderIndicator.backgroundColor = [UIColor redColor];
+        self.sliderIndicator.backgroundColor = [UIColor colorWithHue:0.081 saturation:0.738 brightness:0.957 alpha:1];
     }
     
     return _sliderIndicator;
@@ -101,7 +108,7 @@
     if (!_powerIndicator) {
         CGRect powerIndicatorFrame = CGRectMake(0, 0, POWER_INDICATOR_WIDTH, CGRectGetHeight(self.meterContainer.frame));
         self.powerIndicator = [[UIView alloc] initWithFrame:powerIndicatorFrame];
-        self.powerIndicator.backgroundColor = [UIColor purpleColor];
+        self.powerIndicator.backgroundColor = [UIColor blackColor];
         self.powerIndicator.alpha = 0.5f;
     }
     

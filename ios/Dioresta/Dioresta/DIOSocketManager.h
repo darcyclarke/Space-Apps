@@ -11,6 +11,7 @@
 static NSString *const DIOActionDrill = @"drill";
 static NSString *const DIOActionLeft =  @"left";
 static NSString *const DIOActionRight = @"right";
+static NSString *const DIOActionClientRegistered = @"clientRegistered";
 
 @interface DIOSocketManager : NSObject
 
