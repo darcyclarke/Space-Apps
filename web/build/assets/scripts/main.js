@@ -7,11 +7,21 @@
 
   socket = io.connect('http://localhost:8000');
 
+  socket.on('scarceMineralCollected', function(data) {
+    console.log("SCARCE");
+    return $('span.scarce-mineral').html(JSON.stringify(data));
+  });
+
+  socket.on('commonMineralCollected', function(data) {
+    console.log("COMMON");
+    return $('span.common-mineral').html(JSON.stringify(data));
+  });
+
   socket.on('updateGame', function(data) {
     var json;
     json = data;
     console.log("===> ", json);
-    $('span.game').html("isOver: " + JSON.stringify(json["isOver"]));
+    $('span.game').html("isOver: " + JSON.stringify(json["isOver"]) + ", didWin: " + JSON.stringify(json["didWin"]));
     $('span.asteroid').html(JSON.stringify(json["asteroid"]));
     $('span.player1').html(JSON.stringify(json["players"]["player1"]));
     $('span.player2').html(JSON.stringify(json["players"]["player2"]));

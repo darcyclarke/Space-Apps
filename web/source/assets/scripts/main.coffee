@@ -2,11 +2,23 @@ randomInt = (min, max) ->
   Math.floor(Math.random() * (max - min + 1)) + min
 
 socket = io.connect('http://localhost:8000');
+
+socket.on 'scarceMineralCollected', (data) -> 
+  console.log("SCARCE");
+  $('span.scarce-mineral').html(JSON.stringify(data))
+
+socket.on 'commonMineralCollected', (data) -> 
+  console.log("COMMON");
+  $('span.common-mineral').html(JSON.stringify(data))
+
 socket.on 'updateGame', (data) ->
   json = data
   console.log("===> ", json)
   # $('h1').css({ top: data["player1"].y, left: data["player1"].x })
-  $('span.game').html("isOver: " + JSON.stringify(json["isOver"]))
+  $('span.game').html(
+    "isOver: " + JSON.stringify(json["isOver"]) +
+    ", didWin: " + JSON.stringify(json["didWin"])
+  )
 
   $('span.asteroid').html(JSON.stringify(json["asteroid"]))
 

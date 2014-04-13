@@ -16,6 +16,12 @@ SCARCE_DIFFICULTY_LEVEL = 3
 MINERALS = ABUNDANT_MINERALS.concat(COMMON_MINERALS, SCARCE_MINERALS)
 
 # ===========================================================================
+# global variables
+# ===========================================================================
+
+lastMineral= null
+
+# ===========================================================================
 # class definitions
 # ===========================================================================
 
@@ -83,6 +89,7 @@ Player = () ->
 
 Game = () ->
   this.isOver = false
+  this.didWin = false
   this.numPlayers = 0
   this.asteroid = new Asteroid()
   this.players = 
@@ -93,6 +100,7 @@ Game = () ->
 
   this.update = (playerId, drillPower) -> 
     if this.asteroid.isEmpty()
+      this.didWin = true
       this.isOver = true
     else
       minerals = game.asteroid.presentMinerals()
@@ -115,6 +123,8 @@ Game = () ->
 
       game.asteroid.loseMineral(mineral, amount)
       game.players[playerId].findMineral(mineral, amount)
+
+      lastMineral= mineral
 
   return
 
@@ -161,6 +171,18 @@ io.sockets.on "connection", (socket) ->
       if playerId && drillPower
         game.update(playerId, drillPower)
         socket.emit('updateGame', game)
+
+        if isScarce(lastMineral)
+          socket.emit('scarceMineralCollected', {
+            mineral: lastMineral, 
+            playerID: playerId, 
+          })
+        else if isCommon(lastMineral)
+          socket.emit('commonMineralCollected', {
+            mineral: lastMineral, 
+            playerID: playerId, 
+          })
+
         console.log("=====> ", JSON.stringify(game))
 
   socket.on 'timeUp', (data) -> 
@@ -173,6 +195,14 @@ io.sockets.on "connection", (socket) ->
 # ===========================================================================
 # global methods
 # ===========================================================================
+
+mineralType = (mineral) -> 
+  if isScarce(mineral)
+    return "scarce"
+  else if isCommon(mineral)
+    return "common"
+  else
+    return "abundant"
 
 initGame = () -> 
   game = new Game()
