@@ -140,7 +140,7 @@
 
   jQuery(function($) {
     var game, socket;
-    window.socket = socket = io.connect('http://localhost:8000');
+    window.socket = socket = io.connect('http://107.170.78.222:8000/');
     return window.game = game = new Game(socket);
   });
 
