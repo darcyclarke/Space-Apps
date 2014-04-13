@@ -20,5 +20,6 @@
 @property (strong, nonatomic) DIODrillAccuracyMeter *drillAccuracyMeter;
 @property (strong, nonatomic) DIODrillPowerMeter *drillPowerMeter;
 @property (strong, nonatomic) UIView *errorMessage;
+@property (strong, nonatomic) UIView *display;
 
 @end

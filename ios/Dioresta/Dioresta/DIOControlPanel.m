@@ -12,6 +12,8 @@
 
 @interface DIOControlPanel ()
 
+@property (strong, nonatomic) UILabel *displayLabel;
+
 @end
 
 @implementation DIOControlPanel
@@ -39,6 +41,7 @@
     [self addSubview:self.drillPowerMeter];
     [self addSubview:self.errorMessage];
     self.errorMessage.hidden = YES;
+    [self addSubview:self.display];
 }
 
 #pragma mark slider
@@ -153,6 +156,23 @@
     }
     
     return _drillPowerMeter;
+}
+
+- (UIView *)display
+{
+    if(!_display) {
+        self.display = [[UIView alloc] initWithFrame:CGRectMake(60, 50, 909, 98)];
+        [self.display setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DisplayBackground"]]];
+        
+        UILabel *displayLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.display.frame.size.width - 40, self.display.frame.size.height - 40)];
+        displayLabel.font = [UIFont fontWithName:@"DS-Digital" size:45.0f];
+        displayLabel.textColor = [UIColor colorWithHue:0.277 saturation:0.761 brightness:0.953 alpha:1];
+        [self.display addSubview:displayLabel];
+        displayLabel.text = @"WELCOME TO DIORESTA";
+        displayLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    return _display;
 }
 
 @end
