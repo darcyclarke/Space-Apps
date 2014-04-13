@@ -870,6 +870,20 @@ a:active, a:hover
   h1
     font-size: 60px
 
+////////////////////////////////////////////////////////
+// End Game Screen
+////////////////////////////////////////////////////////
+
+.header.end
+
+  h1
+    font-size: 80px
+    margin: 100px 0 50px
+
+  .bubble
+    max-width: 800px
+    font-size: 40px
+
 
 ////////////////////////////////////////////////////////
 // Game Screen
@@ -878,6 +892,7 @@ a:active, a:hover
 .game
 
   .timer
+    padding-top: 20px
     font-size: 50px
     font-weight: bold
     color: white
@@ -895,10 +910,12 @@ a:active, a:hover
     margin: -($asteroidSize / 2) 0 0 (-1 * ($asteroidSize / 2))
     top: 50%
     left: 50%
+    transition: all 4s
 
     .asteroid
       width: 100%
       position: absolute
+      transition: all 5s
 
   .earth
     position: absolute
@@ -909,6 +926,7 @@ a:active, a:hover
     left: 50%
 
     img
+      transition: all 0.5s
       max-width: 100%
 
   .asteroids
